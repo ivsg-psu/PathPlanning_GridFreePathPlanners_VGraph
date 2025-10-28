@@ -1,5 +1,5 @@
 
-# FeatureExtraction_DataClean_BreakDataIntoLaps
+# PathPlanning_GridFreePathPlanners_VisibilityGraph
 
 <!--
 The following template is based on:
@@ -13,14 +13,16 @@ Search for this, and you will find!
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-  <h2 align="center"> FeatureExtraction_DataClean_BreakDataIntoLaps
+  <h2 align="center"> PathPlanning_GridFreePathPlanners_VisibilityGraph
   </h2>
 
   <pre align="center">
-    <img src=".\Images\RaceTrack.jpg" alt="main laps picture" width="960" height="540">
+    <img src=".\Images\PathPlanning_GridFreePathPlanners_VisibilityGraph.jpg" alt="main laps picture" width="960" height="540">
     <!--figcaption>Fig.1 - The typical progression of map generation.</figcaption -->
-    <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
-</pre>
+    <font size="-2">Photo by <a href="https://unsplash.com/@choys_?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Conny Schneider</a> on <a href="https://unsplash.com/photos/a-blue-background-with-lines-and-dots-xuTJZ7uD7PI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+      </font>
+
+  </pre>
 
   <p align="center">
     The purpose of this code is to break data into "laps", e.g. segments of data that are defined by a clear start condition and end condition. The code finds when a given path meets the "start" condition, then meets the "end" condition, and returns every portion of the path that is inside both conditions. Advanced features of the code include the ability to return the row indices defining each lap's data, as well as the path portions prior and after the lap area in case the "run in" or "run out" areas are needed. Yay! (I think)
