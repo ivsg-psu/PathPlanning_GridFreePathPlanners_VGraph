@@ -25,7 +25,7 @@ Search for this, and you will find!
   </pre>
 
   <p align="center">
-    The purpose of this code is to break data into "laps", e.g. segments of data that are defined by a clear start condition and end condition. The code finds when a given path meets the "start" condition, then meets the "end" condition, and returns every portion of the path that is inside both conditions. Advanced features of the code include the ability to return the row indices defining each lap's data, as well as the path portions prior and after the lap area in case the "run in" or "run out" areas are needed. Yay! (I think)
+    This repo contains the MATLAB functions to calculate the visibility graph of a map defined by a set of polytope vertices. The purpose of the Visibility Graph, or VGraph, code repo is to calculate the "visibility" of one point to another given a map containing polytopes. A "to" point is visible "from" another point if the line connecting the points does not pass through a polytope. The visibility graph is a core input for grid-free path planning.
     <br />
     <!-- a href="https://github.com/ivsg-psu/FeatureExtraction_Association_PointToPointAssociation"><strong>Explore the docs »</strong></a>
     <br />
@@ -61,7 +61,7 @@ Search for this, and you will find!
       <ul>
         <li><a href="#basic-support-functions">Basic Support Functions</li>
         <ul>
-          <li><a href="#fcn_laps_plotlapsxy">fcn_Laps_plotLapsXY - Plotting utility for lap outputs</li>
+          <li><a href="#fcn_visibility_plotvgraph">fcn_Visibility_plotVGraph - Plotting utility for showing visibilty graph</li>
           <li><a href="#fcn_laps_fillsamplelaps">fcn_Laps_fillSampleLaps - Creates test datasets</li>
           <li><a href="#fcn_laps_plotzonedefinition">fcn_Laps_plotZoneDefinition - Plots zone definitions</li>
           <li><a href="#fcn_laps_fillsamplelaps">fcn_Laps_fillSampleLaps - Creates test datasets</li>
@@ -93,18 +93,15 @@ Search for this, and you will find!
 
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
-The most common location of our testing is the Larson Test Track, and we regularly use “laps around the track” as replicates, hence the name of the library. And when not on the test track and on public roads, data often needs to be segmented from one keypoint to another. For example, it is a common task to seek a subset of path data that resides only from one intersection to the next. While one could segment this data during data collection by simply stopping the vehicle recordings at each segment, it is impractical and dangerous to stop data collection at each and every possible intersection or feature point. Rather, vehicle or robot data is often collected by repeated driving of an area over/over without stopping. So, the final data set may contain many replicates of the area of interest.
-
-This "Laps" code assists in breaking recorded path data into paths by defining specific start and end locations, for example from intersection "A" to stop sign "B". Specifically, the purpose of this code is to break data into "laps", e.g. segments of data that are defined by a clear start condition and end condition. The code finds when a given path meets the "start" condition, then meets the "end" condition, and returns every portion of the path that is inside both conditions. There are many advanced features as well including the ability to define excursion points, the number of points that must be within a condition for it to activate, and the ability to extract the portions of the paths before and after each lap, in addition to the data for each lap.
+The purpose of the Visibility Graph repo is to calculate the visbility of one point to another and host functions that support this calculation.
 
 * Inputs:
-  * either a "traversals" type, as explained in the Path library, or a path of XY points in N x 2 format
-  * the start, end, and optional excursions can be entered as either a line segment or a point and radius.  
+  * a map given by an array of polytopes that may be convex or non-convex
+  * the start, end, and optional excursion points can also be specified
 * Outputs
-  * Separate arrays of XY points, or of indices for the lap, with one array for each lap
-  * The function also can return the points that were not used for laps, e.g. the points before the first start and after the last end
+  * the visibility graph matrix, which represents the from (rows) and to (columns) with a value of 0 meaning not visible, 1 being visible
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -117,16 +114,16 @@ To get a local copy up and running follow these simple steps.
 
 1. Make sure to run MATLAB 2020b or higher. Why? The "digitspattern" command used in the DebugTools utilities was released late 2020 and this is used heavily in the Debug routines. If debugging is shut off, then earlier MATLAB versions will likely work, and this has been tested back to 2018 releases.
 
-2. Clone the repo
+2. Clone the repo. The easiest way to do this is to use the GitHub desktop application. The direct git command is:
 
    ```sh
-   git clone https://github.com/ivsg-psu/FeatureExtraction_DataClean_BreakDataIntoLaps
+   git clone https://github.com/ivsg-psu/PathPlanning_GridFreePathPlanners_VisibilityGraph
    ```
 
-3. Run the main code in the root of the folder (script_demo_Laps.m), this will download the required utilities for this code, unzip the zip files into a Utilities folder (.\Utilities), and update the MATLAB path to include the Utility locations. This install process will only occur the first time. Note: to force the install to occur again, delete the Utilities directory and clear all global variables in MATLAB (type: "clear global *").
-4. Confirm it works! Run script_demo_Laps. If the code works, the script should run without errors. This script produces numerous example images such as those in this README file.
+3. Run the main code in the root of the folder (script_demo_VisibilityGraph.m), this will download the required utilities for this code, unzip the zip files into a Utilities folder (.\Utilities), and update the MATLAB path to include the Utility locations. This install process will only occur the first time. Note: to force the install to occur again, there is a "flag" section near the top of the script that uses a 1==0 or 1==1 to deactivate or activate a fresh install. 
+4. Confirm it works! Run script_demo_VisibilityGraph. If the code works, the script should run without errors. This script produces numerous example images such as those in this README file.
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -137,10 +134,11 @@ The following are the top level directories within the repository:
 <ul>
  <li>/Documents folder: Descriptions of the functionality and usage of the various MATLAB functions and scripts in the repository.</li>
  <li>/Functions folder: The majority of the code for the point and patch association functionalities are implemented in this directory. All functions as well as test scripts are provided.</li>
+ <li>/Data folder: This is the location where example data is stored.</li>
  <li>/Utilities folder: Dependencies that are utilized but not implemented in this repository are placed in the Utilities directory. These can be single files but are most often folders containing other cloned repositories.</li>
 </ul>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -148,13 +146,17 @@ The following are the top level directories within the repository:
 
 * [Errata_Tutorials_DebugTools](https://github.com/ivsg-psu/Errata_Tutorials_DebugTools) - The DebugTools repo is used for the initial automated folder setup, and for input checking and general debugging calls within subfunctions. The repo can be found at: <https://github.com/ivsg-psu/Errata_Tutorials_DebugTools>
 
-* [PathPlanning_PathTools_PathClassLibrary](https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary) - the PathClassLibrary contains tools used to find intersections of the data with particular line segments, which is used to find start/end/excursion locations in the functions. The repo can be found at: <https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary>
+* [PathPlanning_MapTools_MapGenClassLibrary](https://github.com/ivsg-psu/PathPlanning_MapTools_MapGenClassLibrary) - The MapGenClass repo is used to create polytope-defined maps representing open space and keep-out areas. The repo can be found at: <https://github.com/ivsg-psu/PathPlanning_MapTools_MapGenClassLibrary>
+
+* [PathPlanning_PathTools_PathClassLibrary](https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary) - the PathClassLibrary contains tools used to find intersections of visibility lines with polytope edges. The repo can be found at: <https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary>
+
+* [FieldDataCollection_VisualizingFieldData_PlotRoad](https://github.com/ivsg-psu/FieldDataCollection_VisualizingFieldData_PlotRoad) - the PlotRoad library contains advanced plotting tools such as color layering. The repo can be found at: <https://github.com/ivsg-psu/FieldDataCollection_VisualizingFieldData_PlotRoad>
 
     Each should be installed in a folder called "Utilities" under the root folder, namely ./Utilities/DebugTools/ , ./Utilities/PathClassLibrary/ . If you wish to put these codes in different directories, the main call stack in script_demo_Laps can be easily modified with strings specifying the different location, but the user will have to make these edits directly.
 
     For ease of getting started, the zip files of the directories used - without the .git repo information, to keep them small - are included in this repo.
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -163,16 +165,21 @@ The following are the top level directories within the repository:
 
 ### Basic Support Functions
 
-#### fcn_Laps_plotLapsXY
+#### fcn_Visibility_plotVGraph
 
-The function fcn_Laps_plotLapsXY plots the laps. For example, the function was used to make the plot below of the last Sample laps.
+The function fcn_Visibility_plotVGraph plots a visibility graph given a generated vgraph and list of all points.
+It allows user to specify the plot styleString and optional from/to indices
+of the vertices to plot. It also includes an animation option to show the VGraph being generated.
 <pre align="center">
-  <img src=".\Images\fcn_Laps_plotLapsXY.png" alt="fcn_Laps_plotLapsXY picture" width="400" height="300">
-  <figcaption>Fig.1 - The function fcn_Laps_plotLapsXY plots the lap outputs.</figcaption>
+  <img src=".\Images\fcn_Visibility_plotVGraph.png" alt="fcn_Visibility_plotVGraph picture" width="400" height="300">
+  <img src=".\Images\fcn_Visibility_plotVGraph_selectedFrom.png" alt="fcn_Visibility_plotVGraph_selectedFrom picture" width="400" height="300">
+  <img src=".\Images\fcn_Visibility_plotVGraph_selectedFromTo.png" alt="fcn_Visibility_plotVGraph_selectedFromTo picture" width="400" height="300">
+  <img src=".\Images\fcn_Visibility_plotVGraph.gif" alt="fcn_Visibility_plotVGraph animation" width="400" height="300">
+  <figcaption>Fig.1 - The function fcn_Visibility_plotVGraph plots the visibility graph (top), selected "from" portions of the visibility graph (second from top), selected to/from portions of the graph (second from bottom), or creation of animated gifs (bottom).</figcaption>
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -186,7 +193,7 @@ The function fcn_Laps_fillSampleLaps creates dummy data to test lap functions. T
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -200,7 +207,7 @@ The function fcn_Laps_plotZoneDefinition plots any type of zone, allowing user-d
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -214,7 +221,7 @@ The function fcn_Laps_plotSegmentZoneDefinition plots a segment zone, allowing u
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font>
 </pre -->
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -230,7 +237,7 @@ The function fcn_Laps_breakDataIntoLaps is the core function for this repo that 
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -244,7 +251,7 @@ The function fcn_Laps_checkZoneType supports fcn_Laps_breakDataIntoLaps by check
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font>
 </pre-->
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -258,7 +265,7 @@ The function fcn_Laps_breakDataIntoLapIndices is a more advanced version of fcn_
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -272,7 +279,7 @@ The function fcn_Laps_findSegmentZoneStartStop is a supporting function that fin
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -286,7 +293,7 @@ The function fcn_Laps_findPointZoneStartStopAndMinimum is a supporting function 
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -314,7 +321,7 @@ help fcn_fcnname
 
 for any function to view function details.
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -334,7 +341,7 @@ for any function to view function details.
    script_test_fcn_Laps_breakDataIntoLapIndices
    ```
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -370,7 +377,7 @@ Why is an excursion point needed? Consider an example: it is common for the star
 
   requires 3 points to occur within the start zone area.
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -379,7 +386,7 @@ Why is an excursion point needed? Consider an example: it is common for the star
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -387,7 +394,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 This code is still in development (alpha testing)
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
@@ -398,7 +405,7 @@ Sean Brennan - sbrennan@psu.edu
 
 Project Link: [hhttps://github.com/ivsg-psu/FeatureExtraction_DataClean_BreakDataIntoLaps](https://github.com/ivsg-psu/FeatureExtraction_DataClean_BreakDataIntoLaps)
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+<a href="#pathplanning_gridfreepathplanners_visibilitygraph">Back to top</a>
 
 ***
 
