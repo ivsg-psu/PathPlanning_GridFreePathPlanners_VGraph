@@ -68,7 +68,7 @@ Search for this, and you will find!
         </ul>
         <li><a href="#core-functions">Core Functions</li>
         <ul>
-          <li><a href="#fcn_laps_breakdataintolaps">fcn_Laps_breakDataIntoLaps - Core function of the repo, breaks data into laps</li>
+          <li><a href="#fcn_visibility_clearandblockedpoints">fcn_Visibility_clearAndBlockedPoints - Calculates visibility from one point to many other points in a polytope map</li>
           <li><a href="#fcn_laps_checkzonetype">fcn_Laps_checkZoneType - Checks inputs to determine if zone is a point or line segment type</li>
           <li><a href="#fcn_laps_breakdataintolapindices">fcn_Laps_breakDataIntoLapIndices - A more advanced version of fcn_Laps_breakDataIntoLaps, where the outputs are the indices that apply to each lap.</li>
           <li><a href="#fcn_laps_findsegmentzonestartstop">fcn_Laps_findSegmentZoneStartStop - Supporting function that finds the portions of a path that meet a segment zone criteria</li>
@@ -227,13 +227,13 @@ The function fcn_Laps_plotSegmentZoneDefinition plots a segment zone, allowing u
 
 ### Core Functions
 
-#### fcn_Laps_breakDataIntoLaps
+#### fcn_Visibility_clearAndBlockedPoints
 
-The function fcn_Laps_breakDataIntoLaps is the core function for this repo that breaks data into laps. Note: the example shown below uses radial zone definitions, and the results illustrate how a lap, when it is within a start zone, starts at the FIRST point within a start zone. Similarly, each lap ends at the LAST point before exiting the end zone definition. The input data is a traversal type for this particular function.
+The function fcn_Visibility_clearAndBlockedPoints is the core function for this repo finds the visbility from one point to many other points in a polytope map.
 
 <pre align="center">
-  <img src=".\Images\fcn_Laps_breakDataIntoLaps.png" alt="fcn_Laps_breakDataIntoLaps picture" width="400" height="300">
-  <figcaption>Fig.4 - The function fcn_Laps_breakDataIntoLaps is the core function in the repo, and breaks data into laps.</figcaption>
+  <img src=".\Images\fcn_Visibility_clearAndBlockedPoints.png" alt="fcn_Visibility_clearAndBlockedPoints picture" width="400" height="300">
+  <figcaption>Fig.4 - The function fcn_Visibility_clearAndBlockedPoints is the core function in the repo, and finds visibility from one point to many other points.</figcaption>
   <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
 </pre>
 

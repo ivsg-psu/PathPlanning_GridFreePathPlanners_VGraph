@@ -339,6 +339,51 @@ assert(isequal(currentHandle.Parent.Parent.Number,figNum)); % The current figure
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
 
+%%
+
+%% fcn_Visibility_clearAndBlockedPoints
+% This is the first demo case in the script: find clear and blocked edges of polytopes in a map
+fig_num = 20001;
+titleString = sprintf('fcn_Visibility_clearAndBlockedPoints');
+fprintf(1,'Figure %.0f: %s\n',fig_num, titleString);
+figure(fig_num); clf;
+
+% Create polytope field
+polytopes = fcn_MapGen_generatePolysFromSeedGeneratorNames('haltonset', [1 100],[], ([100 100]), (-1));
+
+% Trim polytopes on edge of boundary
+trim_polytopes = fcn_MapGen_polytopesDeleteByAABB( polytopes, [0.1 0.1 99.9 99.9], (-1));
+
+% Shrink polytopes to form obstacle field
+shrunk_polytopes = fcn_MapGen_polytopesShrinkEvenly(trim_polytopes, 2.5, (-1));
+
+% Get x and y coordinates of each polytope
+xvert = [shrunk_polytopes.xv];
+yvert = [shrunk_polytopes.yv];
+point_tot = length(xvert);
+
+% Create start and finish points
+start = [0 50 point_tot+1 -1 0];
+finish = [[100; xvert'] [50; yvert'] [point_tot+2; (1:point_tot)'] [0; ones(point_tot,1)] [0; zeros(point_tot,1)]];
+
+% Call function to determine clear and blocked points
+isConcave = [];
+[clear_pts,blocked_pts]=fcn_Visibility_clearAndBlockedPoints(shrunk_polytopes,start,finish,(isConcave),(fig_num));
+
+sgtitle(titleString, 'Interpreter','none');
+
+% Check variable types
+assert(isnumeric(clear_pts));
+assert(isnumeric(blocked_pts));
+
+% Check variable sizes
+Npolys = 100;
+assert(isequal(Npolys,length(polytopes))); 
+
+% Make sure plot opened up
+assert(isequal(get(gcf,'Number'),fig_num));
+
+
 %% Functions follow
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   ______                _   _
