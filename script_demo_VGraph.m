@@ -34,6 +34,8 @@
 % -- set up auto-loading of dependencies using new DebugTools features
 % -- fixed minor "laps" issues in README
 % -- fixed minor test script bugs so that all run through cleanly
+% (new release)
+%
 
 % TO-DO:
 % 20XX_XX_XX - Your name, your email
