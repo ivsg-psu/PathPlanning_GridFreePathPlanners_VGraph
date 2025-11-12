@@ -370,8 +370,6 @@ saveFile = [];
 h_plot = fcn_VGraph_plotVGraph(vGraph, pointsWithData, 'g-', (selectedFromToIndices), (saveFile), ([]));
 axis(goodAxis);
 
-sgtitle(titleString, 'Interpreter','none');
-
 % Check variable types
 assert(all(ishandle(h_plot)));
 
@@ -418,8 +416,6 @@ saveFile = [];
 
 h_plot = fcn_VGraph_plotVGraph(vGraph, pointsWithData, 'g-', (selectedFromToIndices), (saveFile), (-1));
 axis(goodAxis);
-
-sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
 assert(all(ishandle(h_plot)));

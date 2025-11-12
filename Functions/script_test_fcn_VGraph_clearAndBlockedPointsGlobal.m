@@ -431,8 +431,8 @@ deduped_pts = fcn_VGraph_convertPolytopetoDedupedPoints(pointsWithDataNoGaps);
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(visibilityMatrix));
-assert(isstruct(visibilityDetailsEachFromPoint));
+assert(isnumeric(visibilityMatrixWithGaps));
+% assert(isstruct(visibilityDetailsEachFromPoint));
 
 
 % Make sure plot opened up

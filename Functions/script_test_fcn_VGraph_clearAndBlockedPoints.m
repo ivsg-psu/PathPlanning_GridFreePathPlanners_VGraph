@@ -160,8 +160,6 @@ finish = [[100; xvert'] [50; yvert'] [point_tot+2; (1:point_tot)'] [0; ones(poin
 isConcave = [];
 [clear_pts,blocked_pts]=fcn_VGraph_clearAndBlockedPoints(shrunk_polytopes,start,finish,(isConcave),([]));
 
-sgtitle(titleString, 'Interpreter','none');
-
 % Check variable types
 assert(isnumeric(clear_pts));
 assert(isnumeric(blocked_pts));
@@ -202,8 +200,6 @@ finish = [[100; xvert'] [50; yvert'] [point_tot+2; (1:point_tot)'] [0; ones(poin
 % Call function to determine clear and blocked points
 isConcave = [];
 [clear_pts,blocked_pts]=fcn_VGraph_clearAndBlockedPoints(shrunk_polytopes,start,finish,(isConcave),(-1));
-
-sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
 assert(isnumeric(clear_pts));

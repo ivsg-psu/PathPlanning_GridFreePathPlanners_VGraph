@@ -33,8 +33,6 @@
 % TO DO:
 % (none)
 
-clear
-clc
 close all
 
 %% Set flags

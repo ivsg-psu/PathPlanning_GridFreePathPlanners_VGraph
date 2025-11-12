@@ -1,0 +1,739 @@
+
+SUMMARY OF FOUND FILES: 
+<strong>The following scripts were found that will be tested:
+</strong>	script_test_fcn_VGraph_addObstacle.m
+	script_test_fcn_VGraph_calculatePointsOnLines.m
+	script_test_fcn_VGraph_clearAndBlockedPoints.m
+	script_test_fcn_VGraph_clearAndBlockedPointsGlobal.m
+	script_test_fcn_VGraph_convertPolytopetoDedupedPoints.m
+	script_test_fcn_VGraph_findEdgeWeights.m
+	script_test_fcn_VGraph_generateDilationRobustnessMatrix.m
+	script_test_fcn_VGraph_plotVGraph.m
+	script_test_fcn_VGraph_polytopesGenerateAllPtsTable.m
+	script_test_fcn_VGraph_removeObstacle.m
+	script_test_fcn_VGraph_selfBlockedPoints.m
+<strong>The following files were found, but do not seem to be repo functions or scripts:
+</strong><strong>	DATA_testing_fcn_VGraph_findEdgeWeights.mat
+</strong><strong>The following m-files were found, but do not seem to be test scripts or functions:
+</strong><strong>	script_demo_VGraph_AddRemoveObstacles.m
+</strong>
+STARTING TESTS:
+<strong>   
+</strong><strong>Testing script: 1 of 11, test_fcn_VGraph_addObstacle
+
+</strong>Running script_test_fcn_VGraph_addObstacle
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: add a polytope to the map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_addObstacle
+__________
+
+<strong>   
+</strong><strong>Testing script: 2 of 11, test_fcn_VGraph_calculatePointsOnLines
+
+</strong>Running script_test_fcn_VGraph_calculatePointsOnLines
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: check if points are on a line
+.Figure 10002: DEMO case: check if points are NOT on a line
+.Figure 10003: DEMO case: check if points are on a line within a tolerance
+.Figure 10004: DEMO case: check if points are NOT on a line within a tolerance
+.Figure 10005: DEMO case: check if two points on a line
+.Figure 10006: DEMO case: check many random points on a line segment
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: no intersection due to tolerance too small
+. Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.....
+Done script_test_fcn_VGraph_calculatePointsOnLines
+__________
+
+<strong>   
+</strong><strong>Testing script: 3 of 11, test_fcn_VGraph_clearAndBlockedPoints
+
+</strong>Running script_test_fcn_VGraph_clearAndBlockedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find clear and blocked edges of polytopes in a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+
+================================================================================
+<strong>Error occurred in script_test_fcn_VGraph_clearAndBlockedPoints/BasicExample_NOFIGURE and it did not run to completion.</strong>
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:UndefinedFunction'
+    --------------
+    Error Details:
+    --------------
+    Unrecognized function or variable 'titleString'.
+    Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_fcn_VGraph_clearAndBlockedPoints', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPoints.m', 163)" style="font-weight:bold">script_test_fcn_VGraph_clearAndBlockedPoints</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPoints.m',163,0)">line 163</a>)
+    sgtitle(titleString, 'Interpreter','none');
+================================================================================
+.Figure: 80002: FAST mode, figNum=-1
+
+================================================================================
+<strong>Error occurred in script_test_fcn_VGraph_clearAndBlockedPoints/BasicFastMode_NOFIGURE_FASTMODE and it did not run to completion.</strong>
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:UndefinedFunction'
+    --------------
+    Error Details:
+    --------------
+    Unrecognized function or variable 'titleString'.
+    Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_fcn_VGraph_clearAndBlockedPoints', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPoints.m', 206)" style="font-weight:bold">script_test_fcn_VGraph_clearAndBlockedPoints</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPoints.m',206,0)">line 206</a>)
+    sgtitle(titleString, 'Interpreter','none');
+================================================================================
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_clearAndBlockedPoints
+__________
+
+Failure Summary:
+
+     Name                                                                          Failed  Incomplete  Reason(s)
+    =============================================================================================================
+     script_test_fcn_VGraph_clearAndBlockedPoints/BasicExample_NOFIGURE              X         X       Errored.
+    -------------------------------------------------------------------------------------------------------------
+     script_test_fcn_VGraph_clearAndBlockedPoints/BasicFastMode_NOFIGURE_FASTMODE    X         X       Errored.
+<strong>   
+</strong><strong>Testing script: 4 of 11, test_fcn_VGraph_clearAndBlockedPointsGlobal
+
+</strong>Running script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: clear and blocked edges of single convex polytope
+.Figure 10002: DEMO case: clear and blocked edges of two convex polytopes
+.Figure 10002: DEMO case: clear and blocked edges of concave polytope
+.Figure 10003: DEMO case: compute a complex visibility graph
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes, make sure visibility is same as very small gap
+.Figure 20002: TEST case: zero gap between polytopes, make sure visibility is same as very small gap
+
+================================================================================
+<strong>Error occurred in script_test_fcn_VGraph_clearAndBlockedPointsGlobal/TESTCase_ZeroGapBetweenPolytopes_MakeSureVisibilityIsSameAsVe_1 and it did not run to completion.</strong>
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:UndefinedFunction'
+    --------------
+    Error Details:
+    --------------
+    Unrecognized function or variable 'visibilityMatrix'.
+    Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_fcn_VGraph_clearAndBlockedPointsGlobal', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPointsGlobal.m', 434)" style="font-weight:bold">script_test_fcn_VGraph_clearAndBlockedPointsGlobal</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPointsGlobal.m',434,0)">line 434</a>)
+    assert(isnumeric(visibilityMatrix));
+================================================================================
+.Figure: 8XXXXXX: FAST mode cases
+. Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.....
+Done script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+__________
+
+Failure Summary:
+
+     Name                                                                                                                Failed  Incomplete  Reason(s)
+    ===================================================================================================================================================
+     script_test_fcn_VGraph_clearAndBlockedPointsGlobal/TESTCase_ZeroGapBetweenPolytopes_MakeSureVisibilityIsSameAsVe_1    X         X       Errored.
+<strong>   
+</strong><strong>Testing script: 5 of 11, test_fcn_VGraph_convertPolytopetoDedupedPoints
+
+</strong>Running script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: plan a straight line path through a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty fig_num
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+__________
+
+<strong>   
+</strong><strong>Testing script: 6 of 11, test_fcn_VGraph_findEdgeWeights
+
+</strong>Running script_test_fcn_VGraph_findEdgeWeights
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find edge weights
+
+================================================================================
+<strong>Error occurred in script_test_fcn_VGraph_findEdgeWeights/DEMOCase_FindEdgeWeights and it did not run to completion.</strong>
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:UndefinedFunction'
+    --------------
+    Error Details:
+    --------------
+    Unrecognized function or variable 'figNum'.
+    Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_fcn_VGraph_findEdgeWeights', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_findEdgeWeights.m', 101)" style="font-weight:bold">script_test_fcn_VGraph_findEdgeWeights</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_findEdgeWeights.m',101,0)">line 101</a>)
+            (figNum));
+================================================================================
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty fig_num
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_findEdgeWeights
+__________
+
+Failure Summary:
+
+     Name                                                             Failed  Incomplete  Reason(s)
+    ================================================================================================
+     script_test_fcn_VGraph_findEdgeWeights/DEMOCase_FindEdgeWeights    X         X       Errored.
+<strong>   
+</strong><strong>Testing script: 7 of 11, test_fcn_VGraph_generateDilationRobustnessMatrix
+
+</strong>Running script_test_fcn_VGraph_generateDilationRobustnessMatrix
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: Two polytopes with clear space right down middle, edge 1 to 6 only
+{Operation terminated by user during matlab.graphics.chart.primitive.Quiver/getXYZDataExtents
+
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('is2D>testOneAxes', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\is2D.m', 34)" style="font-weight:bold">is2D>testOneAxes</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\is2D.m',34,0)">line 34</a>)
+        camUp = get(ax,'CameraUpVector');
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('is2D', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\is2D.m', 23)" style="font-weight:bold">is2D</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\is2D.m',23,0)">line 23</a>)
+    retval = testOneAxes(ax);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('axis>LocCheckCompatibleLimits', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\axis.m', 251)" style="font-weight:bold">axis>LocCheckCompatibleLimits</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\axis.m',251,0)">line 251</a>)
+if is2D(axH)
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('axis', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\axis.m', 120)" style="font-weight:bold">axis</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\graphics\axis\axis.m',120,0)">line 120</a>)
+                error(LocCheckCompatibleLimits(ax(j)));
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('fcn_VGraph_generateDilationRobustnessMatrix', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\fcn_VGraph_generateDilationRobustnessMatrix.m', 380)" style="font-weight:bold">fcn_VGraph_generateDilationRobustnessMatrix</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\fcn_VGraph_generateDilationRobustnessMatrix.m',380,0)">line 380</a>)
+            axis(plottingOptions.axis);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_fcn_VGraph_generateDilationRobustnessMatrix', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_generateDilationRobustnessMatrix.m', 70)" style="font-weight:bold">script_test_fcn_VGraph_generateDilationRobustnessMatrix</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_generateDilationRobustnessMatrix.m',70,0)">line 70</a>)
+    fcn_VGraph_generateDilationRobustnessMatrix(...
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.internal.executeScriptLines', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\executeScriptLines.m', 12)" style="font-weight:bold">matlab.unittest.internal.executeScriptLines</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\executeScriptLines.m',12,0)">line 12</a>)
+    matlab.lang.internal.executeCodeBlock('caller',scriptName,double.empty(0,2),sectionStartLineNum,sectionEndLineNum);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.internal.ScriptTestCaseProvider/evaluateTestSection', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\ScriptTestCaseProvider.m', 123)" style="font-weight:bold">matlab.unittest.internal.ScriptTestCaseProvider/evaluateTestSection</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\ScriptTestCaseProvider.m',123,0)">line 123</a>)
+            eval(['matlab.unittest.internal.assignSharedVariables(testCase__.TestData);', ...
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.internal.ScriptTestCaseProvider/runTestSection', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\ScriptTestCaseProvider.m', 117)" style="font-weight:bold">matlab.unittest.internal.ScriptTestCaseProvider/runTestSection</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\ScriptTestCaseProvider.m',117,0)">line 117</a>)
+            provider.evaluateTestSection(testCase);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.internal.ScriptTestCaseProvider>@(testCase)provider.runTestSection(testCase)', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\ScriptTestCaseProvider.m', 96)" style="font-weight:bold">matlab.unittest.internal.ScriptTestCaseProvider>@(testCase)provider.runTestSection(testCase)</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\ext\+matlab\+unittest\+internal\ScriptTestCaseProvider.m',96,0)">line 96</a>)
+          testCase = prototype.copyFor(@(testCase) provider.runTestSection(testCase));
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.internal.FunctionTestCase/test', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+internal\FunctionTestCase.m', 73)" style="font-weight:bold">matlab.unittest.internal.FunctionTestCase/test</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+internal\FunctionTestCase.m',73,0)">line 73</a>)
+            testCase.TestFcn(testCase);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/evaluateMethodCore', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 1031)" style="font-weight:bold">matlab.unittest.TestRunner/evaluateMethodCore</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',1031,0)">line 1031</a>)
+                    func(content);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/evaluateMethodsOnTestContent', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 972)" style="font-weight:bold">matlab.unittest.TestRunner/evaluateMethodsOnTestContent</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',972,0)">line 972</a>)
+                    runner.evaluateMethodCore(method, content, arguments);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/runTestMethodCore', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 1147)" style="font-weight:bold">matlab.unittest.TestRunner/runTestMethodCore</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',1147,0)">line 1147</a>)
+            runner.evaluateMethodsOnTestContent(method, testCase);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/runTestCore', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 1119)" style="font-weight:bold">matlab.unittest.TestRunner/runTestCore</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',1119,0)">line 1119</a>)
+                    runner.runTestMethodCore;
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/repeatTest', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 567)" style="font-weight:bold">matlab.unittest.TestRunner/repeatTest</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',567,0)">line 567</a>)
+                    runner.runTestCore;
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/runSharedTestCase', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 508)" style="font-weight:bold">matlab.unittest.TestRunner/runSharedTestCase</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',508,0)">line 508</a>)
+                    runner.repeatTest(usePlugins);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/runTestClass', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 1412)" style="font-weight:bold">matlab.unittest.TestRunner/runTestClass</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',1412,0)">line 1412</a>)
+                runner.runSharedTestCase(runner.PluginData.runSharedTestCase);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.TestRunnerPlugin/runTestClass', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m', 430)" style="font-weight:bold">matlab.unittest.plugins.TestRunnerPlugin/runTestClass</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m',430,0)">line 430</a>)
+            nextOperator.runTestClass(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.testrunprogress.ConciseProgressPlugin/runTestClass', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\+testrunprogress\ConciseProgressPlugin.m', 68)" style="font-weight:bold">matlab.unittest.plugins.testrunprogress.ConciseProgressPlugin/runTestClass</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\+testrunprogress\ConciseProgressPlugin.m',68,0)">line 68</a>)
+            runTestClass@matlab.unittest.plugins.TestRunnerPlugin(plugin, pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.TestRunnerPlugin/runTestClass', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m', 430)" style="font-weight:bold">matlab.unittest.plugins.TestRunnerPlugin/runTestClass</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m',430,0)">line 430</a>)
+            nextOperator.runTestClass(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('sltest.plugins.TestManagerResultsPlugin/runTestClass', 'C:\Program Files\MATLAB\R2024a\toolbox\stm\stm\matlabunit\+sltest\+plugins\TestManagerResultsPlugin.m', 148)" style="font-weight:bold">sltest.plugins.TestManagerResultsPlugin/runTestClass</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\stm\stm\matlabunit\+sltest\+plugins\TestManagerResultsPlugin.m',148,0)">line 148</a>)
+            plugin.runTestClass@matlab.unittest.plugins.TestRunnerPlugin(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 1337)" style="font-weight:bold">matlab.unittest.TestRunner/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',1337,0)">line 1337</a>)
+                    plugin.runTestClass(runner.PluginData.runTestClass);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.TestRunnerPlugin/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m', 265)" style="font-weight:bold">matlab.unittest.plugins.TestRunnerPlugin/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m',265,0)">line 265</a>)
+            nextOperator.runTestSuite(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.DiagnosticsOutputPlugin/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\DiagnosticsOutputPlugin.m', 161)" style="font-weight:bold">matlab.unittest.plugins.DiagnosticsOutputPlugin/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\DiagnosticsOutputPlugin.m',161,0)">line 161</a>)
+            runTestSuite@matlab.unittest.plugins.TestRunnerPlugin(plugin, pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.TestRunnerPlugin/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m', 265)" style="font-weight:bold">matlab.unittest.plugins.TestRunnerPlugin/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m',265,0)">line 265</a>)
+            nextOperator.runTestSuite(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.DiagnosticsRecordingPlugin/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\DiagnosticsRecordingPlugin.m', 208)" style="font-weight:bold">matlab.unittest.plugins.DiagnosticsRecordingPlugin/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\DiagnosticsRecordingPlugin.m',208,0)">line 208</a>)
+            plugin.runTestSuite@matlab.unittest.plugins.TestRunnerPlugin(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.TestRunnerPlugin/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m', 265)" style="font-weight:bold">matlab.unittest.plugins.TestRunnerPlugin/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m',265,0)">line 265</a>)
+            nextOperator.runTestSuite(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('sltest.plugins.TestManagerResultsPlugin/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\stm\stm\matlabunit\+sltest\+plugins\TestManagerResultsPlugin.m', 134)" style="font-weight:bold">sltest.plugins.TestManagerResultsPlugin/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\stm\stm\matlabunit\+sltest\+plugins\TestManagerResultsPlugin.m',134,0)">line 134</a>)
+            plugin.runTestSuite@matlab.unittest.plugins.TestRunnerPlugin(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/evaluateMethodOnPlugins', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 425)" style="font-weight:bold">matlab.unittest.TestRunner/evaluateMethodOnPlugins</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',425,0)">line 425</a>)
+                [varargout{1:nargout}] = plugin.(methodName)(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.internal.SerialTestRunStrategy/runTestSuite', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+internal\SerialTestRunStrategy.m', 36)" style="font-weight:bold">matlab.unittest.internal.SerialTestRunStrategy/runTestSuite</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+internal\SerialTestRunStrategy.m',36,0)">line 36</a>)
+            runner.evaluateMethodOnPlugins("runTestSuite", pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.internal.SerialTestRunStrategy/runSession', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+internal\SerialTestRunStrategy.m', 16)" style="font-weight:bold">matlab.unittest.internal.SerialTestRunStrategy/runSession</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+internal\SerialTestRunStrategy.m',16,0)">line 16</a>)
+            strategy.runTestSuite(runner,testSuiteRunPluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/runSession', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 1293)" style="font-weight:bold">matlab.unittest.TestRunner/runSession</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',1293,0)">line 1293</a>)
+            runner.TestRunStrategy.runSession(runner,pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.plugins.TestRunnerPlugin/runSession', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m', 228)" style="font-weight:bold">matlab.unittest.plugins.TestRunnerPlugin/runSession</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\+plugins\TestRunnerPlugin.m',228,0)">line 228</a>)
+            nextOperator.runSession(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('sltest.plugins.TestManagerResultsPlugin/runSession', 'C:\Program Files\MATLAB\R2024a\toolbox\stm\stm\matlabunit\+sltest\+plugins\TestManagerResultsPlugin.m', 122)" style="font-weight:bold">sltest.plugins.TestManagerResultsPlugin/runSession</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\stm\stm\matlabunit\+sltest\+plugins\TestManagerResultsPlugin.m',122,0)">line 122</a>)
+            plugin.runSession@matlab.unittest.plugins.TestRunnerPlugin(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/evaluateMethodOnPlugins', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 425)" style="font-weight:bold">matlab.unittest.TestRunner/evaluateMethodOnPlugins</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',425,0)">line 425</a>)
+                [varargout{1:nargout}] = plugin.(methodName)(pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/doRunWithFcn', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 413)" style="font-weight:bold">matlab.unittest.TestRunner/doRunWithFcn</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',413,0)">line 413</a>)
+            runner.evaluateMethodOnPlugins(methodName, pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestRunner/run', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m', 297)" style="font-weight:bold">matlab.unittest.TestRunner/run</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestRunner.m',297,0)">line 297</a>)
+            result = doRunWithFcn(runner, "runSession", pluginData);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('matlab.unittest.TestSuite/run', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestSuite.m', 564)" style="font-weight:bold">matlab.unittest.TestSuite/run</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\testframework\unittest\core\+matlab\+unittest\TestSuite.m',564,0)">line 564</a>)
+            results = runner.run(suite);
+In <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_all_functions', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_all_functions.m', 256)" style="font-weight:bold">script_test_all_functions</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_all_functions.m',256,0)">line 256</a>)
+    allResults{ith_testScript,1} = run(suite);} 
+opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPoints.m',163,0)
+opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_clearAndBlockedPointsGlobal.m',434,0)
+opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_findEdgeWeights.m',101,0)
+script_test_all_functions
+
+SUMMARY OF FOUND FILES: 
+<strong>The following scripts were found that will be tested:
+</strong>	script_test_fcn_VGraph_addObstacle.m
+	script_test_fcn_VGraph_calculatePointsOnLines.m
+	script_test_fcn_VGraph_clearAndBlockedPoints.m
+	script_test_fcn_VGraph_clearAndBlockedPointsGlobal.m
+	script_test_fcn_VGraph_convertPolytopetoDedupedPoints.m
+	script_test_fcn_VGraph_findEdgeWeights.m
+	script_test_fcn_VGraph_generateDilationRobustnessMatrix.m
+	script_test_fcn_VGraph_plotVGraph.m
+	script_test_fcn_VGraph_polytopesGenerateAllPtsTable.m
+	script_test_fcn_VGraph_removeObstacle.m
+	script_test_fcn_VGraph_selfBlockedPoints.m
+<strong>The following m-files were found, but do not seem to be test scripts or functions:
+</strong><strong>	script_demo_VGraph_AddRemoveObstacles.m
+</strong>
+STARTING TESTS:
+<strong>   
+</strong><strong>Testing script: 1 of 11, test_fcn_VGraph_addObstacle
+
+</strong>Running script_test_fcn_VGraph_addObstacle
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: add a polytope to the map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_addObstacle
+__________
+
+<strong>   
+</strong><strong>Testing script: 2 of 11, test_fcn_VGraph_calculatePointsOnLines
+
+</strong>Running script_test_fcn_VGraph_calculatePointsOnLines
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: check if points are on a line
+.Figure 10002: DEMO case: check if points are NOT on a line
+.Figure 10003: DEMO case: check if points are on a line within a tolerance
+.Figure 10004: DEMO case: check if points are NOT on a line within a tolerance
+.Figure 10005: DEMO case: check if two points on a line
+.Figure 10006: DEMO case: check many random points on a line segment
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: no intersection due to tolerance too small
+. Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.....
+Done script_test_fcn_VGraph_calculatePointsOnLines
+__________
+
+<strong>   
+</strong><strong>Testing script: 3 of 11, test_fcn_VGraph_clearAndBlockedPoints
+
+</strong>Running script_test_fcn_VGraph_clearAndBlockedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find clear and blocked edges of polytopes in a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_clearAndBlockedPoints
+__________
+
+<strong>   
+</strong><strong>Testing script: 4 of 11, test_fcn_VGraph_clearAndBlockedPointsGlobal
+
+</strong>Running script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: clear and blocked edges of single convex polytope
+.Figure 10002: DEMO case: clear and blocked edges of two convex polytopes
+.Figure 10002: DEMO case: clear and blocked edges of concave polytope
+.Figure 10003: DEMO case: compute a complex visibility graph
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes, make sure visibility is same as very small gap
+.Figure 20002: TEST case: zero gap between polytopes, make sure visibility is same as very small gap
+.Figure: 8XXXXXX: FAST mode cases
+. Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.....
+Done script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+__________
+
+<strong>   
+</strong><strong>Testing script: 5 of 11, test_fcn_VGraph_convertPolytopetoDedupedPoints
+
+</strong>Running script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: plan a straight line path through a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty fig_num
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+__________
+
+<strong>   
+</strong><strong>Testing script: 6 of 11, test_fcn_VGraph_findEdgeWeights
+
+</strong>Running script_test_fcn_VGraph_findEdgeWeights
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find edge weights
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_findEdgeWeights
+__________
+
+<strong>   
+</strong><strong>Testing script: 7 of 11, test_fcn_VGraph_generateDilationRobustnessMatrix
+
+</strong>Running script_test_fcn_VGraph_generateDilationRobustnessMatrix
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: Two polytopes with clear space right down middle, edge 1 to 6 only
+.Figure 10002: DEMO case: Two polytopes with clear space right down middle, all edges
+.Figure 10003: DEMO case: Two polytopes with clear space right down middle, all edges
+.Figure 10004: DEMO case: Three polytopes, MECC paper
+.Figure 10005: DEMO case: Three rectangles, MECC paper
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: Two polytopes with clear space right down middle, edge 5 to 8 on polytope
+.Figure: 8XXXXXX: FAST mode cases
+. Figure: 80001: FAST mode, empty fig_num
+.Figure: 80002: FAST mode, fig_num=-1
+.Figure: 80003: FAST mode comparisons
+.......
+Done script_test_fcn_VGraph_generateDilationRobustnessMatrix
+__________
+
+<strong>   
+</strong><strong>Testing script: 8 of 11, test_fcn_VGraph_plotVGraph
+
+</strong>Running script_test_fcn_VGraph_plotVGraph
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: plotting entire visibility graph, no optional inputs
+.Figure 10002: DEMO case: plotting entire visibility graph, with default optional inputs
+.Figure 10003: DEMO case: plotting entire visibility graph, with specified start index
+.Figure 10004: DEMO case: plotting entire visibility graph, with specified start and end index
+.Figure 10005: DEMO case: plotting entire visibility graph with saveFile specified
+.Figure: 2XXXXXX: TEST mode cases
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+
+================================================================================
+<strong>Error occurred in script_test_fcn_VGraph_plotVGraph/BasicExample_NOFIGURE and it did not run to completion.</strong>
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:UndefinedFunction'
+    --------------
+    Error Details:
+    --------------
+    Unrecognized function or variable 'titleString'.
+    Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_fcn_VGraph_plotVGraph', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_plotVGraph.m', 373)" style="font-weight:bold">script_test_fcn_VGraph_plotVGraph</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_plotVGraph.m',373,0)">line 373</a>)
+    sgtitle(titleString, 'Interpreter','none');
+================================================================================
+. Figure: 80002: FAST mode, figNum=-1
+
+================================================================================
+<strong>Error occurred in script_test_fcn_VGraph_plotVGraph/BasicFastMode_NOFIGURE_FASTMODE and it did not run to completion.</strong>
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:UndefinedFunction'
+    --------------
+    Error Details:
+    --------------
+    Unrecognized function or variable 'titleString'.
+    Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('script_test_fcn_VGraph_plotVGraph', 'C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_plotVGraph.m', 422)" style="font-weight:bold">script_test_fcn_VGraph_plotVGraph</a> (<a href="matlab: opentoline('C:\Users\snb10\Desktop\GitHubRepos\IVSG\PathPlanning\GridFreePathPlanners\VisibilityGraph\Functions\script_test_fcn_VGraph_plotVGraph.m',422,0)">line 422</a>)
+    sgtitle(titleString, 'Interpreter','none');
+================================================================================
+.Figure: 80003: FAST mode comparisons
+.......
+Done script_test_fcn_VGraph_plotVGraph
+__________
+
+Failure Summary:
+
+     Name                                                               Failed  Incomplete  Reason(s)
+    ==================================================================================================
+     script_test_fcn_VGraph_plotVGraph/BasicExample_NOFIGURE              X         X       Errored.
+    --------------------------------------------------------------------------------------------------
+     script_test_fcn_VGraph_plotVGraph/BasicFastMode_NOFIGURE_FASTMODE    X         X       Errored.
+<strong>   
+</strong><strong>Testing script: 9 of 11, test_fcn_VGraph_polytopesGenerateAllPtsTable
+
+</strong>Running script_test_fcn_VGraph_polytopesGenerateAllPtsTable
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: a polytope field
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: One polytope
+.Figure 20002: TEST case: Two polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+. ....
+Done script_test_fcn_VGraph_polytopesGenerateAllPtsTable
+__________
+
+<strong>   
+</strong><strong>Testing script: 10 of 11, test_fcn_VGraph_removeObstacle
+
+</strong>Running script_test_fcn_VGraph_removeObstacle
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: remove a polytope from the map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_removeObstacle
+__________
+
+<strong>   
+</strong><strong>Testing script: 11 of 11, test_fcn_VGraph_selfBlockedPoints
+
+</strong>Running script_test_fcn_VGraph_selfBlockedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find clear and blocked edges of polytopes in a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_selfBlockedPoints
+__________
+
+
+SUMMARY OF FOUND FILES: 
+<strong>The following scripts were found that will be tested:
+</strong>	script_test_fcn_VGraph_addObstacle.m
+	script_test_fcn_VGraph_calculatePointsOnLines.m
+	script_test_fcn_VGraph_clearAndBlockedPoints.m
+	script_test_fcn_VGraph_clearAndBlockedPointsGlobal.m
+	script_test_fcn_VGraph_convertPolytopetoDedupedPoints.m
+	script_test_fcn_VGraph_findEdgeWeights.m
+	script_test_fcn_VGraph_generateDilationRobustnessMatrix.m
+	script_test_fcn_VGraph_plotVGraph.m
+	script_test_fcn_VGraph_polytopesGenerateAllPtsTable.m
+	script_test_fcn_VGraph_removeObstacle.m
+	script_test_fcn_VGraph_selfBlockedPoints.m
+<strong>The following m-files were found, but do not seem to be test scripts or functions:
+</strong><strong>	script_demo_VGraph_AddRemoveObstacles.m
+</strong>
+STARTING TESTS:
+<strong>   
+</strong><strong>Testing script: 1 of 11, test_fcn_VGraph_addObstacle
+
+</strong>Running script_test_fcn_VGraph_addObstacle
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: add a polytope to the map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_addObstacle
+__________
+
+<strong>   
+</strong><strong>Testing script: 2 of 11, test_fcn_VGraph_calculatePointsOnLines
+
+</strong>Running script_test_fcn_VGraph_calculatePointsOnLines
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: check if points are on a line
+.Figure 10002: DEMO case: check if points are NOT on a line
+.Figure 10003: DEMO case: check if points are on a line within a tolerance
+.Figure 10004: DEMO case: check if points are NOT on a line within a tolerance
+.Figure 10005: DEMO case: check if two points on a line
+.Figure 10006: DEMO case: check many random points on a line segment
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: no intersection due to tolerance too small
+. Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.....
+Done script_test_fcn_VGraph_calculatePointsOnLines
+__________
+
+<strong>   
+</strong><strong>Testing script: 3 of 11, test_fcn_VGraph_clearAndBlockedPoints
+
+</strong>Running script_test_fcn_VGraph_clearAndBlockedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find clear and blocked edges of polytopes in a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_clearAndBlockedPoints
+__________
+
+<strong>   
+</strong><strong>Testing script: 4 of 11, test_fcn_VGraph_clearAndBlockedPointsGlobal
+
+</strong>Running script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: clear and blocked edges of single convex polytope
+.Figure 10002: DEMO case: clear and blocked edges of two convex polytopes
+.Figure 10002: DEMO case: clear and blocked edges of concave polytope
+.Figure 10003: DEMO case: compute a complex visibility graph
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes, make sure visibility is same as very small gap
+.Figure 20002: TEST case: zero gap between polytopes, make sure visibility is same as very small gap
+.Figure: 8XXXXXX: FAST mode cases
+. Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.....
+Done script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+__________
+
+<strong>   
+</strong><strong>Testing script: 5 of 11, test_fcn_VGraph_convertPolytopetoDedupedPoints
+
+</strong>Running script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: plan a straight line path through a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty fig_num
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+__________
+
+<strong>   
+</strong><strong>Testing script: 6 of 11, test_fcn_VGraph_findEdgeWeights
+
+</strong>Running script_test_fcn_VGraph_findEdgeWeights
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find edge weights
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_findEdgeWeights
+__________
+
+<strong>   
+</strong><strong>Testing script: 7 of 11, test_fcn_VGraph_generateDilationRobustnessMatrix
+
+</strong>Running script_test_fcn_VGraph_generateDilationRobustnessMatrix
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: Two polytopes with clear space right down middle, edge 1 to 6 only
+.Figure 10002: DEMO case: Two polytopes with clear space right down middle, all edges
+.Figure 10003: DEMO case: Two polytopes with clear space right down middle, all edges
+.Figure 10004: DEMO case: Three polytopes, MECC paper
+.Figure 10005: DEMO case: Three rectangles, MECC paper
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: Two polytopes with clear space right down middle, edge 5 to 8 on polytope
+.Figure: 8XXXXXX: FAST mode cases
+. Figure: 80001: FAST mode, empty fig_num
+.Figure: 80002: FAST mode, fig_num=-1
+.Figure: 80003: FAST mode comparisons
+.......
+Done script_test_fcn_VGraph_generateDilationRobustnessMatrix
+__________
+
+<strong>   
+</strong><strong>Testing script: 8 of 11, test_fcn_VGraph_plotVGraph
+
+</strong>Running script_test_fcn_VGraph_plotVGraph
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: plotting entire visibility graph, no optional inputs
+.Figure 10002: DEMO case: plotting entire visibility graph, with default optional inputs
+.Figure 10003: DEMO case: plotting entire visibility graph, with specified start index
+.Figure 10004: DEMO case: plotting entire visibility graph, with specified start and end index
+.Figure 10005: DEMO case: plotting entire visibility graph with saveFile specified
+.Figure: 2XXXXXX: TEST mode cases
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+. Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.......
+Done script_test_fcn_VGraph_plotVGraph
+__________
+
+<strong>   
+</strong><strong>Testing script: 9 of 11, test_fcn_VGraph_polytopesGenerateAllPtsTable
+
+</strong>Running script_test_fcn_VGraph_polytopesGenerateAllPtsTable
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: a polytope field
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: One polytope
+.Figure 20002: TEST case: Two polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+. ....
+Done script_test_fcn_VGraph_polytopesGenerateAllPtsTable
+__________
+
+<strong>   
+</strong><strong>Testing script: 10 of 11, test_fcn_VGraph_removeObstacle
+
+</strong>Running script_test_fcn_VGraph_removeObstacle
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: remove a polytope from the map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80002: FAST mode, figNum=-1
+.Figure: 80003: FAST mode comparisons
+.. ...
+Done script_test_fcn_VGraph_removeObstacle
+__________
+
+<strong>   
+</strong><strong>Testing script: 11 of 11, test_fcn_VGraph_selfBlockedPoints
+
+</strong>Running script_test_fcn_VGraph_selfBlockedPoints
+.Figure: 1XXXXXX: DEMO cases
+.Figure 10001: DEMO case: find clear and blocked edges of polytopes in a map
+.Figure: 2XXXXXX: TEST mode cases
+.Figure 20001: TEST case: zero gap between polytopes
+.Figure: 8XXXXXX: FAST mode cases
+.Figure: 80001: FAST mode, empty figNum
+.Figure: 80003: FAST mode comparisons
+... ..
+Done script_test_fcn_VGraph_selfBlockedPoints
+__________
+
