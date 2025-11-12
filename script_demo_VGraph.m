@@ -16,30 +16,30 @@
 
 % Revision history:
 % 2025_10_28 - Sean Brennan
-% -- created a the repo by removing visibility functions out of the
+% - created a the repo by removing visibility functions out of the
 %    % BoundedAStar repo
 % 2025_11_07
-% -- fix bug with hardcoded expected vGraphs in
+% - fix bug with hardcoded expected vGraphs in
 %    script_test_fcn_VGraph_clearAndBlockedPointsGlobal
-% -- added fast mode test cases for all scropts
+% - added fast mode test cases for all scropts
 % 2025_11_08 - S. Brennan
-% -- updated variable naming:
+% - updated variable naming:
 %    % * fig_num to figNum
 %    % * vgraph to vGraph
 %    % * all_pts to pointsWithData
 %    % * start to startPointData or startXY, depending on usage
 %    % * finish to finishPointData or finishXY, depending on usage
-% -- fixed minor MATLAB warnings
+% - fixed minor MATLAB warnings
 % 2025_11_12 - S. Brennan
-% -- set up auto-loading of dependencies using new DebugTools features
-% -- fixed minor "laps" issues in README
-% -- fixed minor test script bugs so that all run through cleanly
+% - set up auto-loading of dependencies using new DebugTools features
+% - fixed minor "laps" issues in README
+% - fixed minor test script bugs so that all run through cleanly
 % (new release)
 %
 
 % TO-DO:
 % 20XX_XX_XX - Your name, your email
-% -- list of items to add to the to-do list
+% - list of items to add to the to-do list
 
 %% Clear paths and folders, if needed
 if 1==0
