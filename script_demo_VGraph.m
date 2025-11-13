@@ -38,6 +38,9 @@
 %
 % 2025_11_13 - S. Brennan
 % - updated script_test_all_functions
+% - updated header flags for clearing path, to do fast checking without
+%   % skipping
+% (new release)
 
 % TO-DO:
 % 20XX_XX_XX - Your name, your email
