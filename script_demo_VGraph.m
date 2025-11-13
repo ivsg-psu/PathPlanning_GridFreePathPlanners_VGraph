@@ -36,16 +36,25 @@
 % - fixed minor test script bugs so that all run through cleanly
 % (new release)
 %
+% 2025_11_13 - S. Brennan
+% - updated script_test_all_functions
 
 % TO-DO:
 % 20XX_XX_XX - Your name, your email
 % - list of items to add to the to-do list
 
-%% Clear paths and folders, if needed
-if 1==0
-    clear flag_VGraph_Folders_Initialized
-    fcn_INTERNAL_clearUtilitiesFromPathAndFolders;
+%% Make sure we are running out of root directory
+st = dbstack; 
+thisFile = which(st(1).file);
+[filepath,name,ext] = fileparts(thisFile);
+cd(filepath);
 
+%% Clear paths and folders, if needed
+if 1==1
+    clear flag_VGraph_Folders_Initialized
+end
+if 1==0
+    fcn_INTERNAL_clearUtilitiesFromPathAndFolders;
 end
 
 %% Install dependencies
@@ -73,7 +82,10 @@ dependencySubfolders{ith_repo} = {'Functions','Data'};
 
 %% Do we need to set up the work space?
 if ~exist('flag_VGraph_Folders_Initialized','var')
-    
+
+    % Clear prior global variable flags
+    clear global FLAG_*
+
     % Navigate to the Installer directory
     currentFolder = pwd;
     cd('Installer');
