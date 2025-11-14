@@ -41,6 +41,18 @@
 % - updated header flags for clearing path, to do fast checking without
 %   % skipping
 % (new release)
+%
+% 2025_11_14 - S. Brennan
+% - cleaned up formatting of this demo
+% - added fcn_VGraph_polytopePointsInPolytopes
+%   % * pulled from BoundedAStar library
+%   % * updated README.md
+% (in script_test_fcn_VGraph_polytopePointsInPolytopes)
+% - renamed script after moving from BoundedAStar repo
+%   % * from script_test_fcn_BoundedAStar_polytopePointsInPolytopes
+%   % * to script_test_fcn_VGraph_polytopePointsInPolytopes
+% - fixed header listing of script name - it was incorrect!
+% (new release)
 
 % TO-DO:
 % 20XX_XX_XX - Your name, your email
@@ -163,6 +175,10 @@ disp('Welcome to the demo code for the Visibility Graph (VGraph) library!')
 %                                 |___/
 % See: http://patorjk.com/software/taag/#p=display&f=Big&t=Plotting+Functions&x=none&v=4&h=4&w=80&we=false
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figures start with 1
+
+close all;
+fprintf(1,'Figure: 1XXXXXX: PLOTTING functions\n');
 
 %% fcn_VGraph_plotVGraph - showing full graph
 % Plots the visilibity graph for a field of polytopes
@@ -372,9 +388,27 @@ assert(isequal(currentHandle.Parent.Parent.Number,figNum)); % The current figure
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
 
+
+%% Supporting functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   _____                              _   _               ______                _   _
+%  / ____|                            | | (_)             |  ____|              | | (_)
+% | (___  _   _ _ __  _ __   ___  _ __| |_ _ _ __   __ _  | |__ _   _ _ __   ___| |_ _  ___  _ __  ___
+%  \___ \| | | | '_ \| '_ \ / _ \| '__| __| | '_ \ / _` | |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+%  ____) | |_| | |_) | |_) | (_) | |  | |_| | | | | (_| | | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+% |_____/ \__,_| .__/| .__/ \___/|_|   \__|_|_| |_|\__, | |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+%              | |   | |                            __/ |
+%              |_|   |_|                           |___/
+% See: http://patorjk.com/software/taag/#p=display&f=Big&t=Supporting+Functions&x=none&v=4&h=4&w=80&we=false
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+close all;
+fprintf(1,'Figure: 2XXXXXX: SUPPORTING functions\n');
+
 %% fcn_VGraph_polytopesGenerateAllPtsTable
 % The following is test case 10001 in the test script
-figNum = 10001;
+figNum = 20001;
 titleString = sprintf('fcn_VGraph_polytopesGenerateAllPtsTable');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
@@ -412,7 +446,7 @@ assert(isequal(Npoly,length(polytopes)));
 assert(isequal(get(gcf,'Number'),figNum));
 %% fcn_VGraph_calculatePointsOnLines
 % This is demo case 10006 in the test script
-figNum = 10006;
+figNum = 20002;
 titleString = sprintf('DEMO case: fcn_VGraph_calculatePointsOnLines');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
@@ -445,8 +479,7 @@ assert(isequal(get(gcf,'Number'),figNum));
 
 %% fcn_VGraph_findEdgeWeights
 % Note: the following is test case 10001 in the test script
-
-fig_num = 10001;
+fig_num = 20003;
 titleString = sprintf('DEMO case: find edge weights');
 fprintf(1,'Figure %.0f: %s\n',fig_num, titleString);
 figure(fig_num); clf;
@@ -520,8 +553,7 @@ assert(isequal(get(gcf,'Number'),fig_num));
 
 %% fcn_VGraph_selfBlockedPoints
 % This is case 10001 in test script
-
-figNum = 10001;
+figNum = 20004;
 titleString = sprintf('fcn_VGraph_selfBlockedPoints');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
@@ -561,6 +593,63 @@ assert(isequal(Npolys,length(polytopes)));
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
 
+%% fcn_VGraph_polytopePointsInPolytopes
+% This is test 10002 in the script
+figNum = 20005;
+titleString = sprintf('fcn_VGraph_polytopePointsInPolytopes');
+fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
+figure(figNum); clf;
+
+% Set up polytopes
+
+% Use tiling to generate 8 polytopes
+startingIndex = 345;
+fullyTiledPolytopes = fcn_MapGen_generatePolysFromSeedGeneratorNames('haltonset', [startingIndex startingIndex+7], ([]), ([10 10]), -1);
+
+% Trim polytopes along edge
+trimmedPolytopes = fcn_MapGen_polytopesDeleteByAABB( fullyTiledPolytopes, [0 0 100 100], (-1));
+
+% Shrink polytopes to form obstacles
+polytopes = fcn_MapGen_polytopesShrinkEvenly(trimmedPolytopes, 0.75, (-1));
+
+% Set up many sample points
+Npoints = 20;
+startXY = rand(Npoints,2)*10;
+finishXY = rand(Npoints,2)*10;
+
+flagThrowError = 0;
+flagEdgeCheck = 0;
+
+[flagsAtLeastOnePointIsInPoly, startPolys, finishPolys, flagsStartIsInPoly, flagsFinishIsInPoly] = ...
+    fcn_VGraph_polytopePointsInPolytopes( ...
+    startXY, finishXY, polytopes, ...
+    (flagThrowError), (flagEdgeCheck), (figNum));
+
+sgtitle(titleString, 'Interpreter','none');
+
+% Check variable types
+assert(islogical(flagsAtLeastOnePointIsInPoly));
+assert(isnumeric(startPolys));
+assert(isnumeric(finishPolys));
+assert(islogical(flagsStartIsInPoly));
+assert(islogical(flagsFinishIsInPoly));
+
+% Check variable sizes
+Npoints = length(startXY(:,1));
+assert(size(flagsAtLeastOnePointIsInPoly,1)==Npoints); 
+assert(size(flagsAtLeastOnePointIsInPoly,2)==1); 
+assert(size(startPolys,1)==Npoints); 
+assert(size(startPolys,2)==1); 
+assert(size(finishPolys,1)==Npoints); 
+assert(size(finishPolys,2)==1); 
+assert(size(flagsStartIsInPoly,1)==Npoints); 
+assert(size(flagsStartIsInPoly,2)==1); 
+assert(size(flagsFinishIsInPoly,1)==Npoints); 
+assert(size(flagsFinishIsInPoly,2)==1); 
+
+% Make sure plot opened up
+assert(isequal(get(gcf,'Number'),figNum));
+
 %% Core functions
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -574,10 +663,13 @@ assert(isequal(get(gcf,'Number'),figNum));
 % See: http://patorjk.com/software/taag/#p=display&f=Big&t=Core+Functions&x=none&v=4&h=4&w=80&we=false
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+close all;
+fprintf(1,'Figure: 3XXXXXX: CORE functions\n');
+
 
 %% fcn_VGraph_clearAndBlockedPoints
 % This is the first demo case in the script: find clear and blocked edges of polytopes in a map
-figNum = 20001;
+figNum = 30001;
 titleString = sprintf('DEMO case: fcn_VGraph_clearAndBlockedPoints');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
@@ -623,8 +715,7 @@ assert(isequal(get(gcf,'Number'),figNum));
 
 %% fcn_VGraph_clearAndBlockedPointsGlobal
 % Note, this is test case 10002 in the test script
-
-figNum = 20002;
+figNum = 30002;
 titleString = sprintf('DEMO case: fcn_VGraph_clearAndBlockedPointsGlobal');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
@@ -664,8 +755,7 @@ assert(isequal(get(gcf,'Number'),figNum));
 
 %% fcn_VGraph_addObstacle
 % Note, this is test case 10001 in the test script
-
-figNum = 20003;
+figNum = 30003;
 titleString = sprintf('DEMO case: fcn_VGraph_addObstacle');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
@@ -746,8 +836,7 @@ assert(isequal(get(gcf,'Number'),figNum));
 
 %% fcn_VGraph_generateDilationRobustnessMatrix
 % Note: this is case 10003 in the test script
-
-figNum = 10003;
+figNum = 30004;
 titleString = sprintf('fcn_VGraph_generateDilationRobustnessMatrix');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;

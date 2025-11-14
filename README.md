@@ -67,6 +67,7 @@ Search for this, and you will find!
           <li><a href="#fcn_vgraph_convertpolytopetodedupedpoints">fcn_VGraph_convertPolytopetoDedupedPoints - associated duplicated points shared between polytopes to their respective polytopes</li>
           <li><a href="#fcn_vgraph_findedgeweights">fcn_VGraph_findEdgeWeights -calculates vGraph edge weights using minimum of connected polytope costs (INCOMPLETE) </li>
           <li><a href="#fcn_vgraph_selfblockedpoints">fcn_VGraph_selfBlockedPoints - determines the points blocked by the obstacle containint testPointData (INCOMPLETE) </li>
+          <li><a href="#fcn_vgraph_polytopepointsinpolytopes">fcn_VGraph_polytopePointsInPolytopes - checks if start or finish point(s) are within polytopes </li>
         </ul>
         <li><a href="#core-functions">Core Functions</li>
         <ul>
@@ -538,6 +539,81 @@ determines the points blocked by the obstacle containing testPointData
 </pre>
 
 NOTE: this function does not appear to be completely finished as of 2025_11_08. At least, the edge costs do not plot in different colors.
+
+<a href="#pathplanning_gridfreepathplanners_vgraph">Back to top</a>
+
+***
+
+#### fcn_VGraph_polytopePointsInPolytopes
+
+checks if start or finish point(s) are within polytopes
+
+ **FORMAT:**
+
+```Matlab
+% FORMAT:
+%   
+%   [flagsAtLeastOnePointIsInPoly, startPolys, finishPolys] = ...
+%   fcn_VGraph_polytopePointsInPolytopes(...
+%      startXY, finishXY, polytopes, ...
+%      (flagThrowError), (flagEdgeCheck), (figNum))
+%   
+% INPUTS:
+%   
+%   startXY: [Nx2] vector of x and y coordinates of starting points 
+%   
+%   finishXY: [Nx2] vector of x and y coordinates of ending points
+%   
+%   polytopes: a 1-by-n seven field structure of combined polytopes, where 
+%     p = number of polytopes, with fields:
+%         vertices: a m+1-by-2 matrix of xy points with row1 = rowm+1, where m is
+%         the number of the individual polytope vertices
+%         xv: a 1-by-m vector of vertice x-coordinates
+%         yv: a 1-by-m vector of vertice y-coordinates
+%         distances: a 1-by-m vector of perimeter distances from one point to the
+%         next point, distances(i) = distance from vertices(i) to vertices(i+1)
+%         mean: average xy coordinate of the polytope
+%         area: area of the polytope
+%         max_radius: distance from the mean to the furthest vertex
+%
+% (OPTIONAL INPUTS)
+%   
+%   flagThrowError: flag determining whether an error should be thrown (1) for
+%   points inside any polytope or no error and value assigned to ERR (0) 
+%   
+%   flagEdgeCheck: a flag that determines whether the polytope edges should be
+%   checked for points. If set to 1, a point on the edge is considered
+%   inside the polytope. Otherwise, a point on the edge is outside the
+%   polytope.
+%   
+%   figNum: a figure number to plot results. If set to -1, skips any
+%   input checking or debugging, no figures will be generated, and sets
+%   up code to maximize speed. As well, if given, this forces the
+%   variable types to be displayed as output and as well makes the input
+%   check process verbose
+%
+% OUTPUTS:
+%   
+%   flagsAtLeastOnePointIsInPoly: [Nx1] logical vector containing, for each
+%   ith start/end pair, a value of 0 if neither startXY or finishXY is in/on
+%   any polytopes, 1 otherwise 
+%
+%   startPolys: [Nx1] vector of indicies of first polytope startXY is on.
+%   Returns NaN if none.
+%   
+%   finishPolys: [Nx1] vector of indicies of first polytope finishXY is on.
+%   Returns NaN if none.
+%
+%   flagsStartIsInPoly: [Nx1] vector of true if startXY is in a polytope
+%
+%   flagsFinishIsInPoly: [Nx1] vector of true if finishXY is in a polytope
+  ```
+
+<pre align="center">
+<img src=".\Images\fcn_VGraph_polytopePointsInPolytopes.png" alt="fcn_VGraph_polytopePointsInPolytopes picture" width="400" height="300">
+<figcaption>The function fcn_VGraph_polytopePointsInPolytopes identifies whether start/finish points are within polytopes.</figcaption>
+<!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
+</pre>
 
 <a href="#pathplanning_gridfreepathplanners_vgraph">Back to top</a>
 
