@@ -77,6 +77,10 @@ Search for this, and you will find!
           <li><a href="#fcn_vgraph_removeobstacle">fcn_VGraph_removeObstacle  - Calculates visibility graph update if an obstacle is removed</li>
           <li><a href="#fcn_vgraph_generatedilationrobustnessmatrix">fcn_VGraph_generateDilationRobustnessMatrix  - Estimates edge clearances around each edge in a visibility matrix/li>
         </ul>
+        <li><a href="#cost-functions">Cost Functions</li>
+        <ul>
+          <li><a href="#fcn_vgraph_costcalculate">fcn_VGraph_costCalculate - Calculates cost graph given the visibility graph, the point data, and optional user-specified cost criteria.
+        </ul>
       </ul>
     <li><a href="#usage">Usage</a></li>
      <ul>
@@ -1063,6 +1067,82 @@ algorithm description
 %      point j.  The third index, k, is 1 if the free space is measured to
 %      the left hand side when facing the j from i, or k = 2 if measured to
 %      the right hand side .
+```
+
+<a href="#pathplanning_gridfreepathplanners_vgraph">Back to top</a>
+
+***
+***
+
+### Cost Functions
+
+#### fcn_VGraph_costCalculate
+
+The function fcn_VGraph_costCalculate calculates a cost graph given the visibility graph, the point data, and optional user-specified cost criteria.
+
+<pre align="center">
+  <img src=".\Images\fcn_VGraph_costCalculate.png" alt="fcn_VGraph_costCalculate picture" width="400" height="300">
+  <figcaption>The function fcn_VGraph_costCalculate calculates a cost graph.</figcaption>
+  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
+</pre>
+
+ **FORMAT:**
+
+```Matlab
+% FORMAT:
+%
+%     cGraph = ...
+%         fcn_VGraph_costCalculate(...
+%         vGraph, pointsWithData, ...
+%         (modeString), (figNum));
+%
+% INPUTS:
+%
+%     vGraph: the visibility graph as an nxn matrix where n is the number of
+%     points (nodes) in the map. A 1 is in position i,j if point j is
+%     visible from point i.  0 otherwise. The vGraph indicates which points
+%     are visible from (rows) to (columns) each other.
+%
+%     pointsWithData: n-by-5 matrix of all the possible to/from points for
+%     visibility calculations including the vertex points on each obstacle,
+%     and if the user specifies, the start and/or end points. If the
+%     start/end points are omitted, the value of p is the same as the
+%     number of points within the polytope field, numPolytopeVertices.
+%     Otherwise, p is 1 or 2 larger depending on whether start/end is
+%     given. The information in the 5 columns is as follows:
+%         x-coordinate
+%         y-coordinate
+%         point id number
+%         obstacle id number (-1 for start/end points)
+%         beginning/ending indication (1 if the point is a beginning or
+%         start point, 2 if ending point or finish point, and 0 otherwise)
+%         Ex: [x y point_id obs_id beg_end]
+%
+%      (OPTIONAL INPUTS)
+%
+%      modeString: a string allowing user to specify the cost criterion.
+%      Allowable values include:
+%
+%          'distance from finish': the cost of a to/from edge is specified
+%          as the distance of the "from" destination to the finish. This is
+%          typically the heruistic cost for A-star, greedy, and similar
+%          planners.
+%
+%          'movement distance': the distance between the from and to point
+%          on each edge is the cost of the edge. This is the cost according
+%          to classic path planners.
+% 
+%      figNum: a figure number to plot results. If set to -1, skips any
+%      input checking or debugging, no figures will be generated, and sets
+%      up code to maximize speed.
+%
+% OUTPUTS:
+%
+%      cGraph: the cost graph. This is the same size as the visibility
+%      graph, but instead of 1 values indicating visibility, a cost value
+%      is given for each element. For static maps, the visibility graph
+%      will not change, but costs may change depending on user-defined
+%      cost criteria.
 ```
 
 <a href="#pathplanning_gridfreepathplanners_vgraph">Back to top</a>

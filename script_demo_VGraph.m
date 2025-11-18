@@ -68,6 +68,7 @@
 %   % vgra+ph to vGraph
 %   % visib+ilityGraph to vGraph
 % - Added fcn_VGraph_costCalculate function
+% (new release)
 
 % TO-DO:
 % 2025_11_17 - Sean Brennan, sbrennan@psu.edu

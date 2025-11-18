@@ -3,8 +3,8 @@ function cGraph = ...
     vGraph, pointsWithData, ...
      varargin)
 % fcn_VGraph_costCalculate
-% given a visibility matrix, details on points, and cost calculation
-% method, calculates a cost matrix.
+% Calculates cost graph given the visibility graph, the point data, and
+% optional user-specified mode of calculating cost.
 %
 % FORMAT:
 %
