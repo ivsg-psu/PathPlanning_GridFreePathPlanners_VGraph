@@ -81,6 +81,10 @@ Search for this, and you will find!
         <ul>
           <li><a href="#fcn_vgraph_costcalculate">fcn_VGraph_costCalculate - Calculates cost graph given the visibility graph, the point data, and optional user-specified cost criteria.
         </ul>
+        <li><a href="#helper-functions">Helper Functions</li>
+        <ul>
+          <li><a href="#fcn_vgraph_helperfillpolytopesfrompointdata">fcn_VGraph_helperFillPolytopesFromPointData - helper function that fills in 2D polytpes given point data including XY position, polytope membership, etc..
+        </ul>
       </ul>
     <li><a href="#usage">Usage</a></li>
      <ul>
@@ -1072,7 +1076,6 @@ algorithm description
 <a href="#pathplanning_gridfreepathplanners_vgraph">Back to top</a>
 
 ***
-***
 
 ### Cost Functions
 
@@ -1143,6 +1146,61 @@ The function fcn_VGraph_costCalculate calculates a cost graph given the visibili
 %      is given for each element. For static maps, the visibility graph
 %      will not change, but costs may change depending on user-defined
 %      cost criteria.
+```
+
+<a href="#pathplanning_gridfreepathplanners_vgraph">Back to top</a>
+
+***
+
+### Helper Functions
+
+#### fcn_VGraph_helperFillPolytopesFromPointData
+
+The function fcn_VGraph_helperFillPolytopesFromPointData is a 
+helper function that fills in 2D polytpes given point data including XY
+position, polytope membership, etc.
+
+<pre align="center">
+  <img src=".\Images\fcn_VGraph_helperFillPolytopesFromPointData.png" alt="fcn_VGraph_helperFillPolytopesFromPointData picture" width="400" height="300">
+  <figcaption>The function fcn_VGraph_helperFillPolytopesFromPointData fills in polytopes structure array given point data.</figcaption>
+  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
+</pre>
+
+ **FORMAT:**
+
+```Matlab
+% FORMAT:
+%
+%     polytopes = fcn_VGraph_helperFillPolytopesFromPointData(pointsWithData, varargin)
+%
+% INPUTS:
+%
+%     pointsWithData: n-by-5 matrix of all the possible to/from points for
+%     visibility calculations including the vertex points on each obstacle,
+%     and if the user specifies, the start and/or end points. If the
+%     start/end points are omitted, the value of p is the same as the
+%     number of points within the polytope field, numPolytopeVertices.
+%     Otherwise, p is 1 or 2 larger depending on whether start/end is
+%     given. The information in the 5 columns is as follows:
+%         x-coordinate
+%         y-coordinate
+%         point id number
+%         obstacle id number (-1 for start/end points)
+%         beginning/ending indication (1 if the point is a beginning or
+%         start point, 2 if ending point or finish point, and 0 otherwise)
+%         Ex: [x y point_id obs_id beg_end]
+%
+%      (OPTIONAL INPUTS)
+% 
+%      figNum: a figure number to plot results. If set to -1, skips any
+%      input checking or debugging, no figures will be generated, and sets
+%      up code to maximize speed.
+%
+% OUTPUTS:
+%
+%      polytopes: an individual structure or structure array of 'polytopes'
+%      type that stores the polytopes to be filled. See
+%      fcn_MapGen_polytopeFillEmptyPoly for structure details.
 ```
 
 <a href="#pathplanning_gridfreepathplanners_vgraph">Back to top</a>

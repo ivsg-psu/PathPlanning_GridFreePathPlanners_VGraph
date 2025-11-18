@@ -68,7 +68,17 @@
 %   % vgra+ph to vGraph
 %   % visib+ilityGraph to vGraph
 % - Added fcn_VGraph_costCalculate function
+% - Updated README.md
 % (new release)
+%
+% 2025_11_18 - S. Brennan
+% - Added fcn_VGraph_helperFillPolytopesFromPointData function
+% - Updated README.md
+% - In fcn_VGraph_costCalculate
+%   % * Updated dependencies list
+% (new release)
+
+
 
 % TO-DO:
 % 2025_11_17 - Sean Brennan, sbrennan@psu.edu
@@ -982,6 +992,59 @@ saveas(gcf, fullPathFileName);
 fullPathFileName = fullfile(pwd,'Images',cat(2,titleString,'.fig'));
 saveas(gcf, fullPathFileName);
 
+%% Helper functions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  _    _      _                   ______                _   _
+% | |  | |    | |                 |  ____|              | | (_)
+% | |__| | ___| |_ __   ___ _ __  | |__ _   _ _ __   ___| |_ _  ___  _ __  ___
+% |  __  |/ _ \ | '_ \ / _ \ '__| |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+% | |  | |  __/ | |_) |  __/ |    | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+% |_|  |_|\___|_| .__/ \___|_|    |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+%               | |
+%               |_|
+% See: http://patorjk.com/software/taag/#p=display&f=Big&t=Helper+Functions&x=none&v=4&h=4&w=80&we=false
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+close all;
+fprintf(1,'Figure: 5XXXXXX: HELPER functions\n');
+
+%% DEMO case: fcn_VGraph_helperFillPolytopesFromPointData
+% This is case 10001 in the test script
+
+figNum = 50001;
+titleString = sprintf('fcn_VGraph_helperFillPolytopesFromPointData');
+fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
+figure(figNum); clf;
+
+% Load some test data 
+dataSetNumber = 1; % Two polytopes with clear space right down middle
+[pointsWithData, ~, ~, ~] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
+
+
+% Call the function
+polytopes = fcn_VGraph_helperFillPolytopesFromPointData(pointsWithData, (figNum));
+
+sgtitle(titleString, 'Interpreter','none');
+
+% Check variable types
+assert(isstruct(polytopes));
+
+% Check variable sizes
+assert(size(polytopes,1)==1); 
+assert(size(polytopes,2)==2); 
+
+% Check variable values
+% Nothing to check here
+
+% Make sure plot opened up
+assert(isequal(get(gcf,'Number'),figNum));
+
+% Save results
+fullPathFileName = fullfile(pwd,'Images',cat(2,titleString,'.png'));
+saveas(gcf, fullPathFileName);
+fullPathFileName = fullfile(pwd,'Images',cat(2,titleString,'.fig'));
+saveas(gcf, fullPathFileName);
 
 %% Functions follow
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

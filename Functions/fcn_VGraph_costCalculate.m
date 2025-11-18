@@ -55,15 +55,20 @@ function cGraph = ...
 %
 % OUTPUTS:
 %
-%      cGraph: the cost graph. This is the same size as the visibility
+%      cGraph: the cost graph as an nxn matrix where n is the number of
+%      points (nodes) in the map. This is the same size as the visibility
 %      graph, but instead of 1 values indicating visibility, a cost value
 %      is given for each element. For static maps, the visibility graph
-%      will not change, but costs may change depending on user-defined
-%      cost criteria.
+%      will not change, but costs may change depending on user-defined cost
+%      criteria.
 %
 % DEPENDENCIES:
 %
-%      (none)
+%      fcn_DebugTools_checkInputsToFunctions
+%      fcn_MapGen_plotPolytopes
+%      fcn_plotRoad_reduceColorMap
+%      fcn_VGraph_plotVGraph
+%      fcn_plotRoad_plotXYI
 %
 % EXAMPLES:
 %
@@ -83,6 +88,9 @@ function cGraph = ...
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vgra+ph to vGraph
+%
+% 2025_11_18 - S. Brennan
+% - Updated dependencies list
 
 % TO DO:
 % - fill in to-do items here.
