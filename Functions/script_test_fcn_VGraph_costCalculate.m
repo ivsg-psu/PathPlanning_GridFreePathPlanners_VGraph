@@ -1,47 +1,20 @@
-% script_test_fcn_VGraph_generateDilationRobustnessMatrix
-% Tests: fcn_VGraph_generateDilationRobustnessMatrix
+% script_test_fcn_VGraph_costCalculate
+% Tests: fcn_VGraph_costCalculate
 
 % REVISION HISTORY:
 % 
-% As: script_test_fcn_algorithm_generate_dilation_robustness_matrix
-% 
-% 2024_02_01 by S. Harnett
+% 2025_11_16 by S. Brennan
 % - first write of script
-%
-% As: script_test_fcn_BoundedAStar_generateDilationRobustnessMatrix
-% 
-% 2025_10_06 - S. Brennan
-% - removed addpath calls
-% - removed calls to fcn_visibility_clear_and_blocked_points_global,
-%   % replaced with fcn_Visibility_clearAndBlockedPointsGlobal
-% - removed calls to fcn_algorithm_generate_dilation_robustness_matrix,
-%   % replaced with fcn_BoundedAStar_generateDilationRobustnessMatrix
-% - removed calls to fcn_MapGen_fillPolytopeFieldsFromVertices,
-%   % replaced with fcn_MapGen_polytopesFillFieldsFromVertices
-% 
-% 2025_10_20 - S. Brennan
-% - refactored script to make test cases more clear, do fast mode, etc.
-%
-% As: script_test_fcn_Visibility_generateDilationRobustnessMatrix
-% 
-% 2025_10_31 by Sean Brennan
-% - moved function to Visibility Graph library
-% - cleaned up test cases near header that are now in demo sections
-%
-% As: script_test_fcn_VGraph_generateDilationRobustnessMatrix
-% 
-% 2025_11_07 - S. Brennan
-% - Renamed script_test_fcn_Visibility_generateDilationRobustnessMatrix to script_test_fcn_VGraph_generateDilationRobustnessMatrix
-%
-% 2025_11_16 - S. Brennan
-% - Cleaned up variable naming
 %
 % 2025_11_17 - S. Brennan
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % fig+_num to figNum
 %   % vis+ibilityMatrix to vGraph
-%   % all_+pts to pointsWithData
+
+% TO DO:
+% - set up fast mode tests
+
 
 %% Set up the workspace
 close all
@@ -64,217 +37,124 @@ close all
 close all;
 fprintf(1,'Figure: 1XXXXXX: DEMO cases\n');
 
-%% DEMO case: Two polytopes with clear space right down middle, edge 1 to 6 only
+%% DEMO case: Two polytopes with clear space right down middle, cost calculation based on "distance to finish"
 figNum = 10001;
-titleString = sprintf('DEMO case: Two polytopes with clear space right down middle, edge 1 to 6 only');
+titleString = sprintf('DEMO case: Two polytopes with clear space right down middle, cost calculation based on "distance to finish"');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
-figure(figNum); clf;
+figure(figNum); close(figNum);
 
 % Load some test data 
 dataSetNumber = 1; % Two polytopes with clear space right down middle
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
+[pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
 
-% Set options
-mode = '2d';
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = [1 6];
-plottingOptions.filename = 'dilationAnimation.gif'; % Specify the output file name
+% Plot the polytopes
+fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+axis(goodAxis);
+
+modeString = 'distance from finish';
 
 % Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), (figNum));
+cGraph = ...
+    fcn_VGraph_costCalculate(...
+    vGraph, pointsWithData, modeString, ...
+    (figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(dilation_robustness_matrix));
+assert(isnumeric(cGraph));
 
 % Check variable sizes
 Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
 
 % Check variable values
-% 1 is left, 2 is right
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),1);
-roundedValueToTest = round(valueToTest,2);
-assert(isequal(roundedValueToTest,0.97));
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),2);
-roundedValueToTest = round(valueToTest,2);
-assert(isequal(roundedValueToTest,0.97));
+assert(round(max(cGraph(~isinf(cGraph)),[],'all'))==8);
+assert(round(min(cGraph(~isinf(cGraph)),[],'all'))==0); 
 
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
 
-%% DEMO case: Two polytopes with clear space right down middle, all edges
+
+
+%% DEMO case: Three polytopes with clear space right down middle, cost calculation based on "distance to finish"
 figNum = 10002;
-titleString = sprintf('DEMO case: Two polytopes with clear space right down middle, all edges');
-fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
-figure(figNum); clf;
-
-% Load some test data 
-dataSetNumber = 1; % Two polytopes with clear space right down middle
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
-
-% Set options
-mode = '2d';
-
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = []; %[3 7];
-plottingOptions.filename = []; % Specify the output file name
-
-% Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), (figNum));
-
-sgtitle(titleString, 'Interpreter','none');
-
-% Check variable types
-assert(isnumeric(dilation_robustness_matrix));
-
-% Check variable sizes
-Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-
-% Check variable values
-% Nothing to check
-
-% Make sure plot opened up
-assert(isequal(get(gcf,'Number'),figNum));
-
-%% DEMO case: Three polytopes with clear space right down middle, all edges
-figNum = 10003;
-titleString = sprintf('DEMO case: Two polytopes with clear space right down middle, all edges');
+titleString = sprintf('DEMO case: Three polytopes with clear space right down middle, cost calculation based on "distance to finish"');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
 
 % Load some test data 
 dataSetNumber = 2; % Two polytopes with clear space right down middle
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
+[pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
 
-% Set options
-mode = '2d';
+% Plot the polytopes
+fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+axis(goodAxis);
 
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = []; %[3 7];
-plottingOptions.filename = []; % Specify the output file name
+modeString = 'distance from finish';
 
 % Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), (figNum));
-
+cGraph = ...
+    fcn_VGraph_costCalculate(...
+    vGraph, pointsWithData, modeString, ...
+    (figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(dilation_robustness_matrix));
+assert(isnumeric(cGraph));
 
 % Check variable sizes
 Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
 
 % Check variable values
-% Nothing to check
+assert(round(max(cGraph(~isinf(cGraph)),[],'all'))==8);
+assert(round(min(cGraph(~isinf(cGraph)),[],'all'))==0); 
 
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
 
-%% DEMO case: Three polytopes, MECC paper
-figNum = 10004;
-titleString = sprintf('DEMO case: Three polytopes, MECC paper');
+%% DEMO case: Three polytopes, cost calculation based on "distance to finish"
+figNum = 10003;
+titleString = sprintf('DEMO case: Three polytopes, cost calculation based on "distance to finish"');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
 
 % Load some test data 
-dataSetNumber = 3; % Three polytopes, MECC paper
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
+dataSetNumber = 3; % Two polytopes with clear space right down middle
+[pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
 
-% Set options
-mode = '2d';
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = [11 2];
-plottingOptions.filename = 'ThreePolytopesMECC.gif'; % Specify the output file name
+% Plot the polytopes
+fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+axis(goodAxis);
+
+modeString = 'distance from finish';
 
 % Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), (figNum));
+cGraph = ...
+    fcn_VGraph_costCalculate(...
+    vGraph, pointsWithData, modeString, ...
+    (figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(dilation_robustness_matrix));
+assert(isnumeric(cGraph));
 
 % Check variable sizes
 Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
 
 % Check variable values
-% 1 is left, 2 is right
-% valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),1);
-% roundedValueToTest = round(valueToTest,2);
-% assert(isequal(roundedValueToTest,0.97));
-% valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),2);
-% roundedValueToTest = round(valueToTest,2);
-% assert(isequal(roundedValueToTest,0.97));
+% assert(round(max(cGraph(~isinf(cGraph)),[],'all'))==8);
+% assert(round(min(cGraph(~isinf(cGraph)),[],'all'))==0); 
 
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
-
-%% DEMO case: Three rectangles, MECC paper
-figNum = 10005;
-titleString = sprintf('DEMO case: Three rectangles, MECC paper');
-fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
-figure(figNum); clf;
-
-% Load some test data 
-dataSetNumber = 4; % Three polytopes, MECC paper
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
-
-% Set options
-mode = '2d';
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = [];
-plottingOptions.filename = []; % Specify the output file name
-
-% Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), (figNum));
-
-sgtitle(titleString, 'Interpreter','none');
-
-% Check variable types
-assert(isnumeric(dilation_robustness_matrix));
-
-% Check variable sizes
-Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-
-% Check variable values
-% 1 is left, 2 is right
-% valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),1);
-% roundedValueToTest = round(valueToTest,2);
-% assert(isequal(roundedValueToTest,0.97));
-% valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),2);
-% roundedValueToTest = round(valueToTest,2);
-% assert(isequal(roundedValueToTest,0.97));
-
-% Make sure plot opened up
-assert(isequal(get(gcf,'Number'),figNum));
-
 
 
 %% Test cases start here. These are very simple, usually trivial
@@ -296,48 +176,41 @@ assert(isequal(get(gcf,'Number'),figNum));
 close all;
 fprintf(1,'Figure: 2XXXXXX: TEST mode cases\n');
 
-%% TEST case: Two polytopes with clear space right down middle, edge 5 to 8 on polytope
+%% TEST case: Two polytopes with clear space right down middle, "movement distance" test
 figNum = 20001;
-titleString = sprintf('TEST case: Two polytopes with clear space right down middle, edge 5 to 8 on polytope');
+titleString = sprintf('TEST case: Two polytopes with clear space right down middle, cost calculation based on "movement distance"');
 fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
 figure(figNum); clf;
 
 % Load some test data 
 dataSetNumber = 1; % Two polytopes with clear space right down middle
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
+[pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
 
-% Set options
-mode = '2d';
+% Plot the polytopes
+fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+axis(goodAxis);
 
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = [5 8];
-plottingOptions.filename = 'dilationAnimation.gif'; % Specify the output file name
+modeString = 'movement distance';
 
 % Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), (figNum));
-
+cGraph = ...
+    fcn_VGraph_costCalculate(...
+    vGraph, pointsWithData, modeString, ...
+    (figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(dilation_robustness_matrix));
+assert(isnumeric(cGraph));
 
 % Check variable sizes
 Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
 
 % Check variable values
-% 1 is left, 2 is right
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),1);
-roundedValueToTest = round(valueToTest,2);
-assert(isequal(roundedValueToTest,00));
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),2);
-roundedValueToTest = round(valueToTest,2);
-assert(isinf(roundedValueToTest));
+assert(round(max(cGraph(~isinf(cGraph)),[],'all'))==8);
+assert(round(min(cGraph(~isinf(cGraph)),[],'all'))==1); 
 
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
@@ -367,36 +240,31 @@ figure(figNum); close(figNum);
 
 % Load some test data 
 dataSetNumber = 1; % Two polytopes with clear space right down middle
+[pointsWithData, vGraph, ~, ~] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
 
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
-mode = '2d';
+% % Plot the polytopes
+% fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+% axis(goodAxis);
 
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = [1 6];
-plottingOptions.filename = 'dilationAnimation.gif'; % Specify the output file name
+modeString = 'distance from finish';
 
 % Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), ([]));
+cGraph = ...
+    fcn_VGraph_costCalculate(...
+    vGraph, pointsWithData, modeString, ...
+    ([]));
 
 % Check variable types
-assert(isnumeric(dilation_robustness_matrix));
+assert(isnumeric(cGraph));
 
 % Check variable sizes
 Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
 
 % Check variable values
-% 1 is left, 2 is right
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),1);
-roundedValueToTest = round(valueToTest,2);
-assert(isequal(roundedValueToTest,0.97));
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),2);
-roundedValueToTest = round(valueToTest,2);
-assert(isequal(roundedValueToTest,0.97));
+assert(round(max(cGraph(~isinf(cGraph)),[],'all'))==8);
+assert(round(min(cGraph(~isinf(cGraph)),[],'all'))==0); 
 
 % Make sure plot did NOT open up
 figHandles = get(groot, 'Children');
@@ -410,35 +278,31 @@ figure(figNum); close(figNum);
 
 % Load some test data 
 dataSetNumber = 1; % Two polytopes with clear space right down middle
+[pointsWithData, vGraph, ~, ~] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
 
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
-mode = '2d';
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = [1 6];
-plottingOptions.filename = 'dilationAnimation.gif'; % Specify the output file name
+% % Plot the polytopes
+% fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+% axis(goodAxis);
+
+modeString = 'distance from finish';
 
 % Call the function
-dilation_robustness_matrix = ...
-    fcn_VGraph_generateDilationRobustnessMatrix(...
-    pointsWithData, start, finish, vGraph, mode, polytopes,...
-    (plottingOptions), (-1));
+cGraph = ...
+    fcn_VGraph_costCalculate(...
+    vGraph, pointsWithData, modeString, ...
+    (-1));
 
 % Check variable types
-assert(isnumeric(dilation_robustness_matrix));
+assert(isnumeric(cGraph));
 
 % Check variable sizes
 Npoints = size(vGraph,1);
-assert(size(dilation_robustness_matrix,1)==Npoints); 
-assert(size(dilation_robustness_matrix,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
 
 % Check variable values
-% 1 is left, 2 is right
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),1);
-roundedValueToTest = round(valueToTest,2);
-assert(isequal(roundedValueToTest,0.97));
-valueToTest = dilation_robustness_matrix(plottingOptions.selectedFromToToPlot(1), plottingOptions.selectedFromToToPlot(2),2);
-roundedValueToTest = round(valueToTest,2);
-assert(isequal(roundedValueToTest,0.97));
+assert(round(max(cGraph(~isinf(cGraph)),[],'all'))==8);
+assert(round(min(cGraph(~isinf(cGraph)),[],'all'))==0); 
 
 % Make sure plot did NOT open up
 figHandles = get(groot, 'Children');
@@ -453,25 +317,24 @@ close(figNum);
 
 % Load some test data 
 dataSetNumber = 1; % Two polytopes with clear space right down middle
+[pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
 
-[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber);
-mode = '2d';
+% % Plot the polytopes
+% fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+% axis(goodAxis);
 
-plottingOptions.axis = goodAxis;
-plottingOptions.selectedFromToToPlot = [1 6];
-plottingOptions.filename = 'dilationAnimation.gif'; % Specify the output file name
-
+modeString = 'distance from finish';
  
-Niterations = 1;
+Niterations = 10;
 
 % Do calculation without pre-calculation
 tic;
 for ith_test = 1:Niterations
     % Call the function
-    dilation_robustness_matrix = ...
-        fcn_VGraph_generateDilationRobustnessMatrix(...
-        pointsWithData, start, finish, vGraph, mode, polytopes,...
-        (plottingOptions), ([]));
+    cGraph = ...
+        fcn_VGraph_costCalculate(...
+        vGraph, pointsWithData, modeString, ...
+        ([]));
 end
 slow_method = toc;
 
@@ -479,10 +342,10 @@ slow_method = toc;
 tic;
 for ith_test = 1:Niterations
     % Call the function
-    dilation_robustness_matrix = ...
-        fcn_VGraph_generateDilationRobustnessMatrix(...
-        pointsWithData, start, finish, vGraph, mode, polytopes,...
-        (plottingOptions), (-1));
+    cGraph = ...
+        fcn_VGraph_costCalculate(...
+        vGraph, pointsWithData, modeString, ...
+        (-1));
 end
 fast_method = toc;
 
@@ -603,8 +466,8 @@ subplot(1,3,3); axis(good_axis);
 
 end
 
-%% fcn_INTERNAL_loadExampleData
-function [pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData(dataSetNumber)
+%% fcn_INTERNAL_loadExampleData_costCalculate
+function [pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber)
 % Load some test data
 switch dataSetNumber
     case 1
@@ -633,16 +496,17 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(pointsWithData,1)+1 -1 1];
-        finish = [finish size(pointsWithData,1)+2 -1 1];
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
 
-        finishes = [pointsWithData; start; finish];
-        starts = [pointsWithData; start; finish];
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
         isConcave = 1;
         [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
         % fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
+        pointsWithData = starts;
     case 2
         % Three polytopes with clear space right down middle
         clear polytopes
@@ -672,16 +536,17 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(pointsWithData,1)+1 -1 1];
-        finish = [finish size(pointsWithData,1)+2 -1 1];
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
 
-        finishes = [pointsWithData; start; finish];
-        starts = [pointsWithData; start; finish];
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
         isConcave = 1;
         [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
         % fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
+        pointsWithData = starts;
     case 3 % Three polytopes for MECC paper
         clear polytopes
         polytopes(1).vertices = [-10 5; 2 2; -5 -5; -10 5];
@@ -690,8 +555,8 @@ switch dataSetNumber
         
         polytopes = fcn_MapGen_polytopesFillFieldsFromVertices(polytopes);
         goodAxis = [-20 50 -15 20];
-        start = [nan nan]; % [-15 5];
-        finish = [nan nan]; %[45 5];
+        start = [-15 5];
+        finish = [45 5];
 
         % Make sure all have same cost
         for ith_poly = 1:length(polytopes)
@@ -708,19 +573,20 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(pointsWithData,1)+1 -1 1];
-        finish = [finish size(pointsWithData,1)+2 -1 1];
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
 
-        finishes = [pointsWithData; start; finish];
-        starts = [pointsWithData; start; finish];
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
         isConcave = 1;
         [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
-        fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
+        fcn_VGraph_plotVGraph(vGraph, [vertexPointsWithData; start; finish], 'g-');
         % Plot the polytopes
         figNum = gcf().Number;
         fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+        pointsWithData = starts;
 
     case 4 % Three rectangles, MECC presentation
         % OLD test case 2, called "Stacked sets of squares"
@@ -751,22 +617,23 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(pointsWithData,1)+1 -1 1];
-        finish = [finish size(pointsWithData,1)+2 -1 1];
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
 
-        finishes = [pointsWithData; start; finish];
-        starts = [pointsWithData; start; finish];
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
         isConcave = 1;
         [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
-        fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
+        fcn_VGraph_plotVGraph(vGraph, [vertexPointsWithData; start; finish], 'g-');
         % Plot the polytopes
         figNum = gcf().Number;
         fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+        pointsWithData = starts;
 
 end % Ends switch
-end % Ends fcn_INTERNAL_loadExampleData
+end % Ends fcn_INTERNAL_loadExampleData_costCalculate
 
 %% fcn_INTERNAL_plotPolytopes
 function fcn_INTERNAL_plotPolytopes(polytopes, figNum)

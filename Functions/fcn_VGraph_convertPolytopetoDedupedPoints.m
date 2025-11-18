@@ -6,16 +6,29 @@ function unique_deduped_points_struct = fcn_VGraph_convertPolytopetoDedupedPoint
 %
 % FORMAT:
 %
-% unique_deduped_points_struct = fcn_BoundedAStar_convertPolytopetoDedupedPoints(pointsWithData, (fig_num))
+% unique_deduped_points_struct = fcn_BoundedAStar_convertPolytopetoDedupedPoints(pointsWithData, (figNum))
 %
 % INPUTS:
-% pointsWithData: a-by-5 matrix of all map points, where a = number of map
-% points. Note that a>=L.
-% the columns in pointsWithData are as follows:
+%     pointsWithData: p-by-5 matrix of all the possible origination points for
+%     visibility calculations including the vertex points on each obstacle,
+%     and if the user specifies, the start and/or end points. If the
+%     start/end points are omitted, the value of p is the same as the
+%     number of points within the polytope field, numPolytopeVertices.
+%     Otherwise, p is 1 or 2 larger depending on whether start/end is
+%     given. The information in the 5 columns is as follows:
+%         x-coordinate
+%         y-coordinate
+%         point id number
+%         obstacle id number (-1 for start/end points)
+%         beginning/ending indication (1 if the point is a beginning or
+%         start point, 2 if ending point or finish point, and 0 otherwise)
+%         Ex: [x y point_id obs_id beg_end]
 %
-%   [x y point_id obs_id beg_end]
+% (OPTIONAL INPUTS)
 %
-% see fcn_BoundedAStar_AStarBoundedSetupForTiledPolytopes for more
+%      figNum: a figure number to plot results. If set to -1, skips any
+%      input checking or debugging, no figures will be generated, and sets
+%      up code to maximize speed.
 %
 % OUTPUTS:
 %
@@ -30,33 +43,41 @@ function unique_deduped_points_struct = fcn_VGraph_convertPolytopetoDedupedPoint
 %
 % This function was written on in 2022 by Stephen Harnett
 % Questions or comments? sjharnett@psu.edu
-%
+
 % Revision History:
+% 
 % As: fcn_convert_polytope_struct_to_deduped_points
 % 2022_05_01 - S. Harnett
-% -- first write of code
+% - first write of code
 %
 % As: fcn_BoundedAStar_convertPolytopetoDedupedPoints
+% 
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
-% -- copied function from fcn_convert_polytope_struct_to_deduped_points.m
+% - copied function from fcn_convert_polytope_struct_to_deduped_points.m
 %    to follow library conventions
+% 
 % 2025_08_11 - K. Hayes
-% -- updated fcn header and formatting
-% -- added input checking
+% - updated fcn header and formatting
+% - added input checking
 %
 % As: fcn_Visibility_convertPolytopetoDedupedPoints
-% -- Changed all_pts to pointsWithData
-% % 2025_11_07 - S. Brennan, sbrennan@psu.edu
-% -- Changed global flags from _MAPGEN_ to _VGRAPH_
+% 2025_11_07 - S. Brennan, sbrennan@psu.edu
+% - Changed global flags from _MAPGEN_ to _VGRAPH_
+% - Changed all+_pts to pointsWithData
 %
 % As: fcn_VGraph_convertPolytopetoDedupedPoints
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_convertPolytopetoDedupedPoints to fcn_VGraph_convertPolytopetoDedupedPoints
-% -- Cleared extra figure command out of Inputs section
-
+% - Renamed fcn_Visibility_convertPolytopetoDedupedPoints to fcn_VGraph_convertPolytopetoDedupedPoints
+% - Cleared extra figure command out of Inputs section
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Added figNum documentation to header docstrings
+% - Cleaned up variable naming in all functions
+%   % fig+_num to figNum
 
 %% Debugging and Input checks
-% Check if flag_max_speed set. This occurs if the fig_num variable input
+% Check if flag_max_speed set. This occurs if the figNum variable input
 % argument (varargin) is given a number of -1, which is not a valid figure
 % number.
 MAX_NARGIN = 2; % The largest Number of argument inputs to the function
@@ -82,9 +103,9 @@ end
 if flag_do_debug
     st = dbstack; %#ok<*UNRCH>
     fprintf(1,'STARTING function: %s, in file: %s\n',st(1).name,st(1).file);
-    debug_fig_num = 999978; %#ok<NASGU>
+    debug_figNum = 999978; %#ok<NASGU>
 else
-    debug_fig_num = []; %#ok<NASGU>
+    debug_figNum = []; %#ok<NASGU>
 end
 
 %% check input arguments?
@@ -117,7 +138,7 @@ flag_do_plots = 0; % Default is to NOT show plots
 if (0==flag_max_speed) && (MAX_NARGIN == nargin)
     temp = varargin{end};
     if ~isempty(temp) % Did the user NOT give an empty figure number?
-        fig_num = temp;
+        figNum = temp;
         flag_do_plots = 1;
     end
 end

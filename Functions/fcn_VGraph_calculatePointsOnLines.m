@@ -56,33 +56,44 @@ function flagIsOnLine = fcn_VGraph_calculatePointsOnLines(x1,y1,x2,y2,xi,yi,tole
 
 % Revision History:
 % As: fcn_general_calculation_points_on_lines
+% 
 % 2018_11_28 by Seth Tau
-% -- wrote code
+% - wrote code
 %
 % As: fcn_BoundedAStar_calculatePointsOnLines
+% 
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
-% -- copied to new function from fcn_general_calculation_points_on_lines
-%    to follow library convention
+% - copied to new function from fcn_general_calculation_points_on_lines
+%   % to follow library convention
+% 
 % 2025_08_19 - K. Hayes
-% -- updated fcn header and formatting
+% - updated fcn header and formatting
 %
 % As: fcn_BoundedAStar_calculatePointsOnLines
+% 
 % 2025_11_06 - S. Brennan, sbrennan@psu.edu
-% -- deprecated fcn_BoundedAStar_calculatePointsOnLines
-%    % * Now fcn_VGraph_calculatePointsOnLines
-% -- fixed minor weird usage of ind variable in plotting section
-% -- Updated variable naming:
-%    % * From figNum to figNum
-%    % * From tf to flagIsOnLine
-%    % * From acc to tolerance
+% - deprecated fcn_BoundedAStar_calculatePointsOnLines
+%   % * Now fcn_VGraph_calculatePointsOnLines
+% - fixed minor weird usage of ind variable in plotting section
+% - Updated variable naming:
+%   % * From fi+gNum to figNum
+%   % * From tf to flagIsOnLine
+%   % * From acc to tolerance
+% 
 % 2025_11_07 - S. Brennan, sbrennan@psu.edu
-% -- Changed global flags from _MAPGEN_ to _VGRAPH_
-% -- Cleared extra figure command out of Inputs section
+% - Changed global flags from _MAPGEN_ to _VGRAPH_
+% - Cleared extra figure command out of Inputs section
+% 
+% 2025_11_17 - S. Brennan, sbrennan@psu.edu
+% - Updated formatting to Markdown on Rev history
+% - Updated variable naming:
+%   % * From fi+gNum to figNum
+
 
 % TO-DO: 
 % 2025_11_07 - S. Brennan, sbrennan@psu.edu
-% -- need to simplify input arguments to use vector inputs for X, Y data, 
-%    % e.g. points = [X Y], rathr than separate X, Y inputs
+% - need to simplify input arguments to use vector inputs for X, Y data, 
+%   % e.g. points = [X Y], rathr than separate X, Y inputs
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input
@@ -111,9 +122,9 @@ end
 if flag_do_debug
     st = dbstack; %#ok<*UNRCH>
     fprintf(1,'STARTING function: %s, in file: %s\n',st(1).name,st(1).file);
-    debug_fig_num = 999978; %#ok<NASGU>
+    debug_figNum = 999978; %#ok<NASGU>
 else
-    debug_fig_num = []; %#ok<NASGU>
+    debug_figNum = []; %#ok<NASGU>
 end
 
 %% check input arguments?

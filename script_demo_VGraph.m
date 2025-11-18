@@ -25,10 +25,10 @@
 % 2025_11_08 - S. Brennan
 % - updated variable naming:
 %    % * fig_num to figNum
-%    % * vgraph to vGraph
-%    % * all_pts to pointsWithData
-%    % * start to startPointData or startXY, depending on usage
-%    % * finish to finishPointData or finishXY, depending on usage
+%    % * vg+raph to vGraph
+%    % * all_+pts to pointsWithData
+%    % * sta+rt to startPointData or startXY, depending on usage
+%    % * fi+nish to finishPointData or finishXY, depending on usage
 % - fixed minor MATLAB warnings
 % 2025_11_12 - S. Brennan
 % - set up auto-loading of dependencies using new DebugTools features
@@ -53,10 +53,54 @@
 %   % * to script_test_fcn_VGraph_polytopePointsInPolytopes
 % - fixed header listing of script name - it was incorrect!
 % (new release)
+%
+% 2025_11_14 - S. Brennan
+% - cleaned up formatting of this demo
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history in all functions
+% - Cleaned up variable naming in all functions
+%   % fig+_num to figNum
+%   % vis+ibilityMatrix to vGraph
+%   % newVi+sibilityMatrix to newVGraph
+%   % all_+pts to pointsWithData
+%   % cos+tGraph to cGraph
+%   % vgra+ph to vGraph
+%   % visib+ilityGraph to vGraph
+% - Added fcn_VGraph_costCalculate function
 
 % TO-DO:
-% 20XX_XX_XX - Your name, your email
-% - list of items to add to the to-do list
+% 2025_11_17 - Sean Brennan, sbrennan@psu.edu
+% - In: fcn_VGraph_costCalculate
+%   % * need to add total distance of "to" point to goal as an option
+%   % * then, show in Greedy planner that this produces Djkstra's algorithm
+% - Need to figure out what findEdgeWeights does, and fix, finish, or
+%   % delete
+% - Need to deprecate functions to make classes of functions more clear:
+%   % * Classes would be: plot, cost, visibility, modify, support?
+%   % * modify(VisibilityObstacleAdd)
+
+%% Check which files contain key strings?
+if 1==1
+    clc
+    functionsDirectoryQuery = fullfile(pwd,'Functions','*.*');
+    % Use the following instead, if wish to do subdirectories
+    % directoryQuery = fullfile(pwd,'Functions','**','*.*');
+
+    fileListFunctionsFolder = dir(functionsDirectoryQuery); %cat(2,'.',filesep,filesep,'script_test_fcn_*.m'));
+
+    % Filter out directories from the list
+    fileListFunctionsFolderNoDirectories = fileListFunctionsFolder(~[fileListFunctionsFolder.isdir]);
+
+    % Make sure there's not fig_num
+    queryString = 'visibilityGraph';
+    flagsStringWasFoundInFilesRaw = fcn_DebugTools_directoryStringQuery(fileListFunctionsFolderNoDirectories, queryString, (-1));
+    % flagsStringWasFoundInFiles = fcn_INTERNAL_removeFromList(flagsStringWasFoundInFilesRaw, fileListFunctionsFolderNoDirectories,'script_test_all_functions');
+    if sum(flagsStringWasFoundInFilesRaw)>0
+        fcn_DebugTools_directoryStringQuery(fileListFunctionsFolderNoDirectories, queryString, 1);
+        error('A "%s" was found in one of the functions - see listing above.', queryString);
+    end
+end
 
 %% Make sure we are running out of root directory
 st = dbstack; 
@@ -536,13 +580,13 @@ else
 end
 
 % Calculate weighted visibility graph (cost graph)
-[costGraph, vgraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData, gapSize, fig_num);
+[costGraph, vGraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData, gapSize, fig_num);
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
 assert(isnumeric(costGraph));
-assert(isnumeric(vgraph));
+assert(isnumeric(vGraph));
 
 % Check variable sizes
 Npoly = 5;
@@ -843,7 +887,7 @@ figure(figNum); clf;
 
 % Load some test data 
 dataSetNumber = 2; % Two polytopes with clear space right down middle
-[all_pts, start, finish, vgraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_generateDilationRobustnessMatrix(dataSetNumber);
+[pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_generateDilationRobustnessMatrix(dataSetNumber);
 
 % Set options
 mode = '2d';
@@ -855,7 +899,7 @@ plottingOptions.filename = []; % Specify the output file name
 % Call the function
 dilation_robustness_matrix = ...
     fcn_VGraph_generateDilationRobustnessMatrix(...
-    all_pts, start, finish, vgraph, mode, polytopes,...
+    pointsWithData, start, finish, vGraph, mode, polytopes,...
     (plottingOptions), (figNum));
 
 
@@ -865,7 +909,7 @@ sgtitle(titleString, 'Interpreter','none');
 assert(isnumeric(dilation_robustness_matrix));
 
 % Check variable sizes
-Npoints = size(vgraph,1);
+Npoints = size(vGraph,1);
 assert(size(dilation_robustness_matrix,1)==Npoints); 
 assert(size(dilation_robustness_matrix,1)==Npoints); 
 
@@ -874,6 +918,68 @@ assert(size(dilation_robustness_matrix,1)==Npoints);
 
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
+
+%% Cost functions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %   _____          _     ______                _   _                 
+ %  / ____|        | |   |  ____|              | | (_)                
+ % | |     ___  ___| |_  | |__ _   _ _ __   ___| |_ _  ___  _ __  ___ 
+ % | |    / _ \/ __| __| |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+ % | |___| (_) \__ \ |_  | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+ %  \_____\___/|___/\__| |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+% See: http://patorjk.com/software/taag/#p=display&f=Big&t=Cost+Functions&x=none&v=4&h=4&w=80&we=false
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+close all;
+fprintf(1,'Figure: 4XXXXXX: COST functions\n');
+
+%% DEMO case: fcn_VGraph_costCalculate
+% This is case 10001 in the test script
+
+figNum = 40001;
+titleString = sprintf('fcn_VGraph_costCalculate');
+fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
+figure(figNum); close(figNum);
+
+% Load some test data 
+dataSetNumber = 1; % Two polytopes with clear space right down middle
+[pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber);
+
+% Plot the polytopes
+fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+axis(goodAxis);
+
+modeString = 'distance from finish';
+
+% Call the function
+cGraph = ...
+    fcn_VGraph_costCalculate(...
+    vGraph, pointsWithData, modeString, ...
+    (figNum));
+
+sgtitle(titleString, 'Interpreter','none');
+
+% Check variable types
+assert(isnumeric(cGraph));
+
+% Check variable sizes
+Npoints = size(vGraph,1);
+assert(size(cGraph,1)==Npoints); 
+assert(size(cGraph,1)==Npoints); 
+
+% Check variable values
+assert(round(max(cGraph(~isinf(cGraph)),[],'all'))==8);
+assert(round(min(cGraph(~isinf(cGraph)),[],'all'))==0); 
+
+% Make sure plot opened up
+assert(isequal(get(gcf,'Number'),figNum));
+
+% Save results
+fullPathFileName = fullfile(pwd,'Images',cat(2,titleString,'.png'));
+saveas(gcf, fullPathFileName);
+fullPathFileName = fullfile(pwd,'Images',cat(2,titleString,'.fig'));
+saveas(gcf, fullPathFileName);
 
 
 %% Functions follow
@@ -889,7 +995,7 @@ assert(isequal(get(gcf,'Number'),figNum));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%§
 
 %% fcn_INTERNAL_loadExampleData_generateDilationRobustnessMatrix
-function [all_pts, start, finish, vgraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_generateDilationRobustnessMatrix(dataSetNumber)
+function [pointsWithData, start, finish, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_generateDilationRobustnessMatrix(dataSetNumber)
 % Load some test data
 switch dataSetNumber
     case 1
@@ -918,16 +1024,16 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        all_pts = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(all_pts,1)+1 -1 1];
-        finish = [finish size(all_pts,1)+2 -1 1];
+        start = [start size(pointsWithData,1)+1 -1 1];
+        finish = [finish size(pointsWithData,1)+2 -1 1];
 
-        finishes = [all_pts; start; finish];
-        starts = [all_pts; start; finish];
+        finishes = [pointsWithData; start; finish];
+        starts = [pointsWithData; start; finish];
         isConcave = 1;
-        [vgraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
-        % fcn_VGraph_plotVGraph(vgraph, [all_pts; start; finish], 'g-');
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        % fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
     case 2
         % Three polytopes with clear space right down middle
         clear polytopes
@@ -957,16 +1063,16 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        all_pts = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(all_pts,1)+1 -1 1];
-        finish = [finish size(all_pts,1)+2 -1 1];
+        start = [start size(pointsWithData,1)+1 -1 1];
+        finish = [finish size(pointsWithData,1)+2 -1 1];
 
-        finishes = [all_pts; start; finish];
-        starts = [all_pts; start; finish];
+        finishes = [pointsWithData; start; finish];
+        starts = [pointsWithData; start; finish];
         isConcave = 1;
-        [vgraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
-        % fcn_VGraph_plotVGraph(vgraph, [all_pts; start; finish], 'g-');
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        % fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
     case 3 % Three polytopes for MECC paper
         clear polytopes
         polytopes(1).vertices = [-10 5; 2 2; -5 -5; -10 5];
@@ -993,16 +1099,16 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        all_pts = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(all_pts,1)+1 -1 1];
-        finish = [finish size(all_pts,1)+2 -1 1];
+        start = [start size(pointsWithData,1)+1 -1 1];
+        finish = [finish size(pointsWithData,1)+2 -1 1];
 
-        finishes = [all_pts; start; finish];
-        starts = [all_pts; start; finish];
+        finishes = [pointsWithData; start; finish];
+        starts = [pointsWithData; start; finish];
         isConcave = 1;
-        [vgraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
-        fcn_VGraph_plotVGraph(vgraph, [all_pts; start; finish], 'g-');
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
         % Plot the polytopes
         figNum = gcf().Number;
         fcn_INTERNAL_plotPolytopes(polytopes, figNum)
@@ -1036,16 +1142,16 @@ switch dataSetNumber
             curpt = curpt+verts;
         end
         obs_id = [polytopes.obs_id];
-        all_pts = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+        pointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
 
-        start = [start size(all_pts,1)+1 -1 1];
-        finish = [finish size(all_pts,1)+2 -1 1];
+        start = [start size(pointsWithData,1)+1 -1 1];
+        finish = [finish size(pointsWithData,1)+2 -1 1];
 
-        finishes = [all_pts; start; finish];
-        starts = [all_pts; start; finish];
+        finishes = [pointsWithData; start; finish];
+        starts = [pointsWithData; start; finish];
         isConcave = 1;
-        [vgraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
-        fcn_VGraph_plotVGraph(vgraph, [all_pts; start; finish], 'g-');
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
         % Plot the polytopes
         figNum = gcf().Number;
         fcn_INTERNAL_plotPolytopes(polytopes, figNum)
@@ -1161,3 +1267,172 @@ end
 
 end % Ends fcn_INTERNAL_clearUtilitiesFromPathAndFolders
 
+
+%% fcn_INTERNAL_loadExampleData_costCalculate
+function [pointsWithData, vGraph, polytopes, goodAxis] = fcn_INTERNAL_loadExampleData_costCalculate(dataSetNumber)
+% Load some test data
+switch dataSetNumber
+    case 1
+        % Two polytopes with clear space right down middle
+        clear polytopes
+        polytopes(1).vertices = [0 0; 4,0; 4 2; 2 2.5; 0 0];
+        polytopes(2).vertices = [0 -1; 4 -1; 5 -2; 3 -3; 0 -1];
+        polytopes = fcn_MapGen_polytopesFillFieldsFromVertices(polytopes);
+        goodAxis = [-3 7 -4 4];
+        start = [-2 -0.5];
+        finish = start;
+        finish(1) = 6;
+
+        % Make sure all have same cost
+        for ith_poly = 1:length(polytopes)
+            polytopes(ith_poly).cost = 0.4;
+        end
+
+        point_tot = length([polytopes.xv]); % total number of vertices in the polytopes
+        beg_end = zeros(1,point_tot); % is the point the start/end of an obstacle
+        curpt = 0;
+        for poly = 1:size(polytopes,2) % check each polytope
+            verts = length(polytopes(poly).xv);
+            polytopes(poly).obs_id = ones(1,verts)*poly; % obs_id is the same for every vertex on a single polytope
+            beg_end([curpt+1,curpt+verts]) = 1; % the first and last vertices are marked with 1 and all others are 0
+            curpt = curpt+verts;
+        end
+        obs_id = [polytopes.obs_id];
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
+
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
+        isConcave = 1;
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        % fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
+        pointsWithData = starts;
+    case 2
+        % Three polytopes with clear space right down middle
+        clear polytopes
+        polytopes(1).vertices = [0 0; 4,0; 4 1; 1 1; 0 0];
+        polytopes(2).vertices = [1.5 1.5; 4 1.5; 4 2; 2 2.5; 1.5 1.5];
+        polytopes(3).vertices = [0 -1; 4 -1; 3 -3; 0 -1];
+        polytopes = fcn_MapGen_polytopesFillFieldsFromVertices(polytopes);
+        goodAxis = [-3 7 -4 4];
+
+
+        start = [-2 1.25];
+        finish = start;
+        finish(1) = 6;
+
+        % Make sure all have same cost
+        for ith_poly = 1:length(polytopes)
+            polytopes(ith_poly).cost = 0.4;
+        end
+
+        point_tot = length([polytopes.xv]); % total number of vertices in the polytopes
+        beg_end = zeros(1,point_tot); % is the point the start/end of an obstacle
+        curpt = 0;
+        for poly = 1:size(polytopes,2) % check each polytope
+            verts = length(polytopes(poly).xv);
+            polytopes(poly).obs_id = ones(1,verts)*poly; % obs_id is the same for every vertex on a single polytope
+            beg_end([curpt+1,curpt+verts]) = 1; % the first and last vertices are marked with 1 and all others are 0
+            curpt = curpt+verts;
+        end
+        obs_id = [polytopes.obs_id];
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
+
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
+        isConcave = 1;
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        % fcn_VGraph_plotVGraph(vGraph, [pointsWithData; start; finish], 'g-');
+        pointsWithData = starts;
+    case 3 % Three polytopes for MECC paper
+        clear polytopes
+        polytopes(1).vertices = [-10 5; 2 2; -5 -5; -10 5];
+        polytopes(2).vertices = [-1 -10; 10 2; 30 2; 40 -10; -1 -10];
+        polytopes(3).vertices = [9 7; 7 15; 35 15; 30 7; 9 7];
+        
+        polytopes = fcn_MapGen_polytopesFillFieldsFromVertices(polytopes);
+        goodAxis = [-20 50 -15 20];
+        start = [-15 5];
+        finish = [45 5];
+
+        % Make sure all have same cost
+        for ith_poly = 1:length(polytopes)
+            polytopes(ith_poly).cost = 0.4;
+        end
+
+        point_tot = length([polytopes.xv]); % total number of vertices in the polytopes
+        beg_end = zeros(1,point_tot); % is the point the start/end of an obstacle
+        curpt = 0;
+        for poly = 1:size(polytopes,2) % check each polytope
+            verts = length(polytopes(poly).xv);
+            polytopes(poly).obs_id = ones(1,verts)*poly; % obs_id is the same for every vertex on a single polytope
+            beg_end([curpt+1,curpt+verts]) = 1; % the first and last vertices are marked with 1 and all others are 0
+            curpt = curpt+verts;
+        end
+        obs_id = [polytopes.obs_id];
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
+
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
+        isConcave = 1;
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        fcn_VGraph_plotVGraph(vGraph, [vertexPointsWithData; start; finish], 'g-');
+        % Plot the polytopes
+        figNum = gcf().Number;
+        fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+        pointsWithData = starts;
+
+    case 4 % Three rectangles, MECC presentation
+        % OLD test case 2, called "Stacked sets of squares"
+
+        clear polytopes
+        polytopes(1).vertices = [0 0; 10 0; 10 1; 0 1; 0 0];
+        polytopes(2).vertices = polytopes(1).vertices+[0,2];
+        polytopes(3).vertices = polytopes(1).vertices+[0,5];
+        polytopes(4).vertices = polytopes(1).vertices+[0,10];
+        
+        polytopes = fcn_MapGen_polytopesFillFieldsFromVertices(polytopes);
+        goodAxis = [-5 15 -5 15];
+        start = [-3,8];
+        finish = [13, 8];
+
+        % Make sure all have same cost
+        for ith_poly = 1:length(polytopes)
+            polytopes(ith_poly).cost = 0.4;
+        end
+
+        point_tot = length([polytopes.xv]); % total number of vertices in the polytopes
+        beg_end = zeros(1,point_tot); % is the point the start/end of an obstacle
+        curpt = 0;
+        for poly = 1:size(polytopes,2) % check each polytope
+            verts = length(polytopes(poly).xv);
+            polytopes(poly).obs_id = ones(1,verts)*poly; % obs_id is the same for every vertex on a single polytope
+            beg_end([curpt+1,curpt+verts]) = 1; % the first and last vertices are marked with 1 and all others are 0
+            curpt = curpt+verts;
+        end
+        obs_id = [polytopes.obs_id];
+        vertexPointsWithData = [[polytopes.xv];[polytopes.yv];1:point_tot;obs_id;beg_end]'; % all points [x y point_id obs_id beg_end]
+
+        start = [start size(vertexPointsWithData,1)+1 -1 1];
+        finish = [finish size(vertexPointsWithData,1)+2 -1 1];
+
+        finishes = [vertexPointsWithData; start; finish];
+        starts = [vertexPointsWithData; start; finish];
+        isConcave = 1;
+        [vGraph, ~] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, isConcave,-1);
+        fcn_VGraph_plotVGraph(vGraph, [vertexPointsWithData; start; finish], 'g-');
+        % Plot the polytopes
+        figNum = gcf().Number;
+        fcn_INTERNAL_plotPolytopes(polytopes, figNum)
+        pointsWithData = starts;
+
+end % Ends switch
+end % Ends fcn_INTERNAL_loadExampleData_costCalculate

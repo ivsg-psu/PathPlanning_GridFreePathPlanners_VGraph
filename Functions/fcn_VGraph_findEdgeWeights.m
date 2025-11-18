@@ -1,4 +1,4 @@
-function [costGraph, visibilityGraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData, gapSize, varargin)
+function [cGraph, vGraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData, gapSize, varargin)
 % fcn_VGraph_findEdgeWeights
 %
 % Finds costs associated with edges taking into account to/from pairs that
@@ -9,7 +9,7 @@ function [costGraph, visibilityGraph] = fcn_VGraph_findEdgeWeights(polytopes, po
 % costly than going around. NOTE: this function is not yet done.
 %
 % FORMAT:
-% [costGraph, visibilityGraph] = fcn_VGraph_findEdgeWeights...
+% [cGraph, vGraph] = fcn_VGraph_findEdgeWeights...
 % (polytopes, pointsWithData, gapSize, (figNum))
 %
 % INPUTS:
@@ -36,11 +36,11 @@ function [costGraph, visibilityGraph] = fcn_VGraph_findEdgeWeights(polytopes, po
 %
 % OUTPUTS:
 %
-%    costGraph: the cost graph matrix. A cost matrix is an nxn matrix where n is
+%    cGraph: the cost graph matrix. A cost matrix is an nxn matrix where n is
 %      the number of points (nodes) in the map including the start and goal.
 %      The value of element i-j is the cost of routing from i to j.
 %
-%    visibilityGraph: the original visibility matrix
+%    vGraph: the original visibility matrix
 %    corresponding to pointsWithData and the polytopes passed into the fcn
 %
 % DEPENDENCIES:
@@ -59,39 +59,52 @@ function [costGraph, visibilityGraph] = fcn_VGraph_findEdgeWeights(polytopes, po
 % Questions or comments? contact sjharnett@psu.edu
 
 % REVISION HISTORY:
+% 
 % As: fcn_algorithm_generate_cost_graph
+% 
 % December 2023 by Steve Harnett
-% -- first write of function
+% - first write of function
 %
 % As: fcn_BoundedAStar_findEdgeWeights
+% 
 % 2025_07_17 by K. Hayes, kxh1031@psu.edu
-% -- copied function to new file from fcn_algorithm_generate_cost_graph to
-%    follow library conventions
+% - copied function to new file from fcn_algorithm_generate_cost_graph to
+%   % follow library conventions
+% 
 % 2025_08_07 - K. Hayes
-% -- updated fcn header and formatting
-% -- moved plotting into fcn debug section
+% - updated fcn header and formatting
+% - moved plotting into fcn debug section
 % 
 % As: fcn_VGraph_findEdgeWeights
+% 
 % 2025_11_06 - S. Brennan
-% -- Renamed function
-%    % * from fcn_BoundedAStar_findEdgeWeights
-%    % * to fcn_VGraph_findEdgeWeights
-% -- Cleaned up variable naming:
-%    % * From fig_num to figNum
-%    % * From all_pts to pointsWithData
-%    % * From gap_size to gapSize
-%    % * From cost_matrix to costGraph
-%    % * From visibility_matrix_original to visibiltyGraph
-%    % * From visibility_matrix_original to visibiltyGraph
-% -- Deprecated fcn_BoundedAStar_convertPolytopetoDedupedPoints
-%    % * Changed to fcn_VGraph_convertPolytopetoDedupedPoints
-% -- Fixed global variables: _MAPGEN_ --> _VGRAPH_
+% - Renamed function
+%   % * from fcn_BoundedAStar_findEdgeWeights
+%   % * to fcn_VGraph_findEdgeWeights
+% - Cleaned up variable naming:
+%   % * From fig+_num to figNum
+%   % * From all+_pts to pointsWithData
+%   % * From gap+_size to gapSize
+%   % * From cost+_matrix to cGraph
+%   % * From vis+ibility_matrix_original to vis+ibiltyGraph
+%   % * From visi+bility_matrix_original to vis+ibiltyGraph
+% - Deprecated fcn_BoundedAStar_convertPolytopetoDedupedPoints
+%   % * Changed to fcn_VGraph_convertPolytopetoDedupedPoints
+% - Fixed global variables: _MAPGEN_ --> _VGRAPH_
+% 
 % 2025_11_07 - S. Brennan
-% -- Cleared extra figure command out of Inputs section
+% - Cleared extra figure command out of Inputs section
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % cos+tGraph to cGraph
+%   % vgra+ph to vGraph
+%   % visib+ilityGraph to vGraph
 
 % TO DO:
 % 2025_11_97 - S. Brennan, sbrennan@psu.ed
-% -- need to finish function. It's half done
+% - need to finish function. It's half done
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input
@@ -184,7 +197,7 @@ end
 % pts : obs_id
 % want to form a matrix of 1 and 0 for visibility
 visibility_matrix = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,-1);
-visibilityGraph = visibility_matrix;
+vGraph = visibility_matrix;
 
 % for each 1 in the visibility matrix...
 [fromIndex, toIndex] = find(visibility_matrix==1);
@@ -212,7 +225,7 @@ min_traversal_costs = min(first_traversal_costs,second_traversal_costs);
 % explanation of the following line: https://www.mathworks.com/company/newsletters/articles/matrix-indexing-in-matlab.html
 idx = sub2ind(size(visibility_matrix), fromIndex, toIndex);
 visibility_matrix(idx) = min_traversal_costs;
-costGraph = visibility_matrix;
+cGraph = visibility_matrix;
 
 %% Plot the results (for debugging)?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -235,23 +248,23 @@ if flag_do_plots
     plotFormat.LineWidth = 2;
     fcn_MapGen_plotPolytopes(polytopes, plotFormat, [1 0 0 0 1], figNum);
 
-    % Plot vgraph edges
+    % Plot vGraph edges
     deduped_pts = fcn_VGraph_convertPolytopetoDedupedPoints(pointsWithData);
-    vgraph = visibilityGraph;
+    vGraph = vGraph;
     if gapSize ==0
-        for ith_from = 1:size(vgraph,1)
-            for jth_to = 1:size(vgraph,1)
-                if vgraph(ith_from,jth_to) == 1
+        for ith_from = 1:size(vGraph,1)
+            for jth_to = 1:size(vGraph,1)
+                if vGraph(ith_from,jth_to) == 1
                     plot([deduped_pts(ith_from).x,deduped_pts(jth_to).x],[deduped_pts(ith_from).y,deduped_pts(jth_to).y],'g-','LineWidth',1)
                 end
             end
         end
     end
     if gapSize ~=0
-        for ith_from = 1:size(vgraph,1)
+        for ith_from = 1:size(vGraph,1)
             dataToPlot = [];
-            for jth_to = 1:size(vgraph,1)
-                if vgraph(ith_from,jth_to) == 1
+            for jth_to = 1:size(vGraph,1)
+                if vGraph(ith_from,jth_to) == 1
                     dataToPlot = [dataToPlot; pointsWithData(ith_from,1:2); pointsWithData(jth_to,1:2); nan(1,2)]; %#ok<AGROW>                    
                 end
             end
@@ -261,7 +274,7 @@ if flag_do_plots
 
     % Plot cgraph edges
     % for symmetric we only ned upper triangular part
-    cgraph = costGraph;
+    cgraph = cGraph;
     cgraph_upper_tri = triu(cgraph,1);
     [fromIndex, toIndex] = find(cgraph_upper_tri>0);
     for ith_from = 1:size(fromIndex,1)

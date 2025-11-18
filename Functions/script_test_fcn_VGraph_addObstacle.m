@@ -3,19 +3,30 @@
 % a basic test of adding obstacles to existing visibility graphs
 
 % Revision history
+% 
 % As: fcn_Visibility_addObstacle
+% 
 % 2025_08_01 - K. Hayes, kxh1031@psu.edu
-% -- first write of script, using
-% script_test_fcn_Visibility_clearAndBlockedPoints as a starter
+% - first write of script, using
+%   % script_test_fcn_Visibility_clearAndBlockedPoints as a starter
+% 
 % 2025_08_04 - K. Hayes
-% -- moved plotting into fcn_Visibility_addObstacle debug
+% - moved plotting into fcn_Visibility_addObstacle debug
 %
 % As: fcn_VGraph_addObstacle
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_addObstacle to fcn_VGraph_addObstacle
+% - Renamed fcn_Visibility_addObstacle to fcn_VGraph_addObstacle
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % vis+ibilityMatrix to vGraph
+%   % newVi+sibilityMatrix to newVGraph
+
 
 % TO DO:
-% -- set up fast mode tests
+% - set up fast mode tests
 
 %% Set up the workspace
 close all
@@ -78,7 +89,7 @@ finishPointData = pointsWithData(end,:);
 
 % Create visibility graph
 isConcave = [];
-visibilityMatrix =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
+vGraph =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
 
 % add a polytope
 polytopeToAdd = polytopes(1);
@@ -86,15 +97,15 @@ polytopeToAdd.xv = 0.5*polytopeToAdd.xv + 55;
 polytopeToAdd.yv = 0.5*polytopeToAdd.yv - 10;
 polytopeToAdd.vertices = [polytopeToAdd.xv' polytopeToAdd.yv'];
 
-% Update visibilityMatrix with new polytope added
-[newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+% Update vGraph with new polytope added
+[newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
     fcn_VGraph_addObstacle(...
-    visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (figNum));
+    vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(newVisibilityMatrix));
+assert(isnumeric(newVGraph));
 assert(isnumeric(newPointsWithData));
 assert(isnumeric(newStartPointData));
 assert(isnumeric(newFinishPointData));
@@ -104,8 +115,8 @@ assert(isstruct(newPolytopes));
 NpointsOriginal= length(pointsWithData(:,1));
 NpointsAdded = length(polytopeToAdd.vertices(:,1));
 NpointsNew = NpointsOriginal + NpointsAdded;
-assert(size(newVisibilityMatrix,1)==NpointsNew); 
-assert(size(newVisibilityMatrix,2)==NpointsNew); 
+assert(size(newVGraph,1)==NpointsNew); 
+assert(size(newVGraph,2)==NpointsNew); 
 assert(size(newPointsWithData,1)==NpointsNew); 
 assert(size(newPointsWithData,2)==5); 
 assert(size(newStartPointData,1)==1); 
@@ -202,7 +213,7 @@ finishPointData = pointsWithData(end,:);
 
 % Create visibility graph
 isConcave = [];
-visibilityMatrix =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
+vGraph =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
 
 % add a polytope
 polytopeToAdd = polytopes(1);
@@ -210,13 +221,13 @@ polytopeToAdd.xv = 0.5*polytopeToAdd.xv + 55;
 polytopeToAdd.yv = 0.5*polytopeToAdd.yv - 10;
 polytopeToAdd.vertices = [polytopeToAdd.xv' polytopeToAdd.yv'];
 
-% Update visibilityMatrix with new polytope added
-[newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+% Update vGraph with new polytope added
+[newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
     fcn_VGraph_addObstacle(...
-    visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, ([]));
+    vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, ([]));
 
 % Check variable types
-assert(isnumeric(newVisibilityMatrix));
+assert(isnumeric(newVGraph));
 assert(isnumeric(newPointsWithData));
 assert(isnumeric(newStartPointData));
 assert(isnumeric(newFinishPointData));
@@ -226,8 +237,8 @@ assert(isstruct(newPolytopes));
 NpointsOriginal= length(pointsWithData(:,1));
 NpointsAdded = length(polytopeToAdd.vertices(:,1));
 NpointsNew = NpointsOriginal + NpointsAdded;
-assert(size(newVisibilityMatrix,1)==NpointsNew); 
-assert(size(newVisibilityMatrix,2)==NpointsNew); 
+assert(size(newVGraph,1)==NpointsNew); 
+assert(size(newVGraph,2)==NpointsNew); 
 assert(size(newPointsWithData,1)==NpointsNew); 
 assert(size(newPointsWithData,2)==5); 
 assert(size(newStartPointData,1)==1); 
@@ -282,7 +293,7 @@ finishPointData = pointsWithData(end,:);
 
 % Create visibility graph
 isConcave = [];
-visibilityMatrix =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
+vGraph =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
 
 % add a polytope
 polytopeToAdd = polytopes(1);
@@ -290,13 +301,13 @@ polytopeToAdd.xv = 0.5*polytopeToAdd.xv + 55;
 polytopeToAdd.yv = 0.5*polytopeToAdd.yv - 10;
 polytopeToAdd.vertices = [polytopeToAdd.xv' polytopeToAdd.yv'];
 
-% Update visibilityMatrix with new polytope added
-[newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+% Update vGraph with new polytope added
+[newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
     fcn_VGraph_addObstacle(...
-    visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (-1));
+    vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (-1));
 
 % Check variable types
-assert(isnumeric(newVisibilityMatrix));
+assert(isnumeric(newVGraph));
 assert(isnumeric(newPointsWithData));
 assert(isnumeric(newStartPointData));
 assert(isnumeric(newFinishPointData));
@@ -306,8 +317,8 @@ assert(isstruct(newPolytopes));
 NpointsOriginal= length(pointsWithData(:,1));
 NpointsAdded = length(polytopeToAdd.vertices(:,1));
 NpointsNew = NpointsOriginal + NpointsAdded;
-assert(size(newVisibilityMatrix,1)==NpointsNew); 
-assert(size(newVisibilityMatrix,2)==NpointsNew); 
+assert(size(newVGraph,1)==NpointsNew); 
+assert(size(newVGraph,2)==NpointsNew); 
 assert(size(newPointsWithData,1)==NpointsNew); 
 assert(size(newPointsWithData,2)==5); 
 assert(size(newStartPointData,1)==1); 
@@ -363,7 +374,7 @@ finishPointData = pointsWithData(end,:);
 
 % Create visibility graph
 isConcave = [];
-visibilityMatrix =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
+vGraph =fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
 
 % add a polytope
 polytopeToAdd = polytopes(1);
@@ -376,20 +387,20 @@ Niterations = 3;
 % Do calculation without pre-calculation
 tic;
 for ith_test = 1:Niterations
-    % Update visibilityMatrix with new polytope added
-    [newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+    % Update vGraph with new polytope added
+    [newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
         fcn_VGraph_addObstacle(...
-        visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, ([]));
+        vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, ([]));
 end
 slow_method = toc;
 
 % Do calculation with pre-calculation, FAST_MODE on
 tic;
 for ith_test = 1:Niterations
-    % Update visibilityMatrix with new polytope added
-    [newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+    % Update vGraph with new polytope added
+    [newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
         fcn_VGraph_addObstacle(...
-        visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (-1));
+        vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (-1));
 end
 fast_method = toc;
 

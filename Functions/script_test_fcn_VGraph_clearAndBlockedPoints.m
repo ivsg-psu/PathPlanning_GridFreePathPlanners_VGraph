@@ -4,27 +4,35 @@
 % graph creation
 
 % Revision history
+%
 % (In BoundedAStar)
+% 
 % As: script_test_fcn_Visibility_clearAndBlockedPoints
+% 
 % 2025_07_25 - K. Hayes, kxh1031@psu.edu
-% -- first write of script, code taken from example originally in
-%    fcn_visibility_clear_and_blocked_points
+% - first write of script, code taken from example originally in
+%   % fcn_visibility_clear_and_blocked_points
+% 
 % 2025_08_01 - K. Hayes
-% -- cleaning and reformatting of script
-% -- moved plotting capabilities into fcn debug options
+% - cleaning and reformatting of script
+% - moved plotting capabilities into fcn debug options
+% 
 % (In Visibility Graph)
+% 
 % 2025_10_30 - S. Brennan
-% -- set up fast mode tests
-% -- improved figure captions a bit
+% - set up fast mode tests
+% - improved figure captions a bit
 %
 % As: script_test_fcn_VGraph_clearAndBlockedPoints
 % 2025_11_07 - S. Brennan
-% -- Renamed script_test_fcn_Visibility_clearAndBlockedPoints to script_test_fcn_VGraph_clearAndBlockedPoints
-% -- Cleared extra figure command out of Inputs section
-
+% - Renamed script_test_fcn_Visibility_clearAndBlockedPoints to script_test_fcn_VGraph_clearAndBlockedPoints
+% - Cleared extra figure command out of Inputs section
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
 
 % TO DO:
-% -- set up fast mode tests
+% - set up fast mode tests
 
 %% Set up the workspace
 close all

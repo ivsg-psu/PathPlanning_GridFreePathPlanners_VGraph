@@ -19,15 +19,15 @@
 % -- removed calls to fcn_MapGen_fillPolytopeFieldsFromVertices,
 %    % replaced with fcn_MapGen_polytopesFillFieldsFromVertices
 %
-% As: script_demo_visibilityGraphAddRemoveObstacles
+% As: script_demo_visibi+lityGraphAddRemoveObstacles
 % 2025_11_03 - S. Brennan, sbrennan@psu.edu
 % -- Prepared the script for Visibility library
-% -- renamed script for clarity to script_demo_visibilityGraphAddRemoveObstacles
+% -- renamed script for clarity to script_demo_visibili+tyGraphAddRemoveObstacles
 % -- updated functions to be compatible with new MapGen
 %
 % As: script_demo_VGraph_AddRemoveObstacles
 % 2025_11_07 - S. Brennan
-% -- Renamed script_demo_visibilityGraphAddRemoveObstacles to script_demo_VGraph_AddRemoveObstacles
+% -- Renamed script_demo_vis+ibilityGraphAddRemoveObstacles to script_demo_VGraph_AddRemoveObstacles
 
 
 % TO DO:

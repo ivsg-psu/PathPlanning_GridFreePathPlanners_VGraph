@@ -1,6 +1,6 @@
-function [newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+function [newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
 fcn_VGraph_removeObstacle(...
-visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, indexOfPolytopeForRemoval, varargin)
+vGraph, pointsWithData, startPointData, finishPointData, polytopes, indexOfPolytopeForRemoval, varargin)
 % fcn_VGraph_removeObstacle
 %   recalculates the visibility graph after deleting a polytope without
 %   recalculating the entire visibility graph.  This is accomplished using
@@ -8,19 +8,19 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, in
 %   pointsWithData, startPointData, finishPointData, and polytopes data
 %   structures as these are also affected by the removal of an obstacle.
 % 
-%   See vgraph_modification section of
+%   See vGraph_modification section of
 %   Documentation/bounded_astar_documentation.pptx for pseudocode and
 %   algorithm description
 %
 % FORMAT:
 %
-% [newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+% [newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
 %     fcn_VGraph_removeObstacle(...
-%     visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, indexOfPolytopeForRemoval, (figNum))
+%     vGraph, pointsWithData, startPointData, finishPointData, polytopes, indexOfPolytopeForRemoval, (figNum))
 %
 % INPUTS:
 %
-%     visibilityMatrix: nxn matrix, where n is the number of points in pointsWithData
+%     vGraph: nxn matrix, where n is the number of points in pointsWithData
 %       a 1 in column i and row j indicates that pointsWithData(i,:) is visible from
 %       pointsWithData(j,:).  This matrix is therefore symmetric
 %     
@@ -51,7 +51,7 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, in
 %         check process verbose
 %
 % OUTPUTS:
-%     newVisibilityMatrix: same as the visiblity_matrix input but modified so that the removed
+%     newVGraph: same as the visiblity_matrix input but modified so that the removed
 %         removed polytope no longer affects the visibility.  Note this may have fewer points than
 %         the input matrix as points on the removed polytope are deleted.
 %
@@ -74,7 +74,7 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, in
 % See the scripts: 
 %
 %     script_test_fcn_VGraph_removeObstacle and 
-%     script_demo_visibilityGraphAddRemoveObstacles
+%     script_demo_VGraph_AddRemoveObstacles
 %
 % for a full test suite.
 %
@@ -83,37 +83,47 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, in
 % REVISION HISTORY
 % As: fcn_visibility_graph_remove_obstacle
 % 2024_03
-% -- first written by Steve Harnett
+% - first written by Steve Harnett
 %
 % As: fcn_Visibility_removeObstacle
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
-% -- copied to new function from fcn_visibility_graph_remove_obstacle
-%    to follow library convention
+% - copied to new function from fcn_visibility_graph_remove_obstacle
+%   % to follow library convention
+% 
 % 2025_07_31 - K. Hayes
-% -- updated function formatting and header
-% -- added input and debug checks
+% - updated function formatting and header
+% - added input and debug checks
+% 
 % 2025_08_04 - K. Hayes
-% -- added debug plotting
+% - added debug plotting
+% 
 % 2025_11_03 - S. Brennan
-% -- updated variable naming:
-%    % * fig_num to figNum
-%    % * visibility_matrix to visibilityMatrix
-%    % * all_pts to pointsWithData
-%    % * start_new to newStartPointData
-%    % * finish_new to newFinishPointData
-%    % * newPolytopes to newPolytopes
-%    % * visibilityMatrix_new to newVisibilityMatrix
-%    % * pointsWithData_new to newPointsWithData
-%    % * polytopes to polytopes
-%    % * start to startPointData
-%    % * finish to finishPointData
-%    % * idx_of_polytope_for_removal to indexOfPolytopeForRemoval
+% - updated variable naming:
+%   % * fig+_num to figNum
+%   % * vis+ibility_matrix to visi+bilityMatrix
+%   % * all+_pts to pointsWithData
+%   % * sta+rt_new to newStartPointData
+%   % * fin+ish_new to newFinishPointData
+%   % * ne+wPolytopes to newPolytopes
+%   % * vi+sibilityMatrix_new to newV+isibilityMatrix
+%   % * poi+ntsWithData_new to newPointsWithData
+%   % * pol+ytopes to polytopes
+%   % * sta+rt to startPointData
+%   % * fin+ish to finishPointData
+%   % * idx_o+f_polytope_for_removal to indexOfPolytopeForRemoval
 % - staged function to move into Visibility library
-%    % * _MAPGEN_ changed to _VGRAPH_
+%   % * _MAP+GEN_ changed to _VGRAPH_
 %
 % As: fcn_VGraph_removeObstacle
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_removeObstacle to fcn_VGraph_removeObstacle
+% - Renamed fcn_Visibility_removeObstacle to fcn_VGraph_removeObstacle
+% 
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history in all functions
+% - Cleaned up variable naming in all functions
+%   % vis+ibilityMatrix to vGraph
+%   % newVi+sibilityMatrix to newVGraph
+%   % vgra+ph to vGraph
 
 % TO DO:
 % - uncomment the AABB test and get this to work without using deprecated
@@ -207,15 +217,15 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%§
 
 
-%% initialize the modified vgraph, pts, startPointData, and finishPointData to the old values
-newVisibilityMatrix = visibilityMatrix;
+%% initialize the modified vGraph, pts, startPointData, and finishPointData to the old values
+newVGraph = vGraph;
 newPointsWithData = pointsWithData;
 newStartPointData = startPointData;
 newFinishPointData = finishPointData;
 
 NtoDelete = length(find(pointsWithData(:,4)==indexOfPolytopeForRemoval));
 
-%% remove polytope from vgraph and pointsWithData
+%% remove polytope from vGraph and pointsWithData
 polytope_of_interest = polytopes(indexOfPolytopeForRemoval); % get polytope for removal
 % get AABB of polytope for removal
 polytope_vertices = [[polytope_of_interest.xv]',[polytope_of_interest.yv]'];
@@ -228,12 +238,12 @@ newPolytopes(indexOfPolytopeForRemoval) = [];
 [~, xloc] = ismember(polytope_vertices(:,1), pointsWithData(:,1));
 [~, yloc] = ismember(polytope_vertices(:,2), pointsWithData(:,2));
 idx_of_points_on_polytope = union(xloc,yloc);
-% vgraph edges that start or end on this obstacle should be removed
-newVisibilityMatrix(idx_of_points_on_polytope,:) = [];
-newVisibilityMatrix(:,idx_of_points_on_polytope) = [];
+% vGraph edges that start or end on this obstacle should be removed
+newVGraph(idx_of_points_on_polytope,:) = [];
+newVGraph(:,idx_of_points_on_polytope) = [];
 % remove points on that polytope from pointsWithData table
 newPointsWithData(idx_of_points_on_polytope,:) = [];
-% size of vgraph has now changed so points need to be re-indexed
+% size of vGraph has now changed so points need to be re-indexed
 % reindex pointsWithData, start, and finish
 num_pts_after_removal = size(newPointsWithData,1);
 newPointsWithData(:,3) = (1:num_pts_after_removal)';
@@ -253,14 +263,14 @@ isInside = true(length(newPointsWithData(:,1)),1);
 
 % only want possible edges that are not already edges as deleting the obstacle adds edges, it does
 % not remove existing edges
-[r,c] = find(isInside & ~newVisibilityMatrix);
+[r,c] = find(isInside & ~newVGraph);
 %% check only specific edges method
 for i = 1:length(r)
     [~,~,D] = fcn_VGraph_clearAndBlockedPoints(newPolytopes, newPointsWithData(r(i),:), newPointsWithData(c(i),:));
     visibility_scalar = sum(D);
     assert(isequal(size(visibility_scalar),[1 1]))
     if ~visibility_scalar
-        newVisibilityMatrix(r(i),c(i)) = 1;
+        newVGraph(r(i),c(i)) = 1;
     end
 end
 
@@ -289,10 +299,10 @@ if flag_do_plots
     box on
     xlabel('x [km]')
     ylabel('y [km]')
-     % Plot new vgraph
-    for i = 1:size(visibilityMatrix,1)
-        for j = 1:size(visibilityMatrix,1)
-            if visibilityMatrix(i,j) == 1
+     % Plot new vGraph
+    for i = 1:size(vGraph,1)
+        for j = 1:size(vGraph,1)
+            if vGraph(i,j) == 1
                 plot([pointsWithData(i,1),pointsWithData(j,1)],[pointsWithData(i,2),pointsWithData(j,2)],'-g')
             end
         end
@@ -306,10 +316,10 @@ if flag_do_plots
     xlabel('x [km]')
     ylabel('y [km]')
        
-    % Plot new vgraph
-    for i = 1:size(newVisibilityMatrix,1)
-        for j = 1:size(newVisibilityMatrix,1)
-            if newVisibilityMatrix(i,j) == 1
+    % Plot new vGraph
+    for i = 1:size(newVGraph,1)
+        for j = 1:size(newVGraph,1)
+            if newVGraph(i,j) == 1
                 plot([newPointsWithData(i,1),newPointsWithData(j,1)],[newPointsWithData(i,2),newPointsWithData(j,2)],'-g')
             end
         end

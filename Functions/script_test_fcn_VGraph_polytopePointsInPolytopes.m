@@ -2,9 +2,12 @@
 % tests: fcn_VGraph_polytopePointsInPolytopes
 
 % Revision history
+% 
 % As: script_test_fcn_BoundedAStar_polytopePointsInPolytopes
+% 
 % 2025_08_13 - K. Hayes, kxh1031@psu.edu
-% -- initial write of script
+% - initial write of script
+% 
 % 2025_11_13 - S. Brennan, sbrennan@psu.edu
 % (in fcn_BoundedAStar_polytopePointsInPolytopes)
 % - Refactored code to change from structure inputs to vector inputs
@@ -15,7 +18,7 @@
 %   % standards
 %   % from A (structure) to startXY (1x2 vector)
 %   % from B (structure) to finishXY (1x2 vector)
-%   % fig_num to figNum
+%   % fig+_num to figNum
 %   % throw_error to flagThrowError
 %   % edge_check to flagEdgeCheck
 %   % Apoly to startPolys
@@ -23,11 +26,18 @@
 %   % err to flagsAtLeastOnePointIsInPoly
 %
 % As: script_test_fcn_VGraph_polytopePointsInPolytopes
+% 
 % 2024_11_14 - S. Brennan, sbrennan@psu.edu
 % - renamed script after moving from BoundedAStar repo
 %   % * from script_test_fcn_BoundedAStar_polytopePointsInPolytopes
 %   % * to script_test_fcn_VGraph_polytopePointsInPolytopes
 % - fixed header listing of script name - it was incorrect!
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % fig+_num to figNum
+
 
 %% Set up the workspace
 close all

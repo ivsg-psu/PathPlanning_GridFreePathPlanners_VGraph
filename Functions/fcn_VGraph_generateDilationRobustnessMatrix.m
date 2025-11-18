@@ -1,15 +1,15 @@
 function [dilation_robustness_matrix] = fcn_VGraph_generateDilationRobustnessMatrix(...
-    all_pts, start, finish, vgraph, mode, polytopes, varargin)
+    pointsWithData, start, finish, vGraph, mode, polytopes, varargin)
 % fcn_VGraph_generateDilationRobustnessMatrix
 % estimates edge clearances around each edge in a visibility matrix
 %
 % This function operates on a visibility graph formed from a polytope map
-% to estimate the distance, for each vgraph edge, that the polytopes would
+% to estimate the distance, for each vGraph edge, that the polytopes would
 % have to be dilated to block that edge. This is similar to corridor width
-% except (1) it is only an estimate, the actual corridor around the vgraph
+% except (1) it is only an estimate, the actual corridor around the vGraph
 % edge is not measured/calculated and (2) the distance is measured to each
 % side independently meaning it is more accurate to think of it as the
-% lateral distance from the vgraph edge to the nearest polytope, rather
+% lateral distance from the vGraph edge to the nearest polytope, rather
 % than thinking of it as the width of the corridors between polytopes.  For
 % a better approximate of corridor width please see the medial axis graph
 % structure. see dilation_robustness section of
@@ -20,7 +20,7 @@ function [dilation_robustness_matrix] = fcn_VGraph_generateDilationRobustnessMat
 %
 %      dilation_robustness_matrix = ...
 %      fcn_VGraph_generateDilationRobustnessMatrix(...
-%      all_pts, start, finish, vgraph, mode, polytopes,...
+%      pointsWithData, start, finish, vGraph, mode, polytopes,...
 %      (plottingOptions), (figNum))
 %
 % INPUTS:
@@ -36,14 +36,25 @@ function [dilation_robustness_matrix] = fcn_VGraph_generateDilationRobustnessMat
 %         2D: (x,y,point_id, -1, 1)
 %         3D: (x,y,z,point_id, -1, 1)
 %
-%     all_pts: the point matrix of all point that can be in the route, except the start and finish where
-%         each row is a single point vector.
-%         Format:
-%         2D: (x,y,point_id, poly_id, 1 if point is start/end on poly, 0 otherwise)
-%         3D: (x,y,z,point_id, poly_id, 1 if point is start/end on poly, 0 otherwise)
+%     pointsWithData: p-by-5 matrix of all the possible origination points for
+%     visibility calculations including the vertex points on each obstacle,
+%     and, optionally, the start and/or end points. If the
+%     start/end points are omitted, the value of p is the same as the
+%     number of points within the polytope field, numPolytopeVertices.
+%     Otherwise, p is 1 or 2 larger depending on whether start/end is
+%     given. The information in the 5 columns is as follows:
+%         x-coordinate
+%         y-coordinate
+%         point id number
+%         obstacle id number (-1 for start/end points)
+%         beginning/ending indication (1 if the point is a beginning or
+%         start point, 2 if ending point or finish point, and 0 otherwise)
+%         Ex: [x y point_id obs_id beg_end]
 %
-%     vgraph: the visibility graph as an nxn matrix where n is the number of points (nodes) in the map.
-%         A 1 is in position i,j if point j is visible from point i.  0 otherwise.
+%     vGraph: the visibility graph as an nxn matrix where n is the number
+%     of points (nodes) in the map.
+%         A 1 is in position i,j if point j is visible from point i.  0
+%         otherwise.
 %
 %     mode: a string for what dimension the inputs are in. The mode argument must be a string with
 %       one of the following values:
@@ -61,7 +72,7 @@ function [dilation_robustness_matrix] = fcn_VGraph_generateDilationRobustnessMat
 %          plottingOptions.selectedFromToToPlot: the [from to] edge to plot
 %          plottingOptions.maxScalingValue: the normalization value
 %
-%      fig_num: a figure number to plot results. If set to -1, skips any
+%      figNum: a figure number to plot results. If set to -1, skips any
 %      input checking or debugging, no figures will be generated, and sets
 %      up code to maximize speed.
 %
@@ -90,33 +101,45 @@ function [dilation_robustness_matrix] = fcn_VGraph_generateDilationRobustnessMat
 % REVISION HISTORY:
 % As: fcn_algorithm_generate_dilation_robustness_matrix
 % January 2024 by Steve Harnett
-% -- first write of function
+% - first write of function
+%
 % February 2024 by Steve Harnett
-% -- function updated to make a right left distinction using cross products
+% - function updated to make a right left distinction using cross products
+%
 % As: fcn_BoundedAStar_generateDilationRobustnessMatrix
 % 2025_07_17 by K. Hayes, kxh1031@psu.edu
-% -- function copied to new script from
-%    fcn_algorithm_generate_dilation_robustness_matrix.m to follow library
-%    conventions
+% - function copied to new script from
+%   fcn_algorithm_generate_dilation_robustness_matrix.m to follow library
+%   conventions
+%
 % 2025_10_07 by Sean Brennan
-% -- fixed heading strings and function formatting
+% - fixed heading strings and function formatting
 %
 % As: fcn_Visibility_generateDilationRobustnessMatrix
 % 2025_10_31 by Sean Brennan
-% -- moved function to Visibility Graph library
-% -- replaced _MAPGEN_ with _VGRAPH_ in global variable naming
+% - moved function to Visibility Graph library
+% - replaced _MAPGEN_ with _VGRAPH_ in global variable naming
 %
 % As: fcn_VGraph_generateDilationRobustnessMatrix
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_generateDilationRobustnessMatrix to fcn_VGraph_generateDilationRobustnessMatrix
+% - Renamed function:
+%   % * from: fcn_Visibility_generateDilationRobustnessMatrix 
+%   % * to: fcn_VGraph_generateDilationRobustnessMatrix
+%
+% 2025_11_16 by Sean Brennan
+% - Cleaned up variable naming:
+%   % fig+_num to figNum
+%   % all+_pts to pointsWithData
+%   % v+graph to vGraph
+
 
 % TO DO:
-% -- fill in to-do items here.
+% - fill in to-do items here.
 
 
 %% Debugging and Input checks
 
-% Check if flag_max_speed set. This occurs if the fig_num variable input
+% Check if flag_max_speed set. This occurs if the figNum variable input
 % argument (varargin) is given a number of -1, which is not a valid figure
 % number.
 MAX_NARGIN = 8; % The largest Number of argument inputs to the function
@@ -142,7 +165,7 @@ end
 if flag_do_debug
     st = dbstack; %#ok<*UNRCH>
     fprintf(1,'STARTING function: %s, in file: %s\n',st(1).name,st(1).file);
-    debug_fig_num = 999978;
+    debug_figNum = 999978;
 end
 
 
@@ -214,7 +237,7 @@ if ~isempty(plottingOptions.filename)
     delayTime = 0.5; % Delay between frames in seconds
     loopCount = Inf; % Loop indefinitely (0 for no loop)
     flag_do_movie = 1;
-    debug_fig_num = 123456;
+    debug_figNum = 123456;
 end
 
 %% Grab a colormap for plotting options
@@ -242,30 +265,30 @@ else
 end
 
 
-vgraphNoSelfInteractions = vgraph - eye(size(vgraph)); % we don't want to consider self interactions here
-all_pts = [all_pts; start; finish];
-Npoints = length(all_pts(:,1));
+vGraphNoSelfInteractions = vGraph - eye(size(vGraph)); % we don't want to consider self interactions here
+pointsWithData = [pointsWithData; start; finish];
+Npoints = length(pointsWithData(:,1));
 
 % initialize to zero value for each edge (zero implying the edge has no corridor width, i.e. is blocked)
-dilation_robustness_matrix = zeros(size(vgraphNoSelfInteractions,1),size(vgraphNoSelfInteractions,2),2);
+dilation_robustness_matrix = zeros(size(vGraphNoSelfInteractions,1),size(vGraphNoSelfInteractions,2),2);
 dilation_robustness_matrix_min = nan(Npoints,Npoints);
 allEdgeNumbersProcessed = nan(Npoints,Npoints);
 
-% only need to perform this operation for 1's in vgraph, 0's are blocked edges and have 0 corridor width
-idx_of_valid_edges = find(vgraphNoSelfInteractions==1);
+% only need to perform this operation for 1's in vGraph, 0's are blocked edges and have 0 corridor width
+idx_of_valid_edges = find(vGraphNoSelfInteractions==1);
 num_edges = length(idx_of_valid_edges);
-% recall vgraph edge ij is the line segment from point i to point j
-[edge_start_idx, edge_end_idx] = ind2sub(size(vgraphNoSelfInteractions),idx_of_valid_edges);
+% recall vGraph edge ij is the line segment from point i to point j
+[edge_start_idx, edge_end_idx] = ind2sub(size(vGraphNoSelfInteractions),idx_of_valid_edges);
 
-% Extract points of correct dimension out of all_pts
-allPoints = all_pts(:,1:highestDimension);
+% Extract points of correct dimension out of pointsWithData
+allPoints = pointsWithData(:,1:highestDimension);
 edgeStartPoints = allPoints(edge_start_idx,:);
 edgeEndPoints   = allPoints(edge_end_idx,:);
-edgePolysStart  = all_pts(edge_start_idx,highestDimension+2); % Which polytope the start point is on
-edgePolysEnd    = all_pts(edge_end_idx,highestDimension+2); % Which polytope the end point is on
-[edgeNextInPolySequence, edgePriorInPolySequence] = fcn_INTERNAL_findAdjacentInSequence(all_pts,highestDimension);
+edgePolysStart  = pointsWithData(edge_start_idx,highestDimension+2); % Which polytope the start point is on
+edgePolysEnd    = pointsWithData(edge_end_idx,highestDimension+2); % Which polytope the end point is on
+[edgeNextInPolySequence, edgePriorInPolySequence] = fcn_INTERNAL_findAdjacentInSequence(pointsWithData,highestDimension);
 
-polyOrientations = fcn_INTERNAL_findPolytopeOrientations(all_pts, highestDimension);
+polyOrientations = fcn_INTERNAL_findPolytopeOrientations(pointsWithData, highestDimension);
 
 edgeVectors     = edgeEndPoints - edgeStartPoints;
 edgeVectors_magnitude = sum(edgeVectors.^2,2).^0.5;
@@ -301,11 +324,11 @@ for ith_edge = loopingRange
     unitThisNormalVector = unitEdgeNormalVectors(ith_edge,:);
 
     if 1==flag_do_debug || flag_do_movie
-        figure(debug_fig_num);
+        figure(debug_figNum);
         clf;
 
         % Plot the polytopes
-        fcn_INTERNAL_plotPolytopes(polytopes, debug_fig_num)
+        fcn_INTERNAL_plotPolytopes(polytopes, debug_figNum)
 
         % Set the axis
         if ~isempty(plottingOptions.axis)
@@ -331,8 +354,8 @@ for ith_edge = loopingRange
 
         % label point ids for debugging. The last two points are start and
         % finish, so do not need to be plotted and labeled.
-        plot(all_pts(1:end-2,1), all_pts(1:end-2,2),'LineStyle','none','Marker','o','MarkerFaceColor',[255,165,0]./255);
-        text(all_pts(1:end-2,1)+addNudge,all_pts(1:end-2,2)+addNudge,string(all_pts(1:end-2,3)));
+        plot(pointsWithData(1:end-2,1), pointsWithData(1:end-2,2),'LineStyle','none','Marker','o','MarkerFaceColor',[255,165,0]./255);
+        text(pointsWithData(1:end-2,1)+addNudge,pointsWithData(1:end-2,2)+addNudge,string(pointsWithData(1:end-2,3)));
         title('polytope map with numbered vertices')
 
         drawnow;
@@ -346,7 +369,7 @@ for ith_edge = loopingRange
         end
 
         % Plot the visibiliity graph for all from and to lines
-        fcn_VGraph_plotVGraph(vgraphNoSelfInteractions, all_pts, 'g-');
+        fcn_VGraph_plotVGraph(vGraphNoSelfInteractions, pointsWithData, 'g-');
         % Set the axis
         if ~isempty(plottingOptions.axis)
             axis(plottingOptions.axis);
@@ -365,11 +388,11 @@ for ith_edge = loopingRange
         end
 
         % Plot the visibiliity graph for this from
-        h_plotThisEdgeStartIndex = fcn_VGraph_plotVGraph(vgraphNoSelfInteractions, all_pts, '-',thisEdgeStartIndex);
+        h_plotThisEdgeStartIndex = fcn_VGraph_plotVGraph(vGraphNoSelfInteractions, pointsWithData, '-',thisEdgeStartIndex);
         set(h_plotThisEdgeStartIndex,'Color',[0 0.5 0],'LineWidth',3);
 
         % Plot this edge
-        h_plotThisEdge = fcn_VGraph_plotVGraph(vgraphNoSelfInteractions, all_pts, '-',[thisEdgeStartIndex thisEdgeEndIndex]);
+        h_plotThisEdge = fcn_VGraph_plotVGraph(vGraphNoSelfInteractions, pointsWithData, '-',[thisEdgeStartIndex thisEdgeEndIndex]);
         set(h_plotThisEdge,'Color',[1 0 0],'LineWidth',3);
 
         % Plot the unit vector and unit normal
@@ -417,7 +440,7 @@ for ith_edge = loopingRange
     secondary_edge_vectors = edgeVectors(secondary_edge_ends_idx_not_this_edge,:);
     Nsecondary = length(secondary_edge_ends_idx_not_this_edge(:,1));
     if 1==flag_do_debug || 1==flag_do_movie
-        figure(debug_fig_num);
+        figure(debug_figNum);
         h_quiverAllSecondary = ...
             quiver(thisStartPoint(1,1)*ones(Nsecondary,1),thisStartPoint(1,2)*ones(Nsecondary,1),...
             edgeVectors(secondary_edge_ends_idx_not_this_edge,1),edgeVectors(secondary_edge_ends_idx_not_this_edge,2),...
@@ -471,7 +494,7 @@ for ith_edge = loopingRange
 
     % Show which edges stick out and do not stick out
     if 1==flag_do_debug || 1==flag_do_movie
-        figure(debug_fig_num);
+        figure(debug_figNum);
         
         % Plot the rear stick-outs
         stickOut_idx = secondary_edge_ends_idx_not_this_edge(stickOutSecondaryEdgesRear);
@@ -569,7 +592,7 @@ for ith_edge = loopingRange
         badSecondaryEdges_idx  = notStickOutSecondaryEdge_idx(flags_badSecondaryEdges);
         badSecondaryEdgeVectors = edgeVectors(badSecondaryEdges_idx,:);
 
-        figure(debug_fig_num);
+        figure(debug_figNum);
         NbadSecondary = length(badSecondaryEdgeVectors(:,1));
         h_quiverBadEdges = quiver(thisStartPoint(1,1)*ones(NbadSecondary,1),thisStartPoint(1,2)*ones(NbadSecondary,1),...
             edgeVectors(badSecondaryEdges_idx,1),edgeVectors(badSecondaryEdges_idx,2),...
@@ -634,7 +657,7 @@ for ith_edge = loopingRange
     rightSecondaryEdges_idx = goodSecondaryEdges_idx(flagIsRight);
 
     if 1==flag_do_debug || 1==flag_do_movie
-        figure(debug_fig_num);
+        figure(debug_figNum);
 
         % Shut off visibility of old data
         set(h_quiverGoodSecondary,'Visible','off')
@@ -673,7 +696,7 @@ for ith_edge = loopingRange
 
     %% Find corridor widths to left and right
     % This section finds the dot product of the other edges with the unit
-    % normal to find the corridor width defined by each vgraph edge
+    % normal to find the corridor width defined by each vGraph edge
     % basically the projection of the secondary edge in the direction
     % normal to the primary edge is what we want
     NgoodSecondary = length(goodSecondaryEdges_idx);
@@ -794,7 +817,7 @@ for ith_edge = loopingRange
     edgeFinalMinWidths(ith_edge,1) = thisCorridorWidth;
 
     if 1==flag_do_debug || 1==flag_do_movie
-        figure(debug_fig_num);
+        figure(debug_figNum);
 
         % Shut off visibility of old data
         set(h_quiverLeft,'Visible','off')
@@ -854,7 +877,7 @@ for ith_edge = loopingRange
 
 
     if 1==flag_do_debug || 1==flag_do_movie
-        figure(debug_fig_num);
+        figure(debug_figNum);
 
         % Grab all the edges processed so far
         allEdgesProcessedSoFar = allEdgeNumbersProcessed(~isnan(allEdgeNumbersProcessed));
@@ -901,7 +924,7 @@ for ith_edge = loopingRange
         plotFormat.MarkerSize = 10;
 
         colormap(gca,colorMapMatrixOrString);
-        fcn_plotRoad_plotXYI([dataToPlot(:,1) dataToPlot(:,2) dataToPlot(:,3)], (plotFormat), (reducedRedToGreenColorMap), (debug_fig_num));
+        fcn_plotRoad_plotXYI([dataToPlot(:,1) dataToPlot(:,2) dataToPlot(:,3)], (plotFormat), (reducedRedToGreenColorMap), (debug_figNum));
         title('');
 
         if ~isempty(plottingOptions.axis)
@@ -932,7 +955,7 @@ for ith_edge = loopingRange
 
 
     % if 1==flag_do_debug
-    %     figure(debug_fig_num);
+    %     figure(debug_figNum);
     %     thisEdgeDilationRobustnessMatrix =     dilation_robustness_matrix(thisEdgeStartIndex, thisEdgeEndIndex, :);
     %
     %     % Find the maximum value, not including infinity
@@ -973,7 +996,7 @@ if flag_do_plots
     fcn_INTERNAL_plotPolytopes(polytopes, figNum)
 
     % Plot the visibiliity graph for all from and to lines
-    fcn_VGraph_plotVGraph(vgraphNoSelfInteractions, all_pts, 'g-');
+    fcn_VGraph_plotVGraph(vGraphNoSelfInteractions, pointsWithData, 'g-');
     % Set the axis
     if ~isempty(plottingOptions.axis)
         axis(plottingOptions.axis);
@@ -982,11 +1005,11 @@ if flag_do_plots
     % Color the edges
     if ~isempty(plottingOptions.selectedFromToToPlot)
         % Plot the visibiliity graph for this from
-        h_plotThisEdgeStartIndex = fcn_VGraph_plotVGraph(vgraphNoSelfInteractions, all_pts, '-',thisEdgeStartIndex);
+        h_plotThisEdgeStartIndex = fcn_VGraph_plotVGraph(vGraphNoSelfInteractions, pointsWithData, '-',thisEdgeStartIndex);
         set(h_plotThisEdgeStartIndex,'Color',[0 0.5 0],'LineWidth',3);
 
         % Plot this edge
-        h_plotThisEdge = fcn_VGraph_plotVGraph(vgraphNoSelfInteractions, all_pts, '-',[thisEdgeStartIndex thisEdgeEndIndex]);
+        h_plotThisEdge = fcn_VGraph_plotVGraph(vGraphNoSelfInteractions, pointsWithData, '-',[thisEdgeStartIndex thisEdgeEndIndex]);
         set(h_plotThisEdge,'Color',[0.5 0 0],'LineWidth',3);
 
         % Plot left edges in BLUE
@@ -1097,8 +1120,8 @@ if flag_do_plots
 
     % label point ids for debugging. The last two points are start and
     % finish, so do not need to be plotted and labeled.
-    plot(all_pts(1:end-2,1), all_pts(1:end-2,2),'LineStyle','none','Marker','o','MarkerFaceColor',[255,165,0]./255);
-    text(all_pts(1:end-2,1)+addNudge,all_pts(1:end-2,2)+addNudge,string(all_pts(1:end-2,3)));
+    plot(pointsWithData(1:end-2,1), pointsWithData(1:end-2,2),'LineStyle','none','Marker','o','MarkerFaceColor',[255,165,0]./255);
+    text(pointsWithData(1:end-2,1)+addNudge,pointsWithData(1:end-2,2)+addNudge,string(pointsWithData(1:end-2,3)));
 
 
     % Set the axis
@@ -1138,7 +1161,7 @@ plotFormat.Color = 'Blue'; % edge line plotting
 plotFormat.LineStyle = '-';
 plotFormat.LineWidth = 2; % linewidth of the edge
 fillFormat = [1 0 0 1 0.4];
-% FORMAT: fcn_MapGen_plotPolytopes(polytopes,fig_num,line_spec,line_width,axes_limits,axis_style);
+% FORMAT: fcn_MapGen_plotPolytopes(polytopes,figNum,line_spec,line_width,axes_limits,axis_style);
 fcn_MapGen_plotPolytopes(polytopes,(plotFormat),(fillFormat),(figNum));
 hold on
 box on
@@ -1231,13 +1254,13 @@ end
 end % Ends fcn_INTERNAL_checkPolytopes
 
 %% fcn_INTERNAL_findAdjacentInSequence
-function [edgeNextInPolySequence, edgePriorInPolySequence] = fcn_INTERNAL_findAdjacentInSequence(all_pts, dimension)
+function [edgeNextInPolySequence, edgePriorInPolySequence] = fcn_INTERNAL_findAdjacentInSequence(pointsWithData, dimension)
 % For each vertex in the polytope, finds the vertex that is next in
 % sequence
-Npoints = length(all_pts(:,1));
+Npoints = length(pointsWithData(:,1));
 edgeNextInPolySequence = nan(Npoints,1);
 edgePriorInPolySequence = nan(Npoints,1);
-polysThisPoint = all_pts(:,2+dimension);
+polysThisPoint = pointsWithData(:,2+dimension);
 for ith_point = 1:Npoints
     thisPoly = polysThisPoint(ith_point,1);
     if thisPoly>0

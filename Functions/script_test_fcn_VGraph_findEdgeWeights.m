@@ -2,40 +2,53 @@
 % Tests: fcn_VGraph_findEdgeWeights
 
 % REVISION HISTORY:
+% 
 % As: fcn_general_calculation_euclidean_point_to_point_distance
+% 
 % 2022_11_01 by S. Harnett
-% -- first write of script
+% - first write of script
 %
 % As: fcn_BoundedAStar_findEdgeWeights
+% 
 % 2025_07_08 - K. Hayes, kxh1031@psu.edu
-% -- Replaced fcn_general_calculation_euclidean_point_to_point_distance
-%    with vector sum method 
+% - Replaced fcn_general_calculation_euclidean_point_to_point_distance
+%   % with vector sum method 
+% 
 % 2025_08_07 - K. Hayes 
-% -- moved test to new script 
-% -- fixed script formatting
-% -- moved plotting to function debug 
+% - moved test to new script 
+% - fixed script formatting
+% - moved plotting to function debug 
+% 
 % 2025_10_03 - K. Hayes
-% -- fixed bug causing assertion failure in DEMO case 1
+% - fixed bug causing assertion failure in DEMO case 1
+% 
 % 2025_11_02 - S. Brennan
-% -- changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
-%    % to fcn_Visibility_polytopesGenerateAllPtsTable
-%    % WARNING: inputs/outputs to this changed slightly. Function needs to 
-%    % be rechecked
+% - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
+%   % to fcn_Visibility_polytopesGenerateAllPtsTable
+%   % WARNING: inputs/outputs to this changed slightly. Function needs to 
+%   % be rechecked
 %
 % As: fcn_VGraph_findEdgeWeights
+% 
 % 2025_11_06 - S. Brennan
-% -- Renamed function
-%    % * from fcn_BoundedAStar_findEdgeWeights
-%    % * to fcn_VGraph_findEdgeWeights
-% -- Cleaned up variable naming:
-%    % * From fig_num to figNum
-%    % * From all_pts to pointsWithData
-%    % * From gap_size to gapSize
-%    % * From cgraph to costGraph
+% - Renamed function
+%   % * from fcn_BoundedAStar_findEdgeWeights
+%   % * to fcn_VGraph_findEdgeWeights
+% - Cleaned up variable naming:
+%   % * From fig+_num to figNum
+%   % * From all+_pts to pointsWithData
+%   % * From ga+_size to gapSize
+%   % * From cg+raph to cost+Graph
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % cos+tGraph to cGraph
+%   % vgra+ph to vGraph
 
 % TO-DO:
-% -- Need to finish function
-% -- Need to add fastmode testing once function is working
+% - Need to finish function
+% - Need to add fastmode testing once function is working
 
 
 %%%%%%%%%%%%%%§
@@ -123,13 +136,13 @@ else
 end
 
 % Calculate weighted visibility graph (cost graph)
-[costGraph, vgraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData, gapSize, figNum);
+[cGraph, vGraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData, gapSize, figNum);
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(costGraph));
-assert(isnumeric(vgraph));
+assert(isnumeric(cGraph));
+assert(isnumeric(vGraph));
 
 % Check variable sizes
 Npoly = 5;

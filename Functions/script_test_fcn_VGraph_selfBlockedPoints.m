@@ -3,23 +3,31 @@
 % a basic test of calculation of points blocked by a 
 
 % Revision history
+%
 % As: script_test_fcn_Visibility_selfBlockedPoints
+% 
 % 2025_08_05 - K. Hayes, kaeleahayes@psu.edu
-% -- first write of script using
-%    script_test_fcn_Visibility_clearAndBlockedPoints
+% - first write of script using
+%    % script_test_fcn_Visibility_clearAndBlockedPoints
+% 
 % 2025_10_03 - K. Hayes
-% -- fixed bug with missing variables in DEMO case 1
+% - fixed bug with missing variables in DEMO case 1
+% 
 % 2025_11_02 - S. Brennan
-% -- changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
-%    % to fcn_Visibility_polytopesGenerateAllPtsTable
+% - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
+%   % to fcn_Visibility_polytopesGenerateAllPtsTable
 %
 % As: script_test_fcn_VGraph_selfBlockedPoints
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed script_test_fcn_Visibility_selfBlockedPoints to script_test_fcn_VGraph_selfBlockedPoints
-% -- Cleared extra figure command out of Inputs section
+% - Renamed script_test_fcn_Visibility_selfBlockedPoints to script_test_fcn_VGraph_selfBlockedPoints
+% - Cleared extra figure command out of Inputs section
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
 
 % TO DO:
-% -- set up fast mode tests
+% - set up fast mode tests
 
 %% Set up the workspace
 close all

@@ -61,39 +61,43 @@ function [currentObstacleID, selfBlockedCost, pointsWithDataBlockedBySelf] = ...
 
 % Revision History:
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
-% -- copied to new function from fcn_visibility_self_blocked_pts to
-%    follow library convention
+% - copied to new function from fcn_visibility_self_blocked_pts to
+%   follow library convention
+% 
 % 2025_07_31 - K. Hayes
-% -- reformatted function and updated header
-% -- added input and debug capabilities
+% - reformatted function and updated header
+% - added input and debug capabilities
+% 
 % 2025_08_05 - K. Hayes
-% -- added plotting capabilities to fcn debug section
+% - added plotting capabilities to fcn debug section
+% 
 % 2025_11_03 - S. Brennan
-% -- cleaned up variable naming:
-%    % * all_pts to pointsWithData
-%    % * cur_pt to testPointData
-%    % * cur_obs_id to currentObstacleID
-%    % * fig_num to figNum
-%    % * self_blocked_cost to selfBlockedCost
-%    % pts_blocked_by_self to pointsWithDataBlockedBySelf
+% - cleaned up variable naming:
+%   % * all+_pts to pointsWithData
+%   % * cur+_pt to testPointData
+%   % * cur+_obs_id to currentObstacleID
+%   % * fi+g_num to figNum
+%   % * sel+f_blocked_cost to selfBlockedCost
+%   % pts_b+locked_by_self to pointsWithDataBlockedBySelf
+% 
 % 2025_11_07 - S. Brennan, sbrennan@psu.edu
-% -- Changed global flags from _MAPGEN_ to _VGRAPH_
+% - Changed global flags from _MAPGEN_ to _VGRAPH_
 %
 % As: fcn_VGraph_selfBlockedPoints
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_selfBlockedPoints to fcn_VGraph_selfBlockedPoints
-% -- Cleared extra figure command out of Inputs section
+% - Renamed fcn_Visibility_selfBlockedPoints to fcn_VGraph_selfBlockedPoints
+% - Cleared extra figure command out of Inputs section
 
 % TO DO
 % 2025_11_03 - S. Brennan
-% -- clean up the before/after if/then logic. This can easily be replaced
-% by using a mod operation on the query point +/- 1 with the length of the
-% points.
-% -- make sure first/last point in poly is not repeated
-% -- implement contingency for concave polytopes. An easy way to do this is
-% to find the polytope related to the test point, project outward slightly,
-% then check visibility of the projected point to the other vertices in the
-% polytope.
+% - clean up the before/after if/then logic. This can easily be replaced
+%   % by using a mod operation on the query point +/- 1 with the length of the
+%   % points.
+% - make sure first/last point in poly is not repeated
+% - implement contingency for concave polytopes. An easy way to do this is
+%   % to find the polytope related to the test point, project outward slightly,
+%   % then check visibility of the projected point to the other vertices in the
+%   % polytope.
 
 
 %% Debugging and Input checks

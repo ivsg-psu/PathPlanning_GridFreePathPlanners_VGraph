@@ -1,4 +1,4 @@
-function [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
+function [vGraph, visibilityDetailsEachFromPoint] = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, varargin)
 % fcn_VGraph_clearAndBlockedPointsGlobal
 %
@@ -11,7 +11,7 @@ function [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
 % rather than local intersection truth tables.
 %
 % FORMAT:
-% [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
+% [vGraph, visibilityDetailsEachFromPoint] = ...
 % fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, starts, finishes, (isConcave), (figNum))
 %
 % INPUTS:
@@ -54,7 +54,7 @@ function [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
 %         blank or set to anyting other than 1, the function defaults to the convex behavior
 %         which is more conservative (i.e. setting the flag wrong incorrectly may result in
 %         suboptimal paths but not collisions). For background on what this flag does, see slides
-%         in `concave_vgraph` section of Documentation/bounded_astar_documentation.pptx
+%         in `concave_vGraph` section of Documentation/bounded_astar_documentation.pptx
 %
 %      figNum: a figure number to plot results. If set to -1, skips any
 %         input checking or debugging, no figures will be generated, and sets
@@ -64,9 +64,9 @@ function [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
 %
 % OUTPUTS:
 %
-%     visibilityMatrix: nxn matrix, where n is the number of points in all_pts
-%       a 1 in column i and row j indicates that all_pts(i,:) is visible from
-%       all_pts(j,:).  This matrix is therefore symmetric
+%     vGraph: nxn matrix, where n is the number of points in pointsWithData
+%       a 1 in column i and row j indicates that pointsWithData(i,:) is visible from
+%       pointsWithData(j,:).  This matrix is therefore symmetric
 %
 %     visibilityDetailsEachFromPoint: an array of structures containing
 %     visibilty information for each "from" point. The structure passes out
@@ -88,39 +88,50 @@ function [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
 
 % REVISION HISTORY:
 % 2021_10_28
+% 
 % As: fcn_visibility_clear_and_blocked_points_global
-% -- first written by Steve Harnett
+% - first written by Steve Harnett
 %
 % As: fcn_Visibility_clearAndBlockedPointsGlobal
+% 
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
-% -- copied to new function from
-%    fcn_visibility_clear_and_blocked_points_global to follow library
-%    convention
+% - copied to new function to follow library standards
+%   % * from: fcn_visibility_clear_and_blocked_points_global
+%   % * to: fcn_Visibility_clearAndBlockedPointsGlobal
+%    
 % 2025_07_31 - K. Hayes
-% -- reformatted function
-% -- added input checking and debug
+% - reformatted function
+% - added input checking and debug
+% 
 % 2025_11_01 - S. Brennan
-% -- updated docstrings in header
-% -- staged code for Visibility library
-% -- replaced _MAPGEN_ with _VGRAPH_ in global variable naming
-% -- cleaned up variable naming for clarity (removed variables i and j)
-% -- preallocated visibilityDetailsEachFromPoint variable for speed-up
+% - updated docstrings in header
+% - staged code for Visibility library
+% - replaced _MAPGEN_ with _VGRAPH_ in global variable naming
+% - cleaned up variable naming for clarity (removed variables i and j)
+% - preallocated visibilityDetailsEachFromPoint variable for speed-up
 %
 % As: fcn_VGraph_clearAndBlockedPointsGlobal
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_clearAndBlockedPointsGlobal to fcn_VGraph_clearAndBlockedPointsGlobal
-% -- Cleared extra figure command out of Inputs section
+% - Renamed fcn_Visibility_clearAndBlockedPointsGlobal to fcn_VGraph_clearAndBlockedPointsGlobal
+% - Cleared extra figure command out of Inputs section
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % vis+ibilityMatrix to vGraph
+%   % vgra+ph to vGraph
 
 % TO DO:
 % (copied from Steve's notes)
-% -- could use the Lee algorithm to speed up if necessary
-%    https://github.com/davetcoleman/visibility_graph/blob/master/Visibility_Graph_Algorithm.pdf
-% -- could also discard sides based on direction of normal relative to scan direction
-%    there is an issue: polytopes contain points, therefore points are represented multiple times
-%    need the reverse mappping of points to polytopes
-%    then each point is only represented once
-%    visibility graph can then be reduced
-% -- fix isConcave flag input checking
+% - could use the Lee algorithm to speed up if necessary
+%   % https://github.com/davetcoleman/visibility_graph/blob/master/Visibility_Graph_Algorithm.pdf
+% - could also discard sides based on direction of normal relative to scan direction
+%   % there is an issue: polytopes contain points, therefore points are represented multiple times
+%   % need the reverse mappping of points to polytopes
+%   % then each point is only represented once
+%   % visibility graph can then be reduced
+% - fix isConcave flag input checking
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input
@@ -221,7 +232,7 @@ numPoints = size(starts,1);
 % for non-zero gap size, we can repeatedly call the legacy visibility functions
 
 % if gap_size ~= 0
-visibilityMatrix = NaN(numPoints);
+vGraph = NaN(numPoints);
 
 %% loop through all points
 visibilityDetailsEachFromPoint(numPoints) = struct;
@@ -253,31 +264,31 @@ for jth_point = 1:numPoints
     % of sides hit
     % if sum>0, this implies there is no visibility
     % OLD FORMAT: (slow)
-    visibilityMatrix(fromIndex,:) = sum(visibilityDetailsEachFromPoint(fromIndex).D')==0;
+    vGraph(fromIndex,:) = sum(visibilityDetailsEachFromPoint(fromIndex).D')==0;
     % NEW FORMAT:
-    % visibilityMatrix(fromIndex,:) = sum(visibilityDetailsEachFromPoint(fromIndex).D, 2)';
+    % vGraph(fromIndex,:) = sum(visibilityDetailsEachFromPoint(fromIndex).D, 2)';
 
     % sometimes the diagonal does not contain only 1's (it always should
     % since every point is visible to itself so we overwrite this)
-    visibilityMatrix(fromIndex,fromIndex) = 1;
+    vGraph(fromIndex,fromIndex) = 1;
 
     % %% add self-blocked points
     % % points across the polytope are also visible so find self blocked pts
     % % find obs_id for cur_pt
-    % cur_obs_id = all_pts(i,4);
+    % cur_obs_id = pointsWithData(i,4);
     % % find pt ids of every point on this obstacle
-    % pt_idx = find(all_pts(:,4)==cur_obs_id);
+    % pt_idx = find(pointsWithData(:,4)==cur_obs_id);
     % % at row i, and columns with values in pt_idx...
-    % idx = sub2ind(size(visibilityMatrix), i.*ones(size(pt_idx,1),size(pt_idx,2)), pt_idx);
+    % idx = sub2ind(size(vGraph), i.*ones(size(pt_idx,1),size(pt_idx,2)), pt_idx);
     % % set a 1, indicating the self-blocked points are visible
-    % visibilityMatrix(idx) = 1;
+    % vGraph(idx) = 1;
 end
 % elseif gap_size == 0
 %     % for the zero gap size case, we can do an optimization: all points on the same polytope
 %     % are visible, either along the side or across the polytope
 %     % other points are not visible since there are no gaps and angles of 180 deg
 %     % are not possible in a Voronoi diagram where all vertices have 3 Voronoi sides
-%     deduped_pts = fcn_VGraph_convertPolytopetoDedupedPoints(all_pts);
+%     deduped_pts = fcn_VGraph_convertPolytopetoDedupedPoints(pointsWithData);
 %     num_unique_pts = length(deduped_pts);
 %     all_polys = NaN(num_unique_pts,3);
 %     for i = 1:num_unique_pts
@@ -285,7 +296,7 @@ end
 %             all_polys(i,j) = deduped_pts(i).polys(j);
 %         end
 %     end
-%     visibilityMatrix = zeros(num_unique_pts);
+%     vGraph = zeros(num_unique_pts);
 %     for i = 1:num_unique_pts
 %         for j = 1:3
 %             poly_of_interest = all_polys(i,j);
@@ -294,7 +305,7 @@ end
 %             end
 %             [r,c] = find(all_polys == poly_of_interest);
 %             for k = 1:length(r)
-%                 visibilityMatrix(i,r(k)) = 1;
+%                 vGraph(i,r(k)) = 1;
 %             end
 %         end
 %    end
@@ -302,10 +313,10 @@ end
 if isConcave
     %% check for edges entirely contained by polytopes
     % don't need to check self visible points as this will not change
-    visibilityMatrix_without_self_visible = visibilityMatrix - eye(size(visibilityMatrix,1));
+    vGraph_without_self_visible = vGraph - eye(size(vGraph,1));
     % find indeces of every other '1' or allowed edge...
-    linear_idx = find(visibilityMatrix_without_self_visible); % find 1s in visibilityMatrix
-    [rows_of_1s, cols_of_1s] = ind2sub(size(visibilityMatrix_without_self_visible),linear_idx); % convert linear idx to r,c
+    linear_idx = find(vGraph_without_self_visible); % find 1s in vGraph
+    [rows_of_1s, cols_of_1s] = ind2sub(size(vGraph_without_self_visible),linear_idx); % convert linear idx to r,c
     num_1s = length(rows_of_1s);
     for e = 1:num_1s
         start_pt = starts(rows_of_1s(e),1:2);
@@ -339,7 +350,7 @@ if isConcave
             [is_in,is_on] = isinterior(polyshape_p,mid_pt(1:2));
             % if so, remove the edge, and stop trying polytopes
             if is_in && ~ is_on
-                visibilityMatrix(rows_of_1s(e),cols_of_1s(e)) = 0;
+                vGraph(rows_of_1s(e),cols_of_1s(e)) = 0;
                 % if it is in one polytope, we needn't check any others
                 p = num_polys+1;
             end
@@ -421,15 +432,15 @@ if flag_do_plots
     % Plot visibility graph edges
     visibleConnections = [];
     notVisibileConnections = [];
-    for fromIndex = 1:size(visibilityMatrix,1)
-        for jth_point = 1:size(visibilityMatrix,1)
-            if visibilityMatrix(fromIndex,jth_point) == 1
+    for fromIndex = 1:size(vGraph,1)
+        for jth_point = 1:size(vGraph,1)
+            if vGraph(fromIndex,jth_point) == 1
                 visibleConnections = [visibleConnections; ...
                     starts(fromIndex,1:2);
                     finishes(jth_point,1:2);
                     nan(1,2)]; %#ok<AGROW>
             end
-            if visibilityMatrix(fromIndex,jth_point) == 0
+            if vGraph(fromIndex,jth_point) == 0
                 notVisibileConnections = [notVisibileConnections; ...
                     starts(fromIndex,1:2);
                     finishes(jth_point,1:2);

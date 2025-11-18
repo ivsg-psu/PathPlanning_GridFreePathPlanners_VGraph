@@ -101,7 +101,7 @@ function [flagsAtLeastOnePointIsInPoly, startPolys, finishPolys, flagsStartIsInP
 %   % standards
 %   % from A (structure) to startXY (1x2 vector)
 %   % from B (structure) to finishXY (1x2 vector)
-%   % fig_num to figNum
+%   % fig+_num to figNum
 %   % throw_error to flagThrowError
 %   % edge_check to flagEdgeCheck
 %   % Apoly to startPolys

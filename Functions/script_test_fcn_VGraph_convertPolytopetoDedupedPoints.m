@@ -3,26 +3,34 @@
 % a basic test of cost graph and heuristic vector generation
 
 % Revision history
+% 
 % As: script_test_fcn_BoundedAStar_convertPolytopetoDedupedPoints
+% 
 % 2025_08_06 - K. Hayes, kxh1031@psu.edu
-% -- first write of script
+% - first write of script
+% 
 % 2025_11_02 - S. Brennan
-% -- changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
-%    % to fcn_Visibility_polytopesGenerateAllPtsTable
-%    % WARNING: inputs/outputs to this changed slightly. Function needs to 
-%    % be rechecked
+% - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
+%   % to fcn_Visibility_polytopesGenerateAllPtsTable
+%   % WARNING: inputs/outputs to this changed slightly. Function needs to 
+%   % be rechecked
 %
 % As: script_test_fcn_Visibility_convertPolytopetoDedupedPoints
 %
 % As: script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed script_test_fcn_Visibility_convertPolytopetoDedupedPoints to script_test_fcn_VGraph_convertPolytopetoDedupedPoints
-% -- Cleared extra figure command out of Inputs section
-
-
+% - Renamed script_test_fcn_Visibility_convertPolytopetoDedupedPoints to script_test_fcn_VGraph_convertPolytopetoDedupedPoints
+% - Cleared extra figure command out of Inputs section
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % fig+_num to figNum
+%   % all_+pts to pointsWithData
 
 % TO DO:
-% -- set up fast mode tests
+% - set up fast mode tests
 
 %% Set up the workspace
 close all
@@ -46,10 +54,10 @@ close all;
 fprintf(1,'Figure: 1XXXXXX: DEMO cases\n');
 
 %% DEMO case: generate a cost graph and heuristic vector 
-fig_num = 10001;
+figNum = 10001;
 titleString = sprintf('DEMO case: plan a straight line path through a map');
-fprintf(1,'Figure %.0f: %s\n',fig_num, titleString);
-figure(fig_num); clf;
+fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
+figure(figNum); clf;
 
 % Create polytope field
 polytopes = fcn_MapGen_generatePolysFromSeedGeneratorNames('haltonset', [1 100],[], ([100 100]), (-1));
@@ -71,14 +79,14 @@ finish_xy = [100 50];
 mode = 'xy spatial only';
 
 if 1==1
-    [all_pts, start, finish] = fcn_VGraph_polytopesGenerateAllPtsTable(shrunk_polytopes, start_xy, finish_xy, -1);
+    [pointsWithData, start, finish] = fcn_VGraph_polytopesGenerateAllPtsTable(shrunk_polytopes, start_xy, finish_xy, -1);
 else
     % % OLD:
-    % [all_pts, start, finish] = fcn_BoundedAStar_polytopesGenerateAllPtsTable(shrunk_polytopes, start_xy, finish_xy, -1);
+    % [pointsWithData, start, finish] = fcn_BoundedAStar_polytopesGenerateAllPtsTable(shrunk_polytopes, start_xy, finish_xy, -1);
 end
 
 
-deduped_points_struct = fcn_VGraph_convertPolytopetoDedupedPoints(all_pts(1:end-2,:), []);
+deduped_points_struct = fcn_VGraph_convertPolytopetoDedupedPoints(pointsWithData(1:end-2,:), []);
 
 sgtitle(titleString, 'Interpreter','none');
 
@@ -90,7 +98,7 @@ Npts = 329;
 assert(isequal(Npts,length(deduped_points_struct))); 
 
 % Make sure plot opened up
-assert(isequal(get(gcf,'Number'),fig_num));
+assert(isequal(get(gcf,'Number'),figNum));
 
 
 %% Test cases start here. These are very simple, usually trivial
@@ -113,10 +121,10 @@ close all;
 fprintf(1,'Figure: 2XXXXXX: TEST mode cases\n');
 
 %% TEST case: zero gap between polytopes
-fig_num = 20001;
+figNum = 20001;
 titleString = sprintf('TEST case: zero gap between polytopes');
-fprintf(1,'Figure %.0f: %s\n',fig_num, titleString);
-figure(fig_num); clf;
+fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
+figure(figNum); clf;
 
 % convex polytope with no gaps
 convex_polytope(1).vertices = [0 0; 1 0; 1 1; 0 1; 0 0];
@@ -140,7 +148,7 @@ Npts = 8;
 assert(isequal(Npts,length(deduped_points_struct))); 
 
 % Make sure plot opened up
-assert(isequal(get(gcf,'Number'),fig_num));
+assert(isequal(get(gcf,'Number'),figNum));
 
 %% Fast Mode Tests
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -161,15 +169,15 @@ close all;
 fprintf(1,'Figure: 8XXXXXX: FAST mode cases\n');
 
 %% Basic example - NO FIGURE
-fig_num = 80001;
-fprintf(1,'Figure: %.0f: FAST mode, empty fig_num\n',fig_num);
-figure(fig_num); close(fig_num);
+figNum = 80001;
+fprintf(1,'Figure: %.0f: FAST mode, empty figNum\n',figNum);
+figure(figNum); close(figNum);
 
 %% Compare speeds of pre-calculation versus post-calculation versus a fast variant
-fig_num = 80003;
-fprintf(1,'Figure: %.0f: FAST mode comparisons\n',fig_num);
-figure(fig_num);
-close(fig_num);
+figNum = 80003;
+fprintf(1,'Figure: %.0f: FAST mode comparisons\n',figNum);
+figure(figNum);
+close(figNum);
 
 % map_name = "HST 1 100 SQT 0 1 0 1 SMV 0.01 0.001 1e-6 1111";
 % plot_flag = 1; 
@@ -198,7 +206,7 @@ close(fig_num);
 % 
 % % Make sure plot did NOT open up
 % figHandles = get(groot, 'Children');
-% assert(~any(figHandles==fig_num));
+% assert(~any(figHandles==figNum));
 % 
 % % Plot results as bar chart
 % figure(373737);
@@ -214,7 +222,7 @@ close(fig_num);
 % 
 % % Make sure plot did NOT open up
 % figHandles = get(groot, 'Children');
-% assert(~any(figHandles==fig_num));
+% assert(~any(figHandles==figNum));
 
 %% BUG cases
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

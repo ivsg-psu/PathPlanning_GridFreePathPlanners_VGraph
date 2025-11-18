@@ -3,20 +3,23 @@
 
 % Revision history
 % As: script_test_fcn_BoundedAStar_polytopesGenerateAllPtsTable
+% 
 % 2025_08_05 - K. Hayes, kxh1031@psu.edu
-% -- initial write of script, using script_test_fcn_BoundedAStar_Astar as
+% - initial write of script, using script_test_fcn_BoundedAStar_Astar as
 %    starter
 %
 % As: fcn_Visibility_polytopesGenerateAllPtsTable
+% 
 % 2025_11_01 - S. Brennan
-% -- renamed function 
+% - renamed function 
 %    % from: fcn_BoundedAStar_polytopesGenerateAllPtsTable
 %    % to: fcn_Visibility_polytopesGenerateAllPtsTable
-% -- redid nearly all the test cases
+% - redid nearly all the test cases
 %
 % As: fcn_VGraph_addObstacle
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_polytopesGenerateAllPtsTable to fcn_VGraph_polytopesGenerateAllPtsTable
+% - Renamed fcn_Visibility_polytopesGenerateAllPtsTable to fcn_VGraph_polytopesGenerateAllPtsTable
 
 %% Set up the workspace
 close all

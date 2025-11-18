@@ -8,16 +8,20 @@
 % type('script_test_fcn_geometry_all_stdout.txt')
 
 % REVISION HISTORY:
+% 
 % 2025_11_06 by Sean Brennan
-% -- Started revision history 
-% -- Updated clc and clear all checking to avoid checking this file
-% -- Added subfunction (INTERNAL) to remove specific file names from
-%    % checking
-% -- Improved error checking for missed functions and test scripts
+% - Started revision history 
+% - Updated clc and clear all checking to avoid checking this file
+% - Added subfunction (INTERNAL) to remove specific file names from
+%   % checking
+% - Improved error checking for missed functions and test scripts
+% 
 % 2025_11_12 by Sean Brennan
-% -- Cleaned up variable naming for clarity
-% -- Functionalized fcn_INTERNAL_flagFiles
-
+% - Cleaned up variable naming for clarity
+% - Functionalized fcn_INTERNAL_flagFiles
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
 
 % clearvars; 
 close all; 

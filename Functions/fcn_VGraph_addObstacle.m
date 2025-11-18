@@ -1,6 +1,6 @@
-function [newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+function [newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
 fcn_VGraph_addObstacle(...
-visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, varargin)
+vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, varargin)
 % fcn_VGraph_addObstacle
 %
 %   Recalculates the visibility graph after adding a polytope without
@@ -8,18 +8,18 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, po
 %   an AABB check as a coarse check. This function also recalculates the
 %   pointsWithData, startPointData, finishPointData, and polytopes data
 %   structures as these are also affected by the addition of an obstacle.
-%   See vgraph_modification section of
+%   See vGraph_modification section of
 %   Documentation/bounded_astar_documentation.pptx for pseudocode and
 %   algorithm description
 %
 % FORMAT:
-%     [newVisibilityMatrix, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
+%     [newVGraph, newPointsWithData, newStartPointData, newFinishPointData, newPolytopes] = ...
 %     fcn_VGraph_addObstacle(...
-%     visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (figNum))
+%     vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAdd, (figNum))
 %
 % INPUTS:
 %
-%     visibilityMatrix - nxn matrix, where n is the number of points in pointsWithData
+%     vGraph - nxn matrix, where n is the number of points in pointsWithData
 %       a 1 in column i and row j indicates that pointsWithData(i,:) is visible from
 %       pointsWithData(j,:).  This matrix is therefore symmetric
 %
@@ -51,7 +51,7 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, po
 %
 % OUTPUTS:
 %
-%     newVisibilityMatrix: same as the visiblity_matrix input but modified so that the added
+%     newVGraph: same as the visiblity_matrix input but modified so that the added
 %         polytope now affects the visibility.  Note this may have more points than
 %         the input matrix as points on the added polytope are now considered as nodes.
 %
@@ -76,7 +76,7 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, po
 % See the scripts: 
 %
 %     script_test_fcn_VGraph_addObstacle
-%     script_demo_visibilityGraphAddRemoveObstacles
+%     script_demo_vGraphAddRemoveObstacles
 %
 % for a full test suite.
 %
@@ -84,44 +84,59 @@ visibilityMatrix, pointsWithData, startPointData, finishPointData, polytopes, po
 
 % REVISION HISTORY:
 % As: fcn_visibility_graph_add_obstacle
+% 
 % 2024_03
-% -- first written by Steve Harnett
+% - first written by Steve Harnett
 % 
 % As: fcn_Visibility_addObstacle 
+% 
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
-% -- copied to new function from fcn_visibility_graph_add_obstacle to
-%    follow library convention
+% - copied to new function from fcn_visibility_graph_add_obstacle to
+%   % follow library convention
+% 
 % 2025_07_31 - K. Hayes
-% -- fixed formatting and header details
-% -- added input and debugging capabilities
+% - fixed formatting and header details
+% - added input and debugging capabilities
+% 
 % 2025_08_01 - K. Hayes
-% -- moved plotting into function debug section
+% - moved plotting into function debug section
+% 
 % 2025_11_03 - S. Brennan
-% -- updated variable naming:
-%    % * fig_num to figNum
-%    % * visibility_matrix to visibilityMatrix
-%    % * all_pts to pointsWithData
-%    % * start_new to newStartPointData
-%    % * finish_new to newFinishPointData
-%    % * polytopes_after to newPolytopes
-%    % * visibilityMatrix_new to newVisibilityMatrix
-%    % * pointsWithData_new to newPointsWithData
-%    % * polytopes_before to polytopes
-%    % * start to startPointData
-%    % * finish to finishPointData
-%    % * polytope_to_add to polytopeToAdd
+% - updated variable naming:
+%   % * fig_+num to figNum
+%   % * visibility_+matrix to visibility+Matrix
+%   % * all_+pts to pointsWithData
+%   % * start_+new to newStartPointData
+%   % * finish_+new to newFinishPointData
+%   % * polytopes_+after to newPolytopes
+%   % * visib+ilityMatrix_+new to newVisibility+Matrix
+%   % * pointsWithData_+new to newPointsWithData
+%   % * polytopes_+before to polytopes
+%   % * sta+rt to startPointData
+%   % * fin+ish to finis+hPointData
+%   % * polytope_to+_add to polytopeToAdd
 % - staged function to move into Visibility library
-%    % * _MAPGEN_ changed to _VGRAPH_
+%   % * _MAPGEN_ changed to _VGRAPH_
 % - fixed bug where start and finish data points not filled correctly
 %
 % As: fcn_VGraph_addObstacle
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_addObstacle to fcn_VGraph_addObstacle
-% -- Cleared extra figure command out of Inputs section
-
+% - Renamed fcn_Visibility_addObstacle to fcn_VGraph_addObstacle
+% - Cleared extra figure command out of Inputs section
+% 
+% 2025_11_03 - S. Brennan
+% - updated variable naming:
+%   % * visibili+tyMatrix to vGraph\
+%   % * newVis+ibilityMatrix to newVGraph
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % vgra+ph to vGraph
 
 % TO DO:
-% -- make sure input checking is working correctly
+% - make sure input checking is working correctly
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input
@@ -210,8 +225,8 @@ end
 %See: http://patorjk.com/software/taag/#p=display&f=Big&t=Main
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%§
 
-%% initialize the modified vgraph, pts, startPointData, and finishPointData to the old values
-old_point_count = size(visibilityMatrix,2);
+%% initialize the modified vGraph, pts, startPointData, and finishPointData to the old values
+old_point_count = size(vGraph,2);
 newStartPointData = startPointData;
 newFinishPointData = finishPointData;
 
@@ -244,27 +259,27 @@ if ~isempty(newFinishPointData)
     start_and_finish_count = start_and_finish_count + 1;
 end
 %% initialize new visibility matrix as block matrix
-% the following code inserts the new points on the new polytope into the vgraph such that
+% the following code inserts the new points on the new polytope into the vGraph such that
 % the start and finish are still the last two points in the matrix rather than simply appending
-% new points to the end of the vgraph resulting in the start and finish being somewhere in
+% new points to the end of the vGraph resulting in the start and finish being somewhere in
 % the interior of the matrix
 % a diagram of what this does is shown below
-% old_vgraph =
+% old_vGraph =
 %   ___________________________________________________________________
 %   |  A                             | D                             |
-%   |  the original vgraph           | original vgraph               |
+%   |  the original vGraph           | original vGraph               |
 %   |  block for points excluding    | block for start and finish    |
 %   |  the start and the finish      | relative to other pts         |
 %   ___________________________________________________________________
 %   | D'                             |  F                            |
-%   | original vgraph                |  original vgraph              |
+%   | original vGraph                |  original vGraph              |
 %   | block for start and finish     |  block for start and finish   |
 %   | relative to other pts          |  relative to themselves       |
 %   ___________________________________________________________________
-% new_vgraph =
+% new_vGraph =
 %   ___________________________________________________________________________________________________
 %   |  A                             | B                             | D                             |
-%   |  the original vgraph           | block of zeros for new points | original vgraph               |
+%   |  the original vGraph           | block of zeros for new points | original vGraph               |
 %   |  block for points excluding    | relative to other pts         | block for start and finish    |
 %   |  the start and the finish      | init. to zero until checked   | relative to other pts         |
 %   ___________________________________________________________________________________________________
@@ -274,43 +289,43 @@ end
 %   |  init. to zero until checked   | identity until checked        | init. to zero until checked   |
 %   ___________________________________________________________________________________________________
 %   | D'                             | E'                            |  F                            |
-%   | original vgraph                | block of zeros for new points |  original vgraph              |
+%   | original vGraph                | block of zeros for new points |  original vGraph              |
 %   | block for start and finish     | relative to start and finish  |  block for start and finish   |
 %   | relative to other pts          | init. to zero until checked   |  relative to themselves       |
 %   ___________________________________________________________________________________________________
 
 
-A = visibilityMatrix(1:(old_point_count-start_and_finish_count),1:(old_point_count-start_and_finish_count));
+A = vGraph(1:(old_point_count-start_and_finish_count),1:(old_point_count-start_and_finish_count));
 assert(isequal(size(A) ,  [old_point_count - start_and_finish_count, old_point_count - start_and_finish_count]))
 B = zeros(old_point_count-start_and_finish_count, new_point_tot);
 assert(isequal(size(B) ,  [old_point_count - start_and_finish_count, new_point_tot]))
 C = eye(new_point_tot, new_point_tot);
 assert(isequal(size(C) ,  [new_point_tot, new_point_tot]))
 if start_and_finish_count ~= 0
-    D = visibilityMatrix(1:end-start_and_finish_count,end-start_and_finish_count+1:end);
+    D = vGraph(1:end-start_and_finish_count,end-start_and_finish_count+1:end);
     assert(isequal(size(D) ,  [old_point_count - start_and_finish_count, start_and_finish_count]))
     E = zeros(new_point_tot,start_and_finish_count);
     assert(isequal(size(E) ,  [new_point_tot, start_and_finish_count]))
-    F = visibilityMatrix(end-start_and_finish_count+1:end,end-start_and_finish_count+1:end);
+    F = vGraph(end-start_and_finish_count+1:end,end-start_and_finish_count+1:end);
     assert(isequal(size(F) ,  [start_and_finish_count, start_and_finish_count]))
 else
     D = [];
     E = [];
     F = [];
 end
-newVisibilityMatrix = [A, B, D; B', C, E; D', E', F];
-%% fill in values for new vgraph based on aabb coarse check first
+newVGraph = [A, B, D; B', C, E; D', E', F];
+%% fill in values for new vGraph based on aabb coarse check first
 % find which new points cross the AABB
 % NOTE: commented this out because function is deprecated.
 % isInside = fcn_MapGen_isCrossingAABB(AABB, [newPointsWithData; startPointData; finishPointData]);
 isInside = true(length(newPointsWithData(:,1)),1);
 
 
-% need to note edges that are 1 in new vgraph (i.e. they are unblocked) and cross the AABB
-[r,c] = find(isInside & newVisibilityMatrix);
+% need to note edges that are 1 in new vGraph (i.e. they are unblocked) and cross the AABB
+[r,c] = find(isInside & newVGraph);
 % also need to note edges that go to any point but either start or end on the new obstacle
 idx_of_new_obs = (old_point_count - start_and_finish_count + 1):(old_point_count - start_and_finish_count + new_point_tot); % ids of new points
-idx_of_pointsWithData = 1:size(newVisibilityMatrix,1); % ids of all points
+idx_of_pointsWithData = 1:size(newVGraph,1); % ids of all points
 combos_of_idx_of_new_obs = combinations(idx_of_new_obs,idx_of_pointsWithData); % every combination of a new point with some other points
 array_of_combos_of_idx_of_new_obs = table2array(combos_of_idx_of_new_obs); % convert from table to array
 % append the list of new edges to the list of edges possibly blocked by the new obstacle because they cross the AABB
@@ -323,9 +338,9 @@ for i = 1:length(r)
     visibility_scalar = sum(D);
     assert(isequal(size(visibility_scalar),[1 1]))
     if ~visibility_scalar
-        newVisibilityMatrix(r(i),c(i)) = 1;
+        newVGraph(r(i),c(i)) = 1;
     else
-        newVisibilityMatrix(r(i),c(i)) = 0;
+        newVGraph(r(i),c(i)) = 0;
     end
 end
 
@@ -354,10 +369,10 @@ if flag_do_plots
     box on
     xlabel('x [km]')
     ylabel('y [km]')
-     % Plot new vgraph
-    for i = 1:size(visibilityMatrix,1)
-        for j = 1:size(visibilityMatrix,1)
-            if visibilityMatrix(i,j) == 1
+     % Plot new vGraph
+    for i = 1:size(vGraph,1)
+        for j = 1:size(vGraph,1)
+            if vGraph(i,j) == 1
                 plot([pointsWithData(i,1),pointsWithData(j,1)],[pointsWithData(i,2),pointsWithData(j,2)],'-g')
             end
         end
@@ -372,10 +387,10 @@ if flag_do_plots
     xlabel('x [km]')
     ylabel('y [km]')
        
-    % Plot new vgraph
-    for i = 1:size(newVisibilityMatrix,1)
-        for j = 1:size(newVisibilityMatrix,1)
-            if newVisibilityMatrix(i,j) == 1
+    % Plot new vGraph
+    for i = 1:size(newVGraph,1)
+        for j = 1:size(newVGraph,1)
+            if newVGraph(i,j) == 1
                 plot([newPointsWithData(i,1),newPointsWithData(j,1)],[newPointsWithData(i,2),newPointsWithData(j,2)],'-g')
             end
         end

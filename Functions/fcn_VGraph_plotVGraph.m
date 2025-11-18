@@ -11,8 +11,9 @@ function h_plot = fcn_VGraph_plotVGraph(vGraph, pointsWithData,  styleString, va
 %
 % INPUTS:
 %
-%    vGraph: the visibility graph as an nxn matrix where n is the number of points (nodes) in the map.
-%    A 1 is in position i,j if point j is visible from point i.  0 otherwise.
+%    vGraph: the visibility graph as an nxn matrix where n is the number of
+%    points (nodes) in the map. A 1 is in position i,j if point j is
+%    visible from point i.  0 otherwise.
 %
 %    pointsWithData: the nx5 list of all points in the space to be searched, with
 %    the exception of the start and finish, with columns containing the
@@ -59,30 +60,40 @@ function h_plot = fcn_VGraph_plotVGraph(vGraph, pointsWithData,  styleString, va
 
 % REVISION HISTORY:
 %
+% As: fcn_Visibility_plotVGraph
+%
 % 2025_10_06 - S. Brennan, sbrennan@psu.edu
-% -- first write of the function
+% - first write of the function
+% 
 % 2025_10_08 - K. Hayes, kaeleahayes@psu.edu
-% -- added function header and standard formatting
+% - added function header and standard formatting
+% 
 % 2025_10_10 - S. Brennan, sbrennan@psu.edu
-% -- added options to include selectedFromToIndices, figNum
-% -- updated docstrings in header
-% -- added test script
+% - added options to include selectedFromToIndices, figNum
+% - updated docstrings in header
+% - added test script
+% 
 % 2025_10_28 - S. Brennan, sbrennan@psu.edu
-% -- updated docstrings in header
-% -- fixed figNum to figNum
-% -- added options to include saveFile for animated GIF
+% - updated docstrings in header
+% - fixed figNum to figNum
+% - added options to include saveFile for animated GIF
 %
 % As: fcn_VGraph_plotVGraph
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_plotVGraph to fcn_VGraph_plotVGraph
-% -- Cleared extra figure command out of Inputs section
+% - Renamed fcn_Visibility_plotVGraph to fcn_VGraph_plotVGraph
+% - Cleared extra figure command out of Inputs section
+% 
 % 2025_11_08 - S. Brennan
-% -- updated variable naming:
-%    % * figNum to figNum
-%    % * vgraph to vGraph
-%    % * all_pts to pointsWithData
-%    % * start to startPointData or startXY, depending on usage
-%    % * finish to finishPointData or finishXY, depending on usage
+% - updated variable naming:
+%   % * fig+_num to figNum
+%   % * v+graph to vGraph
+%   % * all+_pts to pointsWithData
+%   % * sta+rt to startPointData or startXY, depending on usage
+%   % * fin+ish to finishPointData or finishXY, depending on usage
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
 
 % TO DO:
 %

@@ -2,32 +2,43 @@
 % Tests: fcn_VGraph_plotVGraph
 
 % REVISION HISTORY:
+% 
 % (in BoundedAStar)
+% 
 % As: script_test_fcn_Visibility_plotVGraph
+% 
 % 2025_10_06 - S. Brennan, sbrennan@psu.edu
 % * In script_test_fcn_Visibility_plotVGraph
-% -- first write of the script
+% - first write of the script
+% 
 % 2025_10_28 - S. Brennan, sbrennan@psu.edu
 % * In script_test_fcn_Visibility_plotVGraph
-% -- Moved function into VGraph library
-% -- fixed addNudge bug
-% -- changed inputs to allow saveFile input
+% - Moved function into VGraph library
+% - fixed addNudge bug
+% - changed inputs to allow saveFile input
 %
 % As: script_test_fcn_VGraph_plotVGraph
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed script_test_fcn_Visibility_plotVGraph to script_test_fcn_VGraph_plotVGraph
-% -- Cleared extra figure command out of Inputs section
+% - Renamed script_test_fcn_Visibility_plotVGraph to script_test_fcn_VGraph_plotVGraph
+% - Cleared extra figure command out of Inputs section
+% 
 % 2025_11_08 - S. Brennan
-% -- updated variable naming:
-%    % * figNum to figNum
-%    % * vgraph to vGraph
-%    % * all_pts to pointsWithData
-%    % * start to startPointData or startXY, depending on usage
-%    % * finish to finishPointData or finishXY, depending on usage
+% - updated variable naming:
+%   % * fig+_num to figNum
+%   % * v+graph to vGraph
+%   % * all+_pts to pointsWithData
+%   % * st+art to startPointData or startXY, depending on usage
+%   % * fin+ish to finishPointData or finishXY, depending on usage
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % all_+pts to pointsWithData
 
 % TO DO:
-% -- set up fast mode tests
-% -- bug in assertion checking against hardcoded expected results
+% - set up fast mode tests
+% - bug in assertion checking against hardcoded expected results
 
 %% Set up the workspace
 close all

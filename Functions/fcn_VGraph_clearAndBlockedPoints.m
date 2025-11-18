@@ -111,42 +111,58 @@ function [clear_pts,blocked_pts,D,di,dj,num_int,xiP,yiP,xiQ,yiQ,xjP,yjP,xjQ,yjQ]
 % Questions or comments? sat5340@psu.edu
 
 % Revision History:
-% (In BoundedAStar)
+% 
+% As: fcn_visibility_clear_and_blocked_points (In BoundedAStar)
+% 
 % 2025_07_08 - K. Hayes, kxh1031@psu.edu
-% -- Replaced fcn_general_calculation_euclidean_point_to_point_distance
-%    with vector sum method in function usage examples
+% - Replaced fcn_general_calculation_euclidean_point_to_point_distance
+%   % with vector sum method in function usage examples
+% 
+% As: fcn_Visibilty_clearAndBlockedPoints 
+%
 % 2025_07_17 - K. Hayes
-% -- copied to new function from fcn_visibility _clear_and_blocked_points
-%    to follow library convention
+% - copied to new function from fcn_visibility_clear_and_blocked_points
+%   % to follow library convention
+% 
 % 2025_07_25 - K. Hayes
-% -- updated function formatting and header info
-% -- added debug and input checking capabilities
+% - updated function formatting and header info
+% - added debug and input checking capabilities
+% 
 % 2025_10_10 - K. Hayes
-% -- fixed bug causing deletion of vgraph edges between adjacent
-%    non-obstacle vertices
-% (in VisibilityGraph)
+% - fixed bug causing deletion of vGraph edges between adjacent
+%   %  non-obstacle vertices
+%
+% As: fcn_Visibilty_clearAndBlockedPoints (in VisibilityGraph)
+% 
 % 2025_10_29 - S. Brennan
-% -- Replaced figNum with figNum
-% -- Replaced _MAPGEN_ with _VGRAPH_ global variable designations
-% (In Visibility Graph)
+% - Replaced figNum with figNum
+% - Replaced _MAPGEN_ with _VGRAPH_ global variable designations
+% 
 % 2025_10_30 - S. Brennan
-% -- fcn_convert_to_vector_points changed to fcn_INTERNAL_convertToVectorPoints
-% -- fcn_calculate_intersection_matrices changed to fcn_INTERNAL_calculateIntersectionMatrices
-% -- updated plotting for better clarity
+% - fcn_convert_to_vector_points changed to fcn_INTERNAL_convertToVectorPoints
+% - fcn_calculate_intersection_matrices changed to fcn_INTERNAL_calculateIntersectionMatrices
+% - updated plotting for better clarity
 %
 % As: fcn_VGraph_clearAndBlockedPoints
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_clearAndBlockedPoints to fcn_VGraph_clearAndBlockedPoints
-% -- Cleared extra figure command out of Inputs section
+% - Renamed fcn_Visibility_clearAndBlockedPoints to fcn_VGraph_clearAndBlockedPoints
+% - Cleared extra figure command out of Inputs section
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % vgra+ph to vGraph
 
 % TO DO:
 % 2025_10_29 - S. Brennan
-% -- Need to simplify the output arguments to vector format. No need to
-% keep X and Y outputs separate since these are paired.
-% -- Need to redo the functional dependence. The core function to check
-% intersections is exactly the same as the intersection testing in Path
-% library, but with fewer error checks and no means to include tolerance.
-% Should convert this to the Path library format.
+% - Need to simplify the output arguments to vector format. No need to
+%   % keep X and Y outputs separate since these are paired.
+% - Need to redo the functional dependence. The core function to check
+%   % intersections is exactly the same as the intersection testing in Path
+%   % library, but with fewer error checks and no means to include tolerance.
+%   % Should convert this to the Path library format as this is FAR more
+%   % robust.
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input

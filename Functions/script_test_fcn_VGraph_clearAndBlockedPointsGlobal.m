@@ -2,40 +2,54 @@
 % Tests: fcn_VGraph_clearAndBlockedPointsGlobal
 
 % REVISION HISTORY:
+% 
 % As: ????
+% 
 % 2022_10_28 by S. Harnett
-% -- first write of script
+% - first write of script
+% 
 % 2025_07_08 - K. Hayes, kaeleahayes@psu.edu
-% -- Replaced fcn_general_calculation_euclidean_point_to_point_distance
-%    with vector sum method
+% - Replaced fcn_general_calculation_euclidean_point_to_point_distance
+%   % with vector sum method
+% 
 % 2025_08_01 - K. Hayes
-% -- cleaned script formatting
-% -- updated functions for compatibility with MapGen library
+% - cleaned script formatting
+% - updated functions for compatibility with MapGen library
+% 
 % 2025_10_03 - K. Hayes
-% -- fixed bug causing Npoly assertion failures in DEMO cases
-% -- fixed bug with missing variables in DEMO case 3
-% -- fixed bug with missing variables in TEST case 1
+% - fixed bug causing Npoly assertion failures in DEMO cases
+% - fixed bug with missing variables in DEMO case 3
+% - fixed bug with missing variables in TEST case 1
+% 
 % 2025_10_07 - S. Brennan
-% -- replaced fcn_MapGen_haltonVoronoiTiling call
-%    % with fcn_MapGen_generatePolysFromSeedGeneratorNames
-% -- added example plotting of visibility for 2025 MECC paper
+% - replaced fcn_MapGen_haltonVoronoiTiling call
+%   % with fcn_MapGen_generatePolysFromSeedGeneratorNames
+% - added example plotting of visibility for 2025 MECC paper
+% 
 % 2025_11_01 - S. Brennan
-% -- staged script to move out of BoundedAStar and into Visibility Graph
-% -- matched script's variable names to those inside the function, for
-%    % clarity
+% - staged script to move out of BoundedAStar and into Visibility Graph
+% - matched script's variable names to those inside the function, for
+%   % clarity
 %
 % As: script_test_fcn_Visibility_clearAndBlockedPointsGlobal
+% 
 % 2025_11_02 - S. Brennan
-% -- changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
-%    % to fcn_Visibility_polytopesGenerateAllPtsTable
+% - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
+%   % to fcn_Visibility_polytopesGenerateAllPtsTable
 %
 % As: script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed script_test_fcn_Visibility_clearAndBlockedPointsGlobal to script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+% - Renamed script_test_fcn_Visibility_clearAndBlockedPointsGlobal to script_test_fcn_VGraph_clearAndBlockedPointsGlobal
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
+% - Cleaned up variable naming in all functions
+%   % vis+ibilityMatrix to vGraph
 
 % TO DO:
-% -- set up fast mode tests
-% -- bug in assertion checking against hardcoded expected results
+% - set up fast mode tests
+% - bug in assertion checking against hardcoded expected results
 
 %% Set up the workspace
 close all
@@ -76,17 +90,17 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % Calculate visibility graph
 isConcave = [];
-[visibilityMatrix, visibilityDetailsEachFromPoint] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,(isConcave),(figNum));
+[vGraph, visibilityDetailsEachFromPoint] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,(isConcave),(figNum));
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(visibilityMatrix));
+assert(isnumeric(vGraph));
 assert(isstruct(visibilityDetailsEachFromPoint));
 
 % Check variable sizes
 NpolyVertices = length([polytopes.xv]);
-assert(size(visibilityMatrix,1)==NpolyVertices+2);
-assert(size(visibilityMatrix,2)==NpolyVertices+2);
+assert(size(vGraph,1)==NpolyVertices+2);
+assert(size(vGraph,2)==NpolyVertices+2);
 assert(size(visibilityDetailsEachFromPoint,2)==NpolyVertices+2);
 
 % Check variable values
@@ -114,18 +128,18 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % Calculate visibility graph
 isConcave = [];
-[visibilityMatrix, visibilityDetailsEachFromPoint] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,(isConcave),(figNum));
+[vGraph, visibilityDetailsEachFromPoint] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,(isConcave),(figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(visibilityMatrix));
+assert(isnumeric(vGraph));
 assert(isstruct(visibilityDetailsEachFromPoint));
 
 % Check variable sizes
 NpolyVertices = length([polytopes.xv]);
-assert(size(visibilityMatrix,1)==NpolyVertices+2);
-assert(size(visibilityMatrix,2)==NpolyVertices+2);
+assert(size(vGraph,1)==NpolyVertices+2);
+assert(size(vGraph,2)==NpolyVertices+2);
 assert(size(visibilityDetailsEachFromPoint,2)==NpolyVertices+2);
 
 % Check variable values
@@ -151,19 +165,19 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % calculate visibility graph
 isConcave = 1;
-[visibilityMatrix, visibilityDetailsEachFromPoint] = ...
+[vGraph, visibilityDetailsEachFromPoint] = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,(isConcave),(figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(visibilityMatrix));
+assert(isnumeric(vGraph));
 assert(isstruct(visibilityDetailsEachFromPoint));
 
 % Check variable sizes
 NpolyVertices = length([polytopes.xv]);
-assert(size(visibilityMatrix,1)==NpolyVertices+2);
-assert(size(visibilityMatrix,2)==NpolyVertices+2);
+assert(size(vGraph,1)==NpolyVertices+2);
+assert(size(vGraph,2)==NpolyVertices+2);
 assert(size(visibilityDetailsEachFromPoint,2)==NpolyVertices+2);
 
 % Check variable values
@@ -212,7 +226,7 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % calculate visibility graph
 isConcave = [];
-[visibilityMatrix, visibilityDetailsEachFromPoint] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,(isConcave),(-1));
+[vGraph, visibilityDetailsEachFromPoint] = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData,(isConcave),(-1));
 
 % Specify the output file name and animated GIF parameters
 filename = fullfile(pwd,'Images','fcn_VGraph_clearAndBlockedPointsGlobal_vGraphAnimation.gif'); 
@@ -222,14 +236,14 @@ loopCount = Inf; % Loop indefinitely (0 for no loop)
 % plot visibility graph edges
 if 1==1
 
-    fcn_VGraph_plotVGraph(visibilityMatrix, pointsWithData, 'g-', []);
+    fcn_VGraph_plotVGraph(vGraph, pointsWithData, 'g-', []);
 
     % Plot just one result in a different color
     priorPlot = [];
-    for ith_fromIndex = 1:size(visibilityMatrix,1)
+    for ith_fromIndex = 1:size(vGraph,1)
         pointsToPlot = [];
-        for jth_toIndex = 1:size(visibilityMatrix,1)
-            if visibilityMatrix(ith_fromIndex,jth_toIndex) == 1
+        for jth_toIndex = 1:size(vGraph,1)
+            if vGraph(ith_fromIndex,jth_toIndex) == 1
                 % plot([pointsWithData(i,1),pointsWithData(j,1)],[pointsWithData(i,2),pointsWithData(j,2)],'-g')
                 % pause(0.01);
                 pointsToPlot = [pointsToPlot; [pointsWithData(ith_fromIndex,1:2); pointsWithData(jth_toIndex,1:2); nan(1,2)]]; %#ok<AGROW>
@@ -264,13 +278,13 @@ end
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(visibilityMatrix));
+assert(isnumeric(vGraph));
 assert(isstruct(visibilityDetailsEachFromPoint));
 
 % Check variable sizes
 NpolyVertices = length([polytopes.xv]);
-assert(size(visibilityMatrix,1)==NpolyVertices+2);
-assert(size(visibilityMatrix,2)==NpolyVertices+2);
+assert(size(vGraph,1)==NpolyVertices+2);
+assert(size(vGraph,2)==NpolyVertices+2);
 assert(size(visibilityDetailsEachFromPoint,2)==NpolyVertices+2);
 
 % Check variable values
@@ -317,7 +331,7 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % Calculate visibility graph
 isConcave = [];
-visibilityMatrixNoGaps = ...
+vGraphNoGaps = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(figNum*100));
 
 % convex polytope with gaps
@@ -334,13 +348,13 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % Calculate visibility graph
 isConcave = [];
-visibilityMatrixWithGaps = ...
+vGraphWithGaps = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave), (figNum));
 
 sgtitle(titleString, 'Interpreter','none');
 
 % Check equivalency
-assert(~isequal(visibilityMatrixNoGaps, visibilityMatrixWithGaps))
+assert(~isequal(vGraphNoGaps, vGraphWithGaps))
 
 % Make sure plot opened up
 assert(isequal(get(gcf,'Number'),figNum));
@@ -398,9 +412,9 @@ pointsWithDataNoGaps   = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, star
 pointsWithDataWithGaps = fcn_VGraph_polytopesGenerateAllPtsTable(polytopesWithGap, startXY, finishXY,-1);
 
 % calculate visibility graphs
-visibilityMatrixNoGaps = ...
+vGraphNoGaps = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithDataNoGaps,pointsWithDataNoGaps);
-visibilityMatrixWithGaps = ...
+vGraphWithGaps = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopesWithGap,pointsWithDataWithGaps,pointsWithDataWithGaps);
 
 deduped_pts = fcn_VGraph_convertPolytopetoDedupedPoints(pointsWithDataNoGaps);
@@ -410,18 +424,18 @@ deduped_pts = fcn_VGraph_convertPolytopetoDedupedPoints(pointsWithDataNoGaps);
 % % plot visibility graph edges
 % figure(figNum)
 % if flag_do_plot && gap_size ==0
-%     for ith_fromIndex = 1:size(visibilityMatrix,1)
-%         for jth_toIndex = 1:size(visibilityMatrix,1)
-%             if visibilityMatrix(ith_fromIndex,jth_toIndex) == 1
+%     for ith_fromIndex = 1:size(vGraph,1)
+%         for jth_toIndex = 1:size(vGraph,1)
+%             if vGraph(ith_fromIndex,jth_toIndex) == 1
 %                 plot([deduped_pts(ith_fromIndex).x,deduped_pts(jth_toIndex).x],[deduped_pts(ith_fromIndex).y,deduped_pts(jth_toIndex).y],'--g','LineWidth',1)
 %             end
 %         end
 %     end
 % end
 % if flag_do_plot && gap_size ~=0
-%     for ith_fromIndex = 1:size(visibilityMatrix,1)
-%         for jth_toIndex = 1:size(visibilityMatrix,1)
-%             if visibilityMatrix(ith_fromIndex,jth_toIndex) == 1
+%     for ith_fromIndex = 1:size(vGraph,1)
+%         for jth_toIndex = 1:size(vGraph,1)
+%             if vGraph(ith_fromIndex,jth_toIndex) == 1
 %                 plot([pointsWithData(ith_fromIndex,1),pointsWithData(jth_toIndex,1)],[pointsWithData(ith_fromIndex,2),pointsWithData(jth_toIndex,2)],'--g','LineWidth',2)
 %             end
 %         end
@@ -431,7 +445,7 @@ deduped_pts = fcn_VGraph_convertPolytopetoDedupedPoints(pointsWithDataNoGaps);
 sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
-assert(isnumeric(visibilityMatrixWithGaps));
+assert(isnumeric(vGraphWithGaps));
 % assert(isstruct(visibilityDetailsEachFromPoint));
 
 
@@ -474,17 +488,17 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % Calculate visibility graph
 isConcave = [];
-[visibilityMatrix, visibilityDetailsEachFromPoint] = ...
+[vGraph, visibilityDetailsEachFromPoint] = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),([]));
 
 % Check variable types
-assert(isnumeric(visibilityMatrix));
+assert(isnumeric(vGraph));
 assert(isstruct(visibilityDetailsEachFromPoint));
 
 % Check variable sizes
 NpolyVertices = length([polytopes.xv]);
-assert(size(visibilityMatrix,1)==NpolyVertices+2);
-assert(size(visibilityMatrix,2)==NpolyVertices+2);
+assert(size(vGraph,1)==NpolyVertices+2);
+assert(size(vGraph,2)==NpolyVertices+2);
 assert(size(visibilityDetailsEachFromPoint,2)==NpolyVertices+2);
 
 % Check variable values
@@ -513,17 +527,17 @@ pointsWithData = fcn_VGraph_polytopesGenerateAllPtsTable(polytopes, startXY, fin
 
 % Calculate visibility graph
 isConcave = [];
-[visibilityMatrix, visibilityDetailsEachFromPoint] = ...
+[vGraph, visibilityDetailsEachFromPoint] = ...
     fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
 
 % Check variable types
-assert(isnumeric(visibilityMatrix));
+assert(isnumeric(vGraph));
 assert(isstruct(visibilityDetailsEachFromPoint));
 
 % Check variable sizes
 NpolyVertices = length([polytopes.xv]);
-assert(size(visibilityMatrix,1)==NpolyVertices+2);
-assert(size(visibilityMatrix,2)==NpolyVertices+2);
+assert(size(vGraph,1)==NpolyVertices+2);
+assert(size(vGraph,2)==NpolyVertices+2);
 assert(size(visibilityDetailsEachFromPoint,2)==NpolyVertices+2);
 
 % Check variable values
@@ -558,7 +572,7 @@ Niterations = 10;
 tic;
 for ith_test = 1:Niterations
     % Call the function
-    [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
+    [vGraph, visibilityDetailsEachFromPoint] = ...
         fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),([]));
 end
 slow_method = toc;
@@ -567,7 +581,7 @@ slow_method = toc;
 tic;
 for ith_test = 1:Niterations
     % Call the function
-    [visibilityMatrix, visibilityDetailsEachFromPoint] = ...
+    [vGraph, visibilityDetailsEachFromPoint] = ...
         fcn_VGraph_clearAndBlockedPointsGlobal(polytopes, pointsWithData, pointsWithData, (isConcave),(-1));
 end
 fast_method = toc;
@@ -643,23 +657,23 @@ if 1==0
 
     % calculate vibility graph
     tic;
-    visibilityMatrix = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData);
+    vGraph = fcn_VGraph_clearAndBlockedPointsGlobal(polytopes,pointsWithData,pointsWithData);
     toc;
     deduped_pts = fcn_convert_polytope_struct_to_deduped_points(pointsWithData);
     % plot visibility graph edges
     if flag_do_plot && gap_size ==0
-        for ith_fromIndex = 1:size(visibilityMatrix,1)
-            for jth_toIndex = 1:size(visibilityMatrix,1)
-                if visibilityMatrix(ith_fromIndex,jth_toIndex) == 1
+        for ith_fromIndex = 1:size(vGraph,1)
+            for jth_toIndex = 1:size(vGraph,1)
+                if vGraph(ith_fromIndex,jth_toIndex) == 1
                     plot([deduped_pts(ith_fromIndex).x,deduped_pts(jth_toIndex).x],[deduped_pts(ith_fromIndex).y,deduped_pts(jth_toIndex).y],'--g','LineWidth',1)
                 end
             end
         end
     end
     if flag_do_plot && gap_size ~=0
-        for ith_fromIndex = 1:size(visibilityMatrix,1)
-            for jth_toIndex = 1:size(visibilityMatrix,1)
-                if visibilityMatrix(ith_fromIndex,jth_toIndex) == 1
+        for ith_fromIndex = 1:size(vGraph,1)
+            for jth_toIndex = 1:size(vGraph,1)
+                if vGraph(ith_fromIndex,jth_toIndex) == 1
                     plot([pointsWithData(ith_fromIndex,1),pointsWithData(jth_toIndex,1)],[pointsWithData(ith_fromIndex,2),pointsWithData(jth_toIndex,2)],'--g','LineWidth',2)
                 end
             end

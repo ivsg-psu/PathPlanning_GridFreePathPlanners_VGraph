@@ -61,9 +61,7 @@ function [pointsWithData, startPointData, finishPointData] = ...
 %     start/end points are omitted, the value of p is the same as the
 %     number of points within the polytope field, numPolytopeVertices.
 %     Otherwise, p is 1 or 2 larger depending on whether start/end is
-%     given.
-%
-%    The information in the 5 columns is as follows:
+%     given. The information in the 5 columns is as follows:
 %         x-coordinate
 %         y-coordinate
 %         point id number
@@ -96,43 +94,51 @@ function [pointsWithData, startPointData, finishPointData] = ...
 %
 % REVISION HISTORY:
 % As: fcn_polytopes_generate_pointsWithData_table
+% 
 % 2024_05_08, by Steve Harnett
-% -- first write of function
+% - first write of function
+% 
 % 2025_07_07 S. Brennan and K. Hayes
-% -- changed demo script
-%    from: script_test_fcn_algorithm_Astar
-%    to:   script_demo_fcn_BoundedAStar_Astar
+% - changed demo script
+%   % * from: script_test_fcn_algorithm_Astar
+%   % * to:   script_demo_fcn_BoundedAStar_Astar
 %
 % As: fcn_BoundedAStar_polytopesGenerateAllPtsTable
+% 
 % 2025_07_25 - K. Hayes
-% -- copied to new function from fcn_polytopes_generate_pointsWithData_table
-%    % to follow library convention
+% - copied to new function from fcn_polytopes_generate_pointsWithData_table
+%   % to follow library convention
+% 
 % 2025_08_05 - K. Hayes
-% -- updated function formatting and header
+% - updated function formatting and header
 %
 % As: fcn_Visibility_polytopesGenerateAllPtsTable
+% 
 % 2025_11_01 - S. Brennan
-% -- renamed function 
-%    % from: fcn_BoundedAStar_polytopesGenerateAllPtsTable
-%    % to: fcn_Visibility_polytopesGenerateAllPtsTable
-%    % moving the function out of BoundedAStar into Visibility library
-% -- improved header docstrings to better explain the function
-% -- made startXY and finishXY optional inputs, instead of required
-% -- changed figNum to figNum
-% -- changed startXY and finishXY to startXY and finishXY
-% -- changed _MAPGEN_ to _VGRAPH_
-% -- changed all_pts to pointsWithData
-% -- refactored the function for clarity and to avoid changing the polytope
-%    % input variable as an internal data source. Too easy to create a bug if
-%    % inputs are changed within the function
+% - renamed function 
+%   % from: fcn_BoundedAStar_polytopesGenerateAllPtsTable
+%   % to: fcn_Visibility_polytopesGenerateAllPtsTable
+%   % moving the function out of BoundedAStar into Visibility library
+% - improved header docstrings to better explain the function
+% - made startXY and finishXY optional inputs, instead of required
+% - changed figNum to figNum
+% - changed startXY and finishXY to startXY and finishXY
+% - changed _MAPGEN_ to _VGRAPH_
+% - changed all_+pts to pointsWithData
+% - refactored the function for clarity and to avoid changing the polytope
+%   % input variable as an internal data source. Too easy to create a bug if
+%   % inputs are changed within the function
 %
 % As: fcn_VGraph_addObstacle
+% 
 % 2025_11_07 - S. Brennan
-% -- Renamed fcn_Visibility_polytopesGenerateAllPtsTable to fcn_VGraph_polytopesGenerateAllPtsTable
-
+% - Renamed fcn_Visibility_polytopesGenerateAllPtsTable to fcn_VGraph_polytopesGenerateAllPtsTable
+%
+% 2025_11_17 - S. Brennan
+% - Updated formatting to Markdown on Rev history
 
 % TO DO:
-% -- fill in to-do items here.
+% - fill in to-do items here.
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input
@@ -394,7 +400,7 @@ plotFormat.Color = 'Blue'; % edge line plotting
 plotFormat.LineStyle = '-';
 plotFormat.LineWidth = 2; % linewidth of the edge
 fillFormat = [1 0 0 1 0.4];
-% FORMAT: fcn_MapGen_plotPolytopes(polytopes,fig_num,line_spec,line_width,axes_limits,axis_style);
+% FORMAT: fcn_MapGen_plotPolytopes(polytopes,figNum,line_spec,line_width,axes_limits,axis_style);
 fcn_MapGen_plotPolytopes(polytopes,(plotFormat),(fillFormat),(figNum));
 hold on
 box on
