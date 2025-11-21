@@ -77,7 +77,7 @@ function [cGraph, vGraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData
 % 
 % As: fcn_VGraph_findEdgeWeights
 % 
-% 2025_11_06 - S. Brennan
+% 2025_11_06 by Sean Brennan, sbrennan@psu.edu
 % - Renamed function
 %   % * from fcn_BoundedAStar_findEdgeWeights
 %   % * to fcn_VGraph_findEdgeWeights
@@ -92,18 +92,18 @@ function [cGraph, vGraph] = fcn_VGraph_findEdgeWeights(polytopes, pointsWithData
 %   % * Changed to fcn_VGraph_convertPolytopetoDedupedPoints
 % - Fixed global variables: _MAPGEN_ --> _VGRAPH_
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Cleared extra figure command out of Inputs section
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % cos+tGraph to cGraph
 %   % vgra+ph to vGraph
 %   % visib+ilityGraph to vGraph
 
-% TO DO:
-% 2025_11_97 - S. Brennan, sbrennan@psu.ed
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - need to finish function. It's half done
 
 %% Debugging and Input checks

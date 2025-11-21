@@ -79,20 +79,23 @@ function cGraph = ...
 % Questions or comments? contact sbrennan@psu.edu
 
 % REVISION HISTORY:
+% 
 % As: fcn_VGraph_costCalculate
 % 
-% 2025_11_16 - S. Brennan
+% 2025_11_16 by Sean Brennan, sbrennan@psu.edu
 % - First write of function
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vgra+ph to vGraph
 %
-% 2025_11_18 - S. Brennan
+% 2025_11_18 by Sean Brennan, sbrennan@psu.edu
 % - Updated dependencies list
 
-% TO DO:
+% TO-DO:
+% 
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - fill in to-do items here.
 
 
@@ -389,6 +392,7 @@ if flag_do_plots
 
     % Set the axis
     if 1==flag_rescale_axis
+        drawnow;
         set(gca,'XLimitMethod','padded')
         set(gca,'YLimitMethod','padded')
         temp = axis;

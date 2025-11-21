@@ -75,23 +75,29 @@ function [flagsAtLeastOnePointIsInPoly, startPolys, finishPolys, flagsStartIsInP
 % Brennan.
 % Questions or comments? sbrennan@psu.edu 
 
-% Revision History:
+% REVISION HISTORY:
+%
 % As: fcn_polytope_calculation_points_in_polytopes
+% 
 % 2018_12_18 by Seth Tau
 % - First write of function
+% 
 % 2025_07_08 - K. Hayes, kxh1031@psu.edu
 % - Replaced fcn_general_calculation_euclidean_point_to_point_distance
 %   with vector sum method in function usage examples
 %
 % As: fcn_BoundedAStar_polytopePointsInPolytopes
+% 
 % 2025_07_17 - K. Hayes
 % - copied to new function from
 %   fcn_polytope_calculation_points_in_polytopes to follow library
 %   convention
+% 
 % 2025_08_14 - K. Hayes
 % - updated fcn header and formatting
 % - added debug plotting to fcn
-% 2025_11_13 - S. Brennan, sbrennan@psu.edu
+% 
+% 2025_11_13 by Sean Brennan, sbrennan@psu.edu
 % (in fcn_VGraph_polytopePointsInPolytopes)
 % - Refactored code to change from structure inputs to vector inputs
 % - Refactored code to vectorize outputs
@@ -109,13 +115,15 @@ function [flagsAtLeastOnePointIsInPoly, startPolys, finishPolys, flagsStartIsInP
 %   % err to flagsAtLeastOnePointIsInPoly
 %
 % As: fcn_VGraph_polytopePointsInPolytopes
-% 2024_11_14 - S. Brennan, sbrennan@psu.edu
+% 
+% 2024_11_14 by Sean Brennan, sbrennan@psu.edu
 % - renamed script after moving from BoundedAStar repo
 %   % * from fcn_BoundedAStar_polytopePointsInPolytopes
 %   % * to fcn_VGraph_polytopePointsInPolytopes
 
 % TO-DO:
-% - (nothing)
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input

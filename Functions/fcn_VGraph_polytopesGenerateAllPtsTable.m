@@ -91,14 +91,14 @@ function [pointsWithData, startPointData, finishPointData] = ...
 % This function was written on 2024_05_08 by Steve Harnett
 % Questions or comments? contact sjharnett@psu.edu
 
-%
+
 % REVISION HISTORY:
 % As: fcn_polytopes_generate_pointsWithData_table
 % 
 % 2024_05_08, by Steve Harnett
 % - first write of function
 % 
-% 2025_07_07 S. Brennan and K. Hayes
+% 2025_07_07 by Sean Brennan, sbrennan@psu.edu and K. Hayes
 % - changed demo script
 %   % * from: script_test_fcn_algorithm_Astar
 %   % * to:   script_demo_fcn_BoundedAStar_Astar
@@ -114,7 +114,7 @@ function [pointsWithData, startPointData, finishPointData] = ...
 %
 % As: fcn_Visibility_polytopesGenerateAllPtsTable
 % 
-% 2025_11_01 - S. Brennan
+% 2025_11_01 by Sean Brennan, sbrennan@psu.edu
 % - renamed function 
 %   % from: fcn_BoundedAStar_polytopesGenerateAllPtsTable
 %   % to: fcn_Visibility_polytopesGenerateAllPtsTable
@@ -131,14 +131,16 @@ function [pointsWithData, startPointData, finishPointData] = ...
 %
 % As: fcn_VGraph_addObstacle
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_polytopesGenerateAllPtsTable to fcn_VGraph_polytopesGenerateAllPtsTable
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 
-% TO DO:
-% - fill in to-do items here.
+
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input

@@ -59,7 +59,8 @@ function [currentObstacleID, selfBlockedCost, pointsWithDataBlockedBySelf] = ...
 % Questions or comments? sjh6473@psu.edu
 %
 
-% Revision History:
+% REVISION HISTORY:
+%
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
 % - copied to new function from fcn_visibility_self_blocked_pts to
 %   follow library convention
@@ -71,7 +72,7 @@ function [currentObstacleID, selfBlockedCost, pointsWithDataBlockedBySelf] = ...
 % 2025_08_05 - K. Hayes
 % - added plotting capabilities to fcn debug section
 % 
-% 2025_11_03 - S. Brennan
+% 2025_11_03 by Sean Brennan, sbrennan@psu.edu
 % - cleaned up variable naming:
 %   % * all+_pts to pointsWithData
 %   % * cur+_pt to testPointData
@@ -80,16 +81,17 @@ function [currentObstacleID, selfBlockedCost, pointsWithDataBlockedBySelf] = ...
 %   % * sel+f_blocked_cost to selfBlockedCost
 %   % pts_b+locked_by_self to pointsWithDataBlockedBySelf
 % 
-% 2025_11_07 - S. Brennan, sbrennan@psu.edu
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Changed global flags from _MAPGEN_ to _VGRAPH_
 %
 % As: fcn_VGraph_selfBlockedPoints
-% 2025_11_07 - S. Brennan
+%
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_selfBlockedPoints to fcn_VGraph_selfBlockedPoints
 % - Cleared extra figure command out of Inputs section
 
-% TO DO
-% 2025_11_03 - S. Brennan
+% TO-DO:
+% 2025_11_03 by Sean Brennan, sbrennan@psu.edu
 % - clean up the before/after if/then logic. This can easily be replaced
 %   % by using a mod operation on the query point +/- 1 with the length of the
 %   % points.

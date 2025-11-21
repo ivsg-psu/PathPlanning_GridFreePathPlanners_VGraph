@@ -87,7 +87,7 @@ function [vGraph, visibilityDetailsEachFromPoint] = ...
 % Questions or comments? contact sjh6473@psu.edu
 
 % REVISION HISTORY:
-% 2021_10_28
+% 2021_10_28 by Sean Brennan, sbrennan@psu.edu
 % 
 % As: fcn_visibility_clear_and_blocked_points_global
 % - first written by Steve Harnett
@@ -103,7 +103,7 @@ function [vGraph, visibilityDetailsEachFromPoint] = ...
 % - reformatted function
 % - added input checking and debug
 % 
-% 2025_11_01 - S. Brennan
+% 2025_11_01 by Sean Brennan, sbrennan@psu.edu
 % - updated docstrings in header
 % - staged code for Visibility library
 % - replaced _MAPGEN_ with _VGRAPH_ in global variable naming
@@ -112,17 +112,19 @@ function [vGraph, visibilityDetailsEachFromPoint] = ...
 %
 % As: fcn_VGraph_clearAndBlockedPointsGlobal
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_clearAndBlockedPointsGlobal to fcn_VGraph_clearAndBlockedPointsGlobal
 % - Cleared extra figure command out of Inputs section
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vis+ibilityMatrix to vGraph
 %   % vgra+ph to vGraph
 
-% TO DO:
+% TO-DO:
+% 
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % (copied from Steve's notes)
 % - could use the Lee algorithm to speed up if necessary
 %   % https://github.com/davetcoleman/visibility_graph/blob/master/Visibility_Graph_Algorithm.pdf

@@ -110,7 +110,7 @@ function [clear_pts,blocked_pts,D,di,dj,num_int,xiP,yiP,xiQ,yiQ,xjP,yjP,xjQ,yjQ]
 % This function was written on 2018_11_17 by Seth Tau
 % Questions or comments? sat5340@psu.edu
 
-% Revision History:
+% REVISION HISTORY:
 % 
 % As: fcn_visibility_clear_and_blocked_points (In BoundedAStar)
 % 
@@ -134,28 +134,29 @@ function [clear_pts,blocked_pts,D,di,dj,num_int,xiP,yiP,xiQ,yiQ,xjP,yjP,xjQ,yjQ]
 %
 % As: fcn_Visibilty_clearAndBlockedPoints (in VisibilityGraph)
 % 
-% 2025_10_29 - S. Brennan
+% 2025_10_29 by Sean Brennan, sbrennan@psu.edu
 % - Replaced figNum with figNum
 % - Replaced _MAPGEN_ with _VGRAPH_ global variable designations
 % 
-% 2025_10_30 - S. Brennan
+% 2025_10_30 by Sean Brennan, sbrennan@psu.edu
 % - fcn_convert_to_vector_points changed to fcn_INTERNAL_convertToVectorPoints
 % - fcn_calculate_intersection_matrices changed to fcn_INTERNAL_calculateIntersectionMatrices
 % - updated plotting for better clarity
 %
 % As: fcn_VGraph_clearAndBlockedPoints
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_clearAndBlockedPoints to fcn_VGraph_clearAndBlockedPoints
 % - Cleared extra figure command out of Inputs section
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vgra+ph to vGraph
 
-% TO DO:
-% 2025_10_29 - S. Brennan
+% TO-DO:
+% 
+% 2025_10_29 by Sean Brennan, sbrennan@psu.edu
 % - Need to simplify the output arguments to vector format. No need to
 %   % keep X and Y outputs separate since these are paired.
 % - Need to redo the functional dependence. The core function to check

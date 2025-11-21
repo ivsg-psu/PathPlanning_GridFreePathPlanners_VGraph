@@ -50,15 +50,16 @@ function polytopes = fcn_VGraph_helperFillPolytopesFromPointData(pointsWithData,
 % Questions or comments? contact sbrennan@psu.edu
 
 % REVISION HISTORY:
+% 
 % As: fcn_VGraph_helperFillPolytopesFromPointDat
 % 
-% 2025_11_18 - S. Brennan
+% 2025_11_18 by Sean Brennan, sbrennan@psu.edu
 % - First write of function using fcn_VGraph_co+stCalculate as template
 
 
-% TO DO:
-% - fill in to-do items here.
-
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 %% Debugging and Input checks
 

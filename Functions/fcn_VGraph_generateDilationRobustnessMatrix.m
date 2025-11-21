@@ -99,7 +99,9 @@ function [dilation_robustness_matrix] = fcn_VGraph_generateDilationRobustnessMat
 % Questions or comments? contact sbrennan@psu.edu
 
 % REVISION HISTORY:
+% 
 % As: fcn_algorithm_generate_dilation_robustness_matrix
+% 
 % January 2024 by Steve Harnett
 % - first write of function
 %
@@ -107,34 +109,38 @@ function [dilation_robustness_matrix] = fcn_VGraph_generateDilationRobustnessMat
 % - function updated to make a right left distinction using cross products
 %
 % As: fcn_BoundedAStar_generateDilationRobustnessMatrix
+% 
 % 2025_07_17 by K. Hayes, kxh1031@psu.edu
 % - function copied to new script from
 %   fcn_algorithm_generate_dilation_robustness_matrix.m to follow library
 %   conventions
 %
-% 2025_10_07 by Sean Brennan
+% 2025_10_07 by Sean Brennan, sbrennan@psu.edu
 % - fixed heading strings and function formatting
 %
 % As: fcn_Visibility_generateDilationRobustnessMatrix
-% 2025_10_31 by Sean Brennan
+% 
+% 2025_10_31 by Sean Brennan, sbrennan@psu.edu
 % - moved function to Visibility Graph library
 % - replaced _MAPGEN_ with _VGRAPH_ in global variable naming
 %
 % As: fcn_VGraph_generateDilationRobustnessMatrix
-% 2025_11_07 - S. Brennan
+% 
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed function:
 %   % * from: fcn_Visibility_generateDilationRobustnessMatrix 
 %   % * to: fcn_VGraph_generateDilationRobustnessMatrix
 %
-% 2025_11_16 by Sean Brennan
+% 2025_11_16 by Sean Brennan, sbrennan@psu.edu
 % - Cleaned up variable naming:
 %   % fig+_num to figNum
 %   % all+_pts to pointsWithData
 %   % v+graph to vGraph
 
 
-% TO DO:
-% - fill in to-do items here.
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 
 %% Debugging and Input checks

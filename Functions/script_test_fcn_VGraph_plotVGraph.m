@@ -7,11 +7,11 @@
 % 
 % As: script_test_fcn_Visibility_plotVGraph
 % 
-% 2025_10_06 - S. Brennan, sbrennan@psu.edu
+% 2025_10_06 by Sean Brennan, sbrennan@psu.edu
 % * In script_test_fcn_Visibility_plotVGraph
 % - first write of the script
 % 
-% 2025_10_28 - S. Brennan, sbrennan@psu.edu
+% 2025_10_28 by Sean Brennan, sbrennan@psu.edu
 % * In script_test_fcn_Visibility_plotVGraph
 % - Moved function into VGraph library
 % - fixed addNudge bug
@@ -19,11 +19,11 @@
 %
 % As: script_test_fcn_VGraph_plotVGraph
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed script_test_fcn_Visibility_plotVGraph to script_test_fcn_VGraph_plotVGraph
 % - Cleared extra figure command out of Inputs section
 % 
-% 2025_11_08 - S. Brennan
+% 2025_11_08 by Sean Brennan, sbrennan@psu.edu
 % - updated variable naming:
 %   % * fig+_num to figNum
 %   % * v+graph to vGraph
@@ -31,12 +31,14 @@
 %   % * st+art to startPointData or startXY, depending on usage
 %   % * fin+ish to finishPointData or finishXY, depending on usage
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % all_+pts to pointsWithData
 
-% TO DO:
+
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - set up fast mode tests
 % - bug in assertion checking against hardcoded expected results
 

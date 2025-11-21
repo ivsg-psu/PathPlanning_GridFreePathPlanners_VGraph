@@ -2,13 +2,16 @@
 % Tests: fcn_VGraph_helperFillPolytopesFromPointData
 
 % REVISION HISTORY:
+% 
 % As: script_test_fcn_VGraph_helperFillPolytopesFromPointData
-% 2025_11_16 by S. Brennan
+% 
+% 2025_11_16 by Sean Brennan, sbrennan@psu.edu
 % - first write of script, using script_test_fcn_VGraph_costCalculate as
 %   % template
 
-% TO DO:
-% - (fill in here)
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 
 %% Set up the workspace
@@ -118,8 +121,6 @@ dataSetNumber = 1; % Two polytopes with clear space right down middle
 % Call the function
 polytopes = fcn_VGraph_helperFillPolytopesFromPointData(pointsWithData, ([]));
 
-sgtitle(titleString, 'Interpreter','none');
-
 % Check variable types
 assert(isstruct(polytopes));
 
@@ -147,8 +148,6 @@ dataSetNumber = 1; % Two polytopes with clear space right down middle
 
 % Call the function
 polytopes = fcn_VGraph_helperFillPolytopesFromPointData(pointsWithData, (-1));
-
-sgtitle(titleString, 'Interpreter','none');
 
 % Check variable types
 assert(isstruct(polytopes));

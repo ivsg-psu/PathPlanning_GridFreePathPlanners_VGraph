@@ -14,35 +14,39 @@
 % connecting the points does not pass through a polytope. The visibility
 % graph is a core input for grid-free path planning.
 
-% Revision history:
-% 2025_10_28 - Sean Brennan
+% REVISION HISTORY:
+% 
+% 2025_10_28 by Sean Brennan, sbrennan@psu.edu
 % - created a the repo by removing visibility functions out of the
 %    % BoundedAStar repo
-% 2025_11_07
+% 
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - fix bug with hardcoded expected vGraphs in
 %    script_test_fcn_VGraph_clearAndBlockedPointsGlobal
 % - added fast mode test cases for all scropts
-% 2025_11_08 - S. Brennan
+% 
+% 2025_11_08 by Sean Brennan, sbrennan@psu.edu
 % - updated variable naming:
-%    % * fig_num to figNum
-%    % * vg+raph to vGraph
-%    % * all_+pts to pointsWithData
-%    % * sta+rt to startPointData or startXY, depending on usage
-%    % * fi+nish to finishPointData or finishXY, depending on usage
+%   % * fig_num to figNum
+%   % * vg+raph to vGraph
+%   % * all_+pts to pointsWithData
+%   % * sta+rt to startPointData or startXY, depending on usage
+%   % * fi+nish to finishPointData or finishXY, depending on usage
 % - fixed minor MATLAB warnings
-% 2025_11_12 - S. Brennan
+% 
+% 2025_11_12 by Sean Brennan, sbrennan@psu.edu
 % - set up auto-loading of dependencies using new DebugTools features
 % - fixed minor "laps" issues in README
 % - fixed minor test script bugs so that all run through cleanly
 % (new release)
 %
-% 2025_11_13 - S. Brennan
+% 2025_11_13 by Sean Brennan, sbrennan@psu.edu
 % - updated script_test_all_functions
 % - updated header flags for clearing path, to do fast checking without
 %   % skipping
 % (new release)
 %
-% 2025_11_14 - S. Brennan
+% 2025_11_14 by Sean Brennan, sbrennan@psu.edu
 % - cleaned up formatting of this demo
 % - added fcn_VGraph_polytopePointsInPolytopes
 %   % * pulled from BoundedAStar library
@@ -54,10 +58,10 @@
 % - fixed header listing of script name - it was incorrect!
 % (new release)
 %
-% 2025_11_14 - S. Brennan
+% 2025_11_14 by Sean Brennan, sbrennan@psu.edu
 % - cleaned up formatting of this demo
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history in all functions
 % - Cleaned up variable naming in all functions
 %   % fig+_num to figNum
@@ -71,17 +75,27 @@
 % - Updated README.md
 % (new release)
 %
-% 2025_11_18 - S. Brennan
+% 2025_11_18 by Sean Brennan, sbrennan@psu.edu
 % - Added fcn_VGraph_helperFillPolytopesFromPointData function
 % - Updated README.md
 % - In fcn_VGraph_costCalculate
 %   % * Updated dependencies list
 % (new release)
-
+%
+% 2025_11_20 by Sean Brennan, sbrennan@psu.edu
+% - In fcn_VGraph_plotVGraph
+%   % * Updated rescaling on plotting to use userdata rather than children
+%   % * Updated auto axes to use padding methods from MATLAB
+%
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - Cleaned up rev list in this script
+% - Cleaned up rev lists in all functions
+% - Fixed bug in test script
+% (new release)
 
 
 % TO-DO:
-% 2025_11_17 - Sean Brennan, sbrennan@psu.edu
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - In: fcn_VGraph_costCalculate
 %   % * need to add total distance of "to" point to goal as an option
 %   % * then, show in Greedy planner that this produces Djkstra's algorithm
@@ -104,7 +118,7 @@ if 1==1
     fileListFunctionsFolderNoDirectories = fileListFunctionsFolder(~[fileListFunctionsFolder.isdir]);
 
     % Make sure there's not fig_num
-    queryString = 'visibilityGraph';
+    queryString = '% --';
     flagsStringWasFoundInFilesRaw = fcn_DebugTools_directoryStringQuery(fileListFunctionsFolderNoDirectories, queryString, (-1));
     % flagsStringWasFoundInFiles = fcn_INTERNAL_removeFromList(flagsStringWasFoundInFilesRaw, fileListFunctionsFolderNoDirectories,'script_test_all_functions');
     if sum(flagsStringWasFoundInFilesRaw)>0

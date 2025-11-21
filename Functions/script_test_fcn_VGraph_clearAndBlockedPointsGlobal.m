@@ -21,33 +21,34 @@
 % - fixed bug with missing variables in DEMO case 3
 % - fixed bug with missing variables in TEST case 1
 % 
-% 2025_10_07 - S. Brennan
+% 2025_10_07 by Sean Brennan, sbrennan@psu.edu
 % - replaced fcn_MapGen_haltonVoronoiTiling call
 %   % with fcn_MapGen_generatePolysFromSeedGeneratorNames
 % - added example plotting of visibility for 2025 MECC paper
 % 
-% 2025_11_01 - S. Brennan
+% 2025_11_01 by Sean Brennan, sbrennan@psu.edu
 % - staged script to move out of BoundedAStar and into Visibility Graph
 % - matched script's variable names to those inside the function, for
 %   % clarity
 %
 % As: script_test_fcn_Visibility_clearAndBlockedPointsGlobal
 % 
-% 2025_11_02 - S. Brennan
+% 2025_11_02 by Sean Brennan, sbrennan@psu.edu
 % - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
 %   % to fcn_Visibility_polytopesGenerateAllPtsTable
 %
 % As: script_test_fcn_VGraph_clearAndBlockedPointsGlobal
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed script_test_fcn_Visibility_clearAndBlockedPointsGlobal to script_test_fcn_VGraph_clearAndBlockedPointsGlobal
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vis+ibilityMatrix to vGraph
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - set up fast mode tests
 % - bug in assertion checking against hardcoded expected results
 

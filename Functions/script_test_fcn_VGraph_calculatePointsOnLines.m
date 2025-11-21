@@ -2,7 +2,7 @@
 
 % Tests: fcn_VGraph_calculatePointsOnLines
 
-% Revision history
+% REVISION HISTORY:
 % 
 % As: script_test_fcn_BoundedAStar_calculatePointsOnLines
 % 
@@ -14,16 +14,17 @@
 %
 % As: script_test_fcn_VGraph_calculatePointsOnLines
 % 
-% 2025_11_06 - S. Brennan, sbrennan@psu.edu
+% 2025_11_06 by Sean Brennan, sbrennan@psu.edu
 % - deprecated fcn_BoundedAStar_calculatePointsOnLines
 %   % * Now fcn_VGraph_calculatePointsOnLines
 % - fixed minor weird usage of ind variable in plotting section
 % - added more test cases including fast test cases
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - need to simplify the inputs to point style ([X Y]) 
 
 %% Set up the workspace

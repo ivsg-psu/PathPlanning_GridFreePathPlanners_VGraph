@@ -1,7 +1,7 @@
 % script_test_fcn_VGraph_polytopesGenerateAllPtsTable.m
 % tests fcn_VGraph_polytopesGenerateAllPtsTable.m
 
-% Revision history
+% REVISION HISTORY:
 % As: script_test_fcn_BoundedAStar_polytopesGenerateAllPtsTable
 % 
 % 2025_08_05 - K. Hayes, kxh1031@psu.edu
@@ -10,7 +10,7 @@
 %
 % As: fcn_Visibility_polytopesGenerateAllPtsTable
 % 
-% 2025_11_01 - S. Brennan
+% 2025_11_01 by Sean Brennan, sbrennan@psu.edu
 % - renamed function 
 %    % from: fcn_BoundedAStar_polytopesGenerateAllPtsTable
 %    % to: fcn_Visibility_polytopesGenerateAllPtsTable
@@ -18,8 +18,12 @@
 %
 % As: fcn_VGraph_addObstacle
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_polytopesGenerateAllPtsTable to fcn_VGraph_polytopesGenerateAllPtsTable
+
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 %% Set up the workspace
 close all

@@ -3,7 +3,7 @@
 
 % a basic test of adding obstacles to existing visibility graphs
 
-% Revision history
+% REVISION HISTORY:
 % 
 % As: script_test_fcn_Visibility_removeObstacle
 % 
@@ -14,11 +14,11 @@
 % 2025_10_03 - K. Hayes
 % - fixed bug with missing variables in DEMO case 1
 % 
-% 2025_11_02 - S. Brennan
+% 2025_11_02 by Sean Brennan, sbrennan@psu.edu
 % - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
 %   % to fcn_Visibility_polytopesGenerateAllPtsTable
 % 
-% 2025_11_03 - S. Brennan
+% 2025_11_03 by Sean Brennan, sbrennan@psu.edu
 % - updated variable naming:
 %   % * fig+_num to figNum
 %   % * visibil+ity_matrix to vis+ibilityMatrix
@@ -37,17 +37,18 @@
 %
 % As: script_test_fcn_VGraph_removeObstacle
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed script_test_fcn_Visibility_removeObstacle to script_test_fcn_VGraph_removeObstacle
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vis+ibilityMatrix to vGraph
 %   % newVi+sibilityMatrix to newVGraph
 
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - set up fast mode tests
 
 %% Set up the workspace

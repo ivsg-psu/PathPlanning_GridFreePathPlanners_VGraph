@@ -1,8 +1,7 @@
 % script_test_fcn_VGraph_addObstacle
-
 % a basic test of adding obstacles to existing visibility graphs
 
-% Revision history
+% REVISION HISTORY:
 % 
 % As: fcn_Visibility_addObstacle
 % 
@@ -15,17 +14,18 @@
 %
 % As: fcn_VGraph_addObstacle
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_addObstacle to fcn_VGraph_addObstacle
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vis+ibilityMatrix to vGraph
 %   % newVi+sibilityMatrix to newVGraph
 
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - set up fast mode tests
 
 %% Set up the workspace

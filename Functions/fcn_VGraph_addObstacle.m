@@ -83,6 +83,7 @@ vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAd
 % Questions or comments? contact sjh6473@psu.edu
 
 % REVISION HISTORY:
+% 
 % As: fcn_visibility_graph_add_obstacle
 % 
 % 2024_03
@@ -101,7 +102,7 @@ vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAd
 % 2025_08_01 - K. Hayes
 % - moved plotting into function debug section
 % 
-% 2025_11_03 - S. Brennan
+% 2025_11_03 by Sean Brennan, sbrennan@psu.edu
 % - updated variable naming:
 %   % * fig_+num to figNum
 %   % * visibility_+matrix to visibility+Matrix
@@ -121,21 +122,22 @@ vGraph, pointsWithData, startPointData, finishPointData, polytopes, polytopeToAd
 %
 % As: fcn_VGraph_addObstacle
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_addObstacle to fcn_VGraph_addObstacle
 % - Cleared extra figure command out of Inputs section
 % 
-% 2025_11_03 - S. Brennan
+% 2025_11_03 by Sean Brennan, sbrennan@psu.edu
 % - updated variable naming:
 %   % * visibili+tyMatrix to vGraph\
 %   % * newVis+ibilityMatrix to newVGraph
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % vgra+ph to vGraph
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - make sure input checking is working correctly
 
 %% Debugging and Input checks

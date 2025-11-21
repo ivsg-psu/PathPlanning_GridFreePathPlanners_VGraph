@@ -10,7 +10,7 @@
 %
 % As: script_test_fcn_BoundedAStar_generateDilationRobustnessMatrix
 % 
-% 2025_10_06 - S. Brennan
+% 2025_10_06 by Sean Brennan, sbrennan@psu.edu
 % - removed addpath calls
 % - removed calls to fcn_visibility_clear_and_blocked_points_global,
 %   % replaced with fcn_Visibility_clearAndBlockedPointsGlobal
@@ -19,29 +19,34 @@
 % - removed calls to fcn_MapGen_fillPolytopeFieldsFromVertices,
 %   % replaced with fcn_MapGen_polytopesFillFieldsFromVertices
 % 
-% 2025_10_20 - S. Brennan
+% 2025_10_20 by Sean Brennan, sbrennan@psu.edu
 % - refactored script to make test cases more clear, do fast mode, etc.
 %
 % As: script_test_fcn_Visibility_generateDilationRobustnessMatrix
 % 
-% 2025_10_31 by Sean Brennan
+% 2025_10_31 by Sean Brennan, sbrennan@psu.edu
 % - moved function to Visibility Graph library
 % - cleaned up test cases near header that are now in demo sections
 %
 % As: script_test_fcn_VGraph_generateDilationRobustnessMatrix
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed script_test_fcn_Visibility_generateDilationRobustnessMatrix to script_test_fcn_VGraph_generateDilationRobustnessMatrix
 %
-% 2025_11_16 - S. Brennan
+% 2025_11_16 by Sean Brennan, sbrennan@psu.edu
 % - Cleaned up variable naming
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % fig+_num to figNum
 %   % vis+ibilityMatrix to vGraph
 %   % all_+pts to pointsWithData
+
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
+
 
 %% Set up the workspace
 close all

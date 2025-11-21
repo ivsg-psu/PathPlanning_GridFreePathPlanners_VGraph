@@ -3,7 +3,7 @@
 % a basic test of calculation of clear and blocked points for visibility
 % graph creation
 
-% Revision history
+% REVISION HISTORY:
 %
 % (In BoundedAStar)
 % 
@@ -19,19 +19,21 @@
 % 
 % (In Visibility Graph)
 % 
-% 2025_10_30 - S. Brennan
+% 2025_10_30 by Sean Brennan, sbrennan@psu.edu
 % - set up fast mode tests
 % - improved figure captions a bit
 %
 % As: script_test_fcn_VGraph_clearAndBlockedPoints
-% 2025_11_07 - S. Brennan
+% 
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed script_test_fcn_Visibility_clearAndBlockedPoints to script_test_fcn_VGraph_clearAndBlockedPoints
 % - Cleared extra figure command out of Inputs section
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - set up fast mode tests
 
 %% Set up the workspace

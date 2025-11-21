@@ -54,7 +54,8 @@ function flagIsOnLine = fcn_VGraph_calculatePointsOnLines(x1,y1,x2,y2,xi,yi,tole
 % This function was written on 2018_11_28 by Seth Tau
 % Questions or comments? sat5340@psu.edu
 
-% Revision History:
+% REVISION HISTORY:
+% 
 % As: fcn_general_calculation_points_on_lines
 % 
 % 2018_11_28 by Seth Tau
@@ -71,7 +72,7 @@ function flagIsOnLine = fcn_VGraph_calculatePointsOnLines(x1,y1,x2,y2,xi,yi,tole
 %
 % As: fcn_BoundedAStar_calculatePointsOnLines
 % 
-% 2025_11_06 - S. Brennan, sbrennan@psu.edu
+% 2025_11_06 by Sean Brennan, sbrennan@psu.edu
 % - deprecated fcn_BoundedAStar_calculatePointsOnLines
 %   % * Now fcn_VGraph_calculatePointsOnLines
 % - fixed minor weird usage of ind variable in plotting section
@@ -80,18 +81,18 @@ function flagIsOnLine = fcn_VGraph_calculatePointsOnLines(x1,y1,x2,y2,xi,yi,tole
 %   % * From tf to flagIsOnLine
 %   % * From acc to tolerance
 % 
-% 2025_11_07 - S. Brennan, sbrennan@psu.edu
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Changed global flags from _MAPGEN_ to _VGRAPH_
 % - Cleared extra figure command out of Inputs section
 % 
-% 2025_11_17 - S. Brennan, sbrennan@psu.edu
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Updated variable naming:
 %   % * From fi+gNum to figNum
 
 
 % TO-DO: 
-% 2025_11_07 - S. Brennan, sbrennan@psu.edu
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - need to simplify input arguments to use vector inputs for X, Y data, 
 %   % e.g. points = [X Y], rathr than separate X, Y inputs
 

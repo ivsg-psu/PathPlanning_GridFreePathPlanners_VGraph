@@ -80,12 +80,15 @@ vGraph, pointsWithData, startPointData, finishPointData, polytopes, indexOfPolyt
 %
 % Questions or comments? contact sjh6473@psu.edu
 
-% REVISION HISTORY
+% REVISION HISTORY:
+%
 % As: fcn_visibility_graph_remove_obstacle
+% 
 % 2024_03
 % - first written by Steve Harnett
 %
 % As: fcn_Visibility_removeObstacle
+% 
 % 2025_07_17 - K. Hayes, kxh1031@psu.edu
 % - copied to new function from fcn_visibility_graph_remove_obstacle
 %   % to follow library convention
@@ -97,7 +100,7 @@ vGraph, pointsWithData, startPointData, finishPointData, polytopes, indexOfPolyt
 % 2025_08_04 - K. Hayes
 % - added debug plotting
 % 
-% 2025_11_03 - S. Brennan
+% 2025_11_03 by Sean Brennan, sbrennan@psu.edu
 % - updated variable naming:
 %   % * fig+_num to figNum
 %   % * vis+ibility_matrix to visi+bilityMatrix
@@ -115,19 +118,21 @@ vGraph, pointsWithData, startPointData, finishPointData, polytopes, indexOfPolyt
 %   % * _MAP+GEN_ changed to _VGRAPH_
 %
 % As: fcn_VGraph_removeObstacle
-% 2025_11_07 - S. Brennan
+% 
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_removeObstacle to fcn_VGraph_removeObstacle
 % 
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history in all functions
 % - Cleaned up variable naming in all functions
 %   % vis+ibilityMatrix to vGraph
 %   % newVi+sibilityMatrix to newVGraph
 %   % vgra+ph to vGraph
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - uncomment the AABB test and get this to work without using deprecated
-% function. It significantly speeds up this function
+%   % function. It significantly speeds up this function
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input

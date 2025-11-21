@@ -22,7 +22,7 @@
 % 2025_10_03 - K. Hayes
 % - fixed bug causing assertion failure in DEMO case 1
 % 
-% 2025_11_02 - S. Brennan
+% 2025_11_02 by Sean Brennan, sbrennan@psu.edu
 % - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
 %   % to fcn_Visibility_polytopesGenerateAllPtsTable
 %   % WARNING: inputs/outputs to this changed slightly. Function needs to 
@@ -30,7 +30,7 @@
 %
 % As: fcn_VGraph_findEdgeWeights
 % 
-% 2025_11_06 - S. Brennan
+% 2025_11_06 by Sean Brennan, sbrennan@psu.edu
 % - Renamed function
 %   % * from fcn_BoundedAStar_findEdgeWeights
 %   % * to fcn_VGraph_findEdgeWeights
@@ -40,7 +40,7 @@
 %   % * From ga+_size to gapSize
 %   % * From cg+raph to cost+Graph
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % cos+tGraph to cGraph

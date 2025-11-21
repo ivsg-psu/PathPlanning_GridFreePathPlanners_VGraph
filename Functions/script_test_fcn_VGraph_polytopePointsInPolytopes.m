@@ -1,14 +1,14 @@
 % script_test_fcn_VGraph_polytopePointsInPolytopes
 % tests: fcn_VGraph_polytopePointsInPolytopes
 
-% Revision history
+% REVISION HISTORY:
 % 
 % As: script_test_fcn_BoundedAStar_polytopePointsInPolytopes
 % 
 % 2025_08_13 - K. Hayes, kxh1031@psu.edu
 % - initial write of script
 % 
-% 2025_11_13 - S. Brennan, sbrennan@psu.edu
+% 2025_11_13 by Sean Brennan, sbrennan@psu.edu
 % (in fcn_BoundedAStar_polytopePointsInPolytopes)
 % - Refactored code to change from structure inputs to vector inputs
 % - Refactored code to vectorize outputs
@@ -27,17 +27,20 @@
 %
 % As: script_test_fcn_VGraph_polytopePointsInPolytopes
 % 
-% 2024_11_14 - S. Brennan, sbrennan@psu.edu
+% 2024_11_14 by Sean Brennan, sbrennan@psu.edu
 % - renamed script after moving from BoundedAStar repo
 %   % * from script_test_fcn_BoundedAStar_polytopePointsInPolytopes
 %   % * to script_test_fcn_VGraph_polytopePointsInPolytopes
 % - fixed header listing of script name - it was incorrect!
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % fig+_num to figNum
 
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 %% Set up the workspace
 close all

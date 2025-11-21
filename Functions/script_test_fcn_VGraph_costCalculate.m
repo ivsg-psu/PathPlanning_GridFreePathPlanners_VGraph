@@ -3,16 +3,16 @@
 
 % REVISION HISTORY:
 % 
-% 2025_11_16 by S. Brennan
+% 2025_11_16 by Sean Brennan, sbrennan@psu.edu
 % - first write of script
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % fig+_num to figNum
 %   % vis+ibilityMatrix to vGraph
 
-% TO DO:
+% TO-DO:
 % - set up fast mode tests
 
 

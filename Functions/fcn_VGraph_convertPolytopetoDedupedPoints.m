@@ -44,7 +44,7 @@ function unique_deduped_points_struct = fcn_VGraph_convertPolytopetoDedupedPoint
 % This function was written on in 2022 by Stephen Harnett
 % Questions or comments? sjharnett@psu.edu
 
-% Revision History:
+% REVISION HISTORY:
 % 
 % As: fcn_convert_polytope_struct_to_deduped_points
 % 2022_05_01 - S. Harnett
@@ -61,20 +61,27 @@ function unique_deduped_points_struct = fcn_VGraph_convertPolytopetoDedupedPoint
 % - added input checking
 %
 % As: fcn_Visibility_convertPolytopetoDedupedPoints
-% 2025_11_07 - S. Brennan, sbrennan@psu.edu
+% 
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Changed global flags from _MAPGEN_ to _VGRAPH_
 % - Changed all+_pts to pointsWithData
 %
 % As: fcn_VGraph_convertPolytopetoDedupedPoints
-% 2025_11_07 - S. Brennan
+% 
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_convertPolytopetoDedupedPoints to fcn_VGraph_convertPolytopetoDedupedPoints
 % - Cleared extra figure command out of Inputs section
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Added figNum documentation to header docstrings
 % - Cleaned up variable naming in all functions
 %   % fig+_num to figNum
+
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
+
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input

@@ -2,14 +2,14 @@
 
 % a basic test of cost graph and heuristic vector generation
 
-% Revision history
+% REVISION HISTORY:
 % 
 % As: script_test_fcn_BoundedAStar_convertPolytopetoDedupedPoints
 % 
 % 2025_08_06 - K. Hayes, kxh1031@psu.edu
 % - first write of script
 % 
-% 2025_11_02 - S. Brennan
+% 2025_11_02 by Sean Brennan, sbrennan@psu.edu
 % - changed fcn_BoundedAStar_polytopesGenerateAllPtsTable 
 %   % to fcn_Visibility_polytopesGenerateAllPtsTable
 %   % WARNING: inputs/outputs to this changed slightly. Function needs to 
@@ -19,17 +19,18 @@
 %
 % As: script_test_fcn_VGraph_convertPolytopetoDedupedPoints
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed script_test_fcn_Visibility_convertPolytopetoDedupedPoints to script_test_fcn_VGraph_convertPolytopetoDedupedPoints
 % - Cleared extra figure command out of Inputs section
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
 % - Cleaned up variable naming in all functions
 %   % fig+_num to figNum
 %   % all_+pts to pointsWithData
 
-% TO DO:
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
 % - set up fast mode tests
 
 %% Set up the workspace

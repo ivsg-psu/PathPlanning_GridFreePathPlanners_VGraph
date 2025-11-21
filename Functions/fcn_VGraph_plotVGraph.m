@@ -62,29 +62,29 @@ function h_plot = fcn_VGraph_plotVGraph(vGraph, pointsWithData,  styleString, va
 %
 % As: fcn_Visibility_plotVGraph
 %
-% 2025_10_06 - S. Brennan, sbrennan@psu.edu
+% 2025_10_06 by Sean Brennan, sbrennan@psu.edu
 % - first write of the function
 % 
 % 2025_10_08 - K. Hayes, kaeleahayes@psu.edu
 % - added function header and standard formatting
 % 
-% 2025_10_10 - S. Brennan, sbrennan@psu.edu
+% 2025_10_10 by Sean Brennan, sbrennan@psu.edu
 % - added options to include selectedFromToIndices, figNum
 % - updated docstrings in header
 % - added test script
 % 
-% 2025_10_28 - S. Brennan, sbrennan@psu.edu
+% 2025_10_28 by Sean Brennan, sbrennan@psu.edu
 % - updated docstrings in header
 % - fixed figNum to figNum
 % - added options to include saveFile for animated GIF
 %
 % As: fcn_VGraph_plotVGraph
 % 
-% 2025_11_07 - S. Brennan
+% 2025_11_07 by Sean Brennan, sbrennan@psu.edu
 % - Renamed fcn_Visibility_plotVGraph to fcn_VGraph_plotVGraph
 % - Cleared extra figure command out of Inputs section
 % 
-% 2025_11_08 - S. Brennan
+% 2025_11_08 by Sean Brennan, sbrennan@psu.edu
 % - updated variable naming:
 %   % * fig+_num to figNum
 %   % * v+graph to vGraph
@@ -92,11 +92,18 @@ function h_plot = fcn_VGraph_plotVGraph(vGraph, pointsWithData,  styleString, va
 %   % * sta+rt to startPointData or startXY, depending on usage
 %   % * fin+ish to finishPointData or finishXY, depending on usage
 %
-% 2025_11_17 - S. Brennan
+% 2025_11_17 by Sean Brennan, sbrennan@psu.edu
 % - Updated formatting to Markdown on Rev history
-
-% TO DO:
 %
+% 2025_11_20 by Sean Brennan, sbrennan@psu.edu
+% - In fcn_VGraph_plotVGraph
+%   % * Updated rescaling on plotting to use userdata rather than children
+%   % * Updated auto axes to use padding methods from MATLAB
+
+
+% TO-DO:
+% 2025_11_21 by Sean Brennan, sbrennan@psu.edu
+% - (add items here)
 
 %% Debugging and Input checks
 % Check if flag_max_speed set. This occurs if the figNum variable input
@@ -251,12 +258,15 @@ end
 if flag_do_plots
 
     % check whether the figure already has data
-    temp_h = figure(figNum);
-    flag_rescale_axis = 0; 
-    if isempty(get(temp_h,'Children'))
-        flag_rescale_axis = 1; % Set to 1 to force rescaling
+    temp_h = figure(figNum); %#ok<NASGU>
+    flag_rescale_axis = 0;
+    if isempty(get(gca,'UserData'))
         axis equal
-    end        
+        flag_rescale_axis = 1; % Set to 1 to force rescaling
+        plotFlags = struct;
+        plotFlags.flagAlreadyPlotted = 1;
+        set(gca,'UserData',plotFlags)
+    end
 
     hold on;
 
@@ -320,8 +330,11 @@ end % Ends the function
 
 %% fcn_INTERNAL_rescaleAxis
 function fcn_INTERNAL_rescaleAxis
+drawnow;
+set(gca,'XLimitMethod','padded')
+set(gca,'YLimitMethod','padded')
+
 temp = axis;
-%     temp = [min(points(:,1)) max(points(:,1)) min(points(:,2)) max(points(:,2))];
 axis_range_x = temp(2)-temp(1);
 axis_range_y = temp(4)-temp(3);
 percent_larger = 0.3;
